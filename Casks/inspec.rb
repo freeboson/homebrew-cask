@@ -1,11 +1,11 @@
 cask 'inspec' do
-  version '1.32.1-1'
-  sha256 'c2fcce3f239f749c0ea3356da26da9cb4d48dac3ae7fe0bf61f79fd5d3da7270'
+  version '1.45.9-1'
+  sha256 '941eb14d6d4c8244e09ca5d36e3133acb96f7b7ed8bf74d2fb282aed287a7197'
 
   # packages.chef.io was verified as official when first introduced to the cask
-  url "https://packages.chef.io/files/stable/inspec/#{version.major_minor_patch}/mac_os_x/10.12/inspec-#{version}.dmg"
+  url "https://packages.chef.io/files/stable/inspec/#{version.major_minor_patch}/mac_os_x/10.13/inspec-#{version}.dmg"
   appcast 'https://github.com/chef/inspec/releases.atom',
-          checkpoint: '78f296772661942094895dc2ee832f4e9ad7c7210cd7144d92629a6a454bc01e'
+          checkpoint: '258068d87ceb42345489532f668d14a631c37c50fed79659f5a0df8e9a1008a4'
   name 'InSpec by Chef'
   homepage 'https://www.inspec.io/'
 
@@ -21,5 +21,5 @@ cask 'inspec' do
   uninstall pkgutil: 'com.getchef.pkg.inspec',
             delete:  '/opt/inspec/'
 
-  zap delete: '~/.inspec/'
+  zap trash: '~/.inspec/'
 end

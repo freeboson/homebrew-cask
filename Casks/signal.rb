@@ -1,19 +1,19 @@
 cask 'signal' do
-  version '1.0.35'
-  sha256 '66fe12bbff7f67494b59b537c80d974cc3f8bd38712caf6f36a1690b5b1c7b98'
+  version '1.0.39'
+  sha256 '957b55782351d912f7261a3018e6f2be87a5fa9c130271b45a753cc81882a251'
 
   url "https://updates.signal.org/desktop/Signal-mac-#{version}.zip"
   appcast 'https://github.com/WhisperSystems/Signal-Desktop/releases.atom',
-          checkpoint: '7dc0a07e8499c4e44ba6fc8ce13a083d497d05e5668dcd404bc547b9dcc68d99'
+          checkpoint: '7bd0f4cd30a17d56bcd93ff7df8979fa990be88f064f93a79f50046011e60864'
   name 'Signal'
   homepage 'https://signal.org/'
 
   app 'Signal.app'
 
-  zap delete: '~/Library/Saved Application State/org.whispersystems.signal-desktop.savedState',
-      trash:  [
-                '~/Library/Application Support/Signal',
-                '~/Library/Preferences/org.whispersystems.signal-desktop.helper.plist',
-                '~/Library/Preferences/org.whispersystems.signal-desktop.plist',
-              ]
+  zap trash: [
+               '~/Library/Application Support/Signal',
+               '~/Library/Preferences/org.whispersystems.signal-desktop.helper.plist',
+               '~/Library/Preferences/org.whispersystems.signal-desktop.plist',
+               '~/Library/Saved Application State/org.whispersystems.signal-desktop.savedState',
+             ]
 end

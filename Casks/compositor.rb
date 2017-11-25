@@ -1,18 +1,18 @@
 cask 'compositor' do
-  version '0.9.13'
-  sha256 'abb96825560e865c82b7d4f24cffbcfb4d24b79833b0e4ec81bf27766ee107cd'
+  version '0.9.15'
+  sha256 '71f23802980f8311f8288a068ffa7df336395862a77a1730cfdaa9880b33f471'
 
   url 'http://compositorapp.com/downloads/Compositor.dmg'
   appcast 'http://compositorapp.com/updates/appcast.xml',
-          checkpoint: '651ee81e0edf3d86849ab8bf0f811a09cc5686d279e44ee23446949752c74c39'
+          checkpoint: 'fd05c31bdda084240afa7e346feb019f3a076b3f82bfd85bbfe0ade4b26e7209'
   name 'Compositor'
   homepage 'http://compositorapp.com/'
 
   app 'Compositor.app'
 
-  zap delete: [
-                '~/Library/Application Scripts/com.microlarge.Compositor',
-                '~/Library/Containers/com.microlarge.Compositor',
-              ],
-      trash:  '~/Library/Preferences/com.microlarge.Compositor.plist'
+  zap trash: [
+               '~/Library/Application Scripts/com.microlarge.Compositor',
+               '~/Library/Containers/com.microlarge.Compositor',
+               '~/Library/Preferences/com.microlarge.Compositor.plist',
+             ]
 end

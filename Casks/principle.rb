@@ -1,10 +1,10 @@
 cask 'principle' do
-  version '3.2'
-  sha256 'f667d019e9d5d53eedce8644c380959e0679c5ddd45f4dc466a0c401e431a911'
+  version '3.6'
+  sha256 '0cc3fa7635b3a7bdbadf6a2349bf45ab78bde5b8554c5aa1ddd49cbecbb5eb8c'
 
   url "http://principleformac.com/download/Principle_#{version.dots_to_underscores}.zip"
   appcast 'http://principleformac.com/update2.xml',
-          checkpoint: 'e3db207a18150b905ae998f78a4aa0675ce46439bf7cfb9b1cd09f6a831cc851'
+          checkpoint: 'e9153520f388d312b4eb6af72c6be70b53d90d57582cb6e8f7de234a35207238'
   name 'Principle'
   homepage 'http://principleformac.com/'
 
