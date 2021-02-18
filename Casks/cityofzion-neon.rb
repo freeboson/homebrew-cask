@@ -1,12 +1,19 @@
-cask 'cityofzion-neon' do
-  version '0.0.7'
-  sha256 '21510de71999ed23cac15a3d07069cca8f83cf0f2492e45260fa51ead33fac73'
+cask "cityofzion-neon" do
+  version "2.6.2"
+  sha256 "20d7832ec98fb1939ca1fa5af0ab1ac4f30a559fbc1cb9eb83f638c920b196cb"
 
-  url "https://github.com/CityOfZion/neon-wallet/releases/download/#{version}/Neon-#{version}.Mac.dmg"
-  appcast 'https://github.com/CityOfZion/neon-wallet/releases.atom',
-          checkpoint: 'ed3bfa1d3af402723e24dda6183cd5abc7a9f0103be6a82fbc80a189958147dd'
-  name 'Neon Wallet'
-  homepage 'https://github.com/CityOfZion/neon-wallet'
+  url "https://github.com/CityOfZion/neon-wallet/releases/download/v#{version}/Neon.#{version}.dmg"
+  appcast "https://github.com/CityOfZion/neon-wallet/releases.atom"
+  name "Neon Wallet"
+  desc "Light wallet for the NEO blockchain"
+  homepage "https://github.com/CityOfZion/neon-wallet"
 
-  app 'Neon.app'
+  app "Neon.app"
+
+  zap trash: [
+    "~/Library/Application Support/Neon",
+    "~/Library/Preferences/com.electron.neon.helper.plist",
+    "~/Library/Preferences/com.electron.neon.plist",
+    "~/Library/Saved Application State/com.electron.neon.savedState",
+  ]
 end

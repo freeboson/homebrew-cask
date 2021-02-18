@@ -1,27 +1,21 @@
-cask 'obs' do
-  version '20.1.0'
-  sha256 '8eb490f749b3717002fd55b0ee14e082191cc921c5913070890e95af8776445d'
+cask "obs" do
+  version "26.1.2"
+  sha256 "42b852a5f23c5fd20d7a3ec444d6e5632fc92a63d3c8546aa6267ee6ad2f085d"
 
-  # github.com/jp9000/obs-studio was verified as official when first introduced to the cask
-  url "https://github.com/jp9000/obs-studio/releases/download/#{version}/obs-mac-#{version.major_minor}-installer.pkg"
-  appcast 'https://github.com/jp9000/obs-studio/releases.atom',
-          checkpoint: 'bce365214c203a68f6978094931f9748ddac61be3b8de71adbb55a6cdf0f584e'
-  name 'OBS'
-  homepage 'https://obsproject.com/'
+  url "https://cdn-fastly.obsproject.com/downloads/obs-mac-#{version}.dmg"
+  appcast "https://github.com/obsproject/obs-studio/releases.atom"
+  name "OBS"
+  desc "Open-source software for live streaming and screen recording"
+  homepage "https://obsproject.com/"
 
-  pkg "obs-mac-#{version.major_minor}-installer.pkg"
+  auto_updates true
 
-  uninstall pkgutil: [
-                       'org.obsproject.pkg.obs-studio',
-                       'zakk.lol.SyphonInject',
-                     ]
+  app "OBS.app"
 
   zap trash: [
-               '/Library/Application Support/obs-studio',
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.obsproject.obs-studio.sfl*',
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/zakk.lol.syphoninject.sfl*',
-               '~/Library/Application Support/obs-studio',
-               '/private/var/db/receipts/zakk.lol.SyphonInject.bom',
-               '/private/var/db/receipts/zakk.lol.SyphonInject.plist',
-             ]
+    "/Library/CoreMediaIO/Plug-Ins/DAL/obs-mac-virtualcam.plugin",
+    "~/Library/Application Support/obs-studio",
+    "~/Library/Preferences/com.obsproject.obs-studio.plist",
+    "~/Library/Saved Application State/com.obsproject.obs-studio.savedState",
+  ]
 end

@@ -1,41 +1,24 @@
-cask '1password' do
-  if MacOS.version <= :lion
-    version '3.8.22'
-    sha256 '3afd75f1bddf791dc7dbc9a7d92ab6eb91ee891407d750cedb7b5aff5fe8bf17'
+cask "1password" do
+  version "7.7"
+  sha256 "14617fe50edcdaf3d3fbfc06bb456e6d2e301ec7378189a1266d8517027b1fd5"
 
-    # cache.agilebits.com/dist/1P/mac was verified as official when first introduced to the cask
-    url "https://cache.agilebits.com/dist/1P/mac/1Password-#{version}.zip"
-
-    app '1Password.app'
-  elsif MacOS.version <= :mavericks
-    version '4.4.3'
-    sha256 '6657fc9192b67dde63fa9f67b344dc3bc6b7ff3e501d3dbe0f5712a41d8ee428'
-
-    # cache.agilebits.com/dist/1P/mac4 was verified as official when first introduced to the cask
-    url "https://cache.agilebits.com/dist/1P/mac4/1Password-#{version}.zip"
-
-    app "1Password #{version.major}.app"
-  else
-    version '6.8.4'
-    sha256 '6d86d1d7c75e1f2245af955c9c94ce49d5293c1cde7be98ca3268c0d3106b342'
-
-    # cache.agilebits.com/dist/1P/mac4 was verified as official when first introduced to the cask
-    url "https://cache.agilebits.com/dist/1P/mac4/1Password-#{version}.zip"
-
-    app "1Password #{version.major}.app"
-  end
-
-  appcast 'https://app-updates.agilebits.com/product_history/OPM4',
-          checkpoint: '6dfb8fc9495094ee9af5fb9f603aed25391449119fefd35d7d374e8c97ad3be8'
-  name '1Password'
-  homepage 'https://1password.com/'
+  url "https://c.1password.com/dist/1P/mac#{version.major}/1Password-#{version}.zip"
+  appcast "https://app-updates.agilebits.com/product_history/OPM#{version.major}"
+  name "1Password"
+  desc "Password manager that keeps all passwords secure behind one password"
+  homepage "https://1password.com/"
 
   auto_updates true
+  conflicts_with cask: "1password-beta"
+  depends_on macos: ">= :high_sierra"
+
+  app "1Password #{version.major}.app"
 
   zap trash: [
-               '~/Library/Application Scripts/2BUA8C4S2C.com.agilebits.onepassword-osx-helper',
-               '~/Library/Containers/2BUA8C4S2C.com.agilebits.onepassword-osx-helper',
-               '~/Library/Containers/com.agilebits.onepassword-osx',
-               '~/Library/Group Containers/2BUA8C4S2C.com.agilebits',
-             ]
+    "~/Library/Application Scripts/*.agilebits.onepassword*",
+    "~/Library/Containers/*.agilebits.onepassword*",
+    "~/Library/Group Containers/2BUA8C4S2C.com.agilebits",
+    "~/Library/Logs/1Password",
+    "~/Library/Preferences/com.agilebits.onepassword*",
+  ]
 end

@@ -1,26 +1,29 @@
-cask 'intel-haxm' do
-  version '6.2.1,a0:49'
-  sha256 '18a5c08a61f711ac1ce824feebfaa5819aabbe7e03ee4638f3edd6f0c34b69d9'
+cask "intel-haxm" do
+  version "7.6.5"
+  sha256 "e05d1626d8fe40004bed7a3b09f0e977cb2b53ed713bebc17e1194b1c2dd0864"
 
-  url "https://software.intel.com/sites/default/files/managed/#{version.after_comma.before_colon}/#{version.after_colon}/haxm-macosx_v#{version.before_comma.dots_to_underscores}.zip"
-  name 'Intel HAXM'
-  homepage 'https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager'
+  url "https://github.com/intel/haxm/releases/download/v#{version}/haxm-macosx_v#{version.dots_to_underscores}.zip",
+      verified: "github.com/intel/haxm/"
+  appcast "https://github.com/intel/haxm/releases.atom"
+  name "Intel HAXM"
+  homepage "https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager"
+
+  depends_on macos: ">= :yosemite"
 
   installer script: {
-                      executable: 'silent_install.sh',
-                      sudo:       true,
-                    }
+    executable: "silent_install.sh",
+    sudo:       true,
+  }
 
-  uninstall script: {
-                      sudo:         true,
-                      must_succeed: true,
-                      executable:   'silent_install.sh',
-                      args:         ['-u'],
-                    }
+  uninstall pkgutil: "com.intel.kext.haxm.*",
+            script:  {
+              sudo:         true,
+              must_succeed: true,
+              executable:   "silent_install.sh",
+              args:         ["-u"],
+            }
 
-  caveats <<~EOS
-    Installing this Cask means you have AGREED to the Intel® Hardware Accelerated Execution Manager End-User License Agreement - macOS at
-
-      https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager-end-user-license-agreement-macosx
-  EOS
+  caveats do
+    license "https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager-end-user-license-agreement-macosx"
+  end
 end

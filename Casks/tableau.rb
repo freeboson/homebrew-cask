@@ -1,24 +1,33 @@
-cask 'tableau' do
-  version '10.4.1'
-  sha256 'ddb0ff0fd89d051a3b43fdd5a91f91a2f6ceb5b72e8dcb69c5b65042737786f7'
+cask "tableau" do
+  version "2020.4.1"
+  sha256 "f461e2acef6618d796a7ef9ebcf1ea32eb5452f87a985067f4dee625e8aec5c0"
 
   url "https://downloads.tableau.com/tssoftware/TableauDesktop-#{version.dots_to_hyphens}.dmg"
-  name 'Tableau Desktop'
-  homepage 'https://public.tableau.com/s/'
+  name "Tableau Desktop"
+  desc "Popular analytics platform"
+  homepage "https://www.tableau.com/products/desktop/download"
 
-  depends_on macos: '>= :yosemite'
+  livecheck do
+    url "https://www.tableau.com/downloads/desktop/mac"
+    strategy :header_match do |headers|
+      headers["location"][/-(\d+-\d+-\d+)\.dmg/i, 1].tr("-", ".")
+    end
+  end
 
-  pkg 'Tableau Desktop.pkg'
+  depends_on macos: ">= :yosemite"
+
+  pkg "Tableau Desktop.pkg"
 
   uninstall pkgutil: [
-                       'com.amazon.redshiftodbc',
-                       'simba.sparkodbc',
-                       'com.simba.sqlserverodbc',
-                       'com.tableausoftware.Desktop.app',
-                       'com.tableausoftware.DesktopShortcut',
-                       'com.tableausoftware.FLEXNet.11.14.0',
-                       'com.tableausoftware.mysql',
-                       'com.tableausoftware.oracle',
-                       'com.tableausoftware.postgresql',
-                     ]
+    "com.amazon.redshiftodbc",
+    "simba.sparkodbc",
+    "com.simba.sparkodbc",
+    "com.simba.sqlserverodbc",
+    "com.tableausoftware.Desktop.app",
+    "com.tableausoftware.DesktopShortcut",
+    "com.tableausoftware.FLEXNet.11.*",
+    "com.tableausoftware.mysql",
+    "com.tableausoftware.oracle",
+    "com.tableausoftware.postgresql",
+  ]
 end

@@ -1,16 +1,20 @@
-cask 'flume' do
-  version '2.8.3'
-  sha256 'f5b07c5e4155a12cb099e2e39b4f08da09e599bcccf8567bfad6d40b2266435b'
+cask "flume" do
+  version "2.8.6.5"
+  sha256 "25b80175858387a19a3eedde2df3b25a5b28b420fdd9bad1a8b552a0a86320ea"
 
   url "https://flumeapp.com/files/Flume-#{version}.zip"
-  appcast 'https://rink.hockeyapp.net/api/2/apps/c88c56b02dcd4dd3acceb6d7a24f7122',
-          checkpoint: '7ead805aef0221f3ca99bd3dfe893c7165b42f8ba22e08cc3635170dcc6e71bc'
-  name 'Flume'
-  homepage 'https://flumeapp.com/'
+  name "Flume"
+  desc "Instagram desktop client"
+  homepage "https://flumeapp.com/"
+
+  livecheck do
+    url "https://flumeapp.com/download/"
+    strategy :header_match
+  end
 
   auto_updates true
 
-  app 'Flume.app'
+  app "Flume.app"
 
-  zap trash: '~/Library/Application Support/Flume'
+  zap trash: "~/Library/Application Support/Flume"
 end

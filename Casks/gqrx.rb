@@ -1,13 +1,25 @@
-cask 'gqrx' do
-  version '2.9-1'
-  sha256 'd6fdb4ee405c8e0652e0502a2fe6670ad7baf66eb202b0bf8ab6f0aad3100130'
+cask "gqrx" do
+  version "2.14.4"
+  sha256 "4ceafde17ccb4a8e5780b3df490f7b9346fb60f2338ec6b7856e9f04a44b806c"
 
-  # github.com/csete/gqrx was verified as official when first introduced to the cask
-  url "https://github.com/csete/gqrx/releases/download/v#{version.major_minor}/Gqrx-#{version}.dmg"
-  appcast 'https://github.com/csete/gqrx/releases.atom',
-          checkpoint: 'ceec115a1c11b2d8c4600fb9448b8ff2de1939c53e4616180e55eb7d2c2000b5'
-  name 'Gqrx'
-  homepage 'http://gqrx.dk/'
+  url "https://github.com/csete/gqrx/releases/download/v#{version.major_minor_patch}/Gqrx-#{version}.dmg",
+      verified: "github.com/csete/gqrx/"
+  appcast "https://github.com/csete/gqrx/releases.atom"
+  name "Gqrx"
+  desc "Software-defined radio receiver powered by GNU Radio and Qt"
+  homepage "https://gqrx.dk/"
 
-  app 'Gqrx.app'
+  depends_on macos: ">= :catalina"
+
+  app "Gqrx.app"
+  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
+  shimscript = "#{staged_path}/gqrx.wrapper.sh"
+  binary shimscript, target: "gqrx"
+
+  preflight do
+    IO.write shimscript, <<~EOS
+      #!/bin/sh
+      '#{appdir}/Gqrx.app/Contents/MacOS/gqrx' "$@"
+    EOS
+  end
 end

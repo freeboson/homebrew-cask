@@ -1,12 +1,12 @@
-cask 'sonic-pi' do
-  version '3.0.1'
-  sha256 'd9eea57df86da3d39a2a068358fcc256e0dd0181a110fa2d83ad16ad153b10fd'
+cask "sonic-pi" do
+  version "3.3.1"
+  sha256 "ab7ae6784c82ad2ad30c1d79ca8e23f7a207778e99e9827e2917c20c1c6ce8e5"
 
-  url "http://sonic-pi.net/files/releases/v#{version}/Sonic-Pi-for-Mac-v#{version}.dmg"
-  appcast 'https://github.com/samaaron/sonic-pi/releases.atom',
-          checkpoint: '8a9296c1835b8f4211157e08c06547c95513436615a5980a2832de4e23422234'
-  name 'Sonic Pi'
-  homepage 'http://sonic-pi.net/'
+  url "https://sonic-pi.net/files/releases/v#{version}/Sonic-Pi-for-Mac-x64-v#{version}.dmg"
+  appcast "https://github.com/samaaron/sonic-pi/releases.atom"
+  name "Sonic Pi"
+  desc "Code-based music creation and performance tool"
+  homepage "https://sonic-pi.net/"
 
-  app 'Sonic Pi.app'
+  app "Sonic Pi.app"
 end

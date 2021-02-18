@@ -1,20 +1,27 @@
-cask 'cookie' do
-  version '5.6.3'
-  sha256 '2d223002348b1626e92abbad06a37cc13ae59acbc6ee6f5b16be2a1533d72519'
+cask "cookie" do
+  version "6.3.6"
+  sha256 :no_check
 
-  url "https://sweetpproductions.com/products/cookie#{version.major}/Cookie#{version.major}.dmg"
-  appcast "https://sweetpproductions.com/products/cookie#{version.major}/appcast.xml",
-          checkpoint: 'ed13cca9c8fc008c4ef42264cad0b2a45b5ff6a1e0c96513961da68b4277046d'
-  name 'Cookie'
-  homepage 'https://sweetpproductions.com/'
+  url "https://sweetpproductions.com/products/cookieapp/Cookie.dmg"
+  name "Cookie"
+  desc "Protection from tracking and online profiling"
+  homepage "https://sweetpproductions.com/"
 
-  depends_on macos: '>= :el_capitan'
+  livecheck do
+    url "https://sweetpproductions.com/products/cookieapp/appcast.xml"
+    strategy :sparkle
+  end
 
-  app 'Cookie.app'
+  depends_on macos: ">= :mojave"
+
+  app "Cookie.app"
 
   zap trash: [
-               '~/Library/Application Scripts/com.sweetpproductions.Cookie5',
-               '~/Library/Containers/com.sweetpproductions.Cookie5',
-               '~/Library/Preferences/com.sweetpproductions.Cookie5.plist',
-             ]
+    "~/Library/Application Scripts/com.sweetpproductions.Cookie5",
+    "~/Library/Containers/com.sweetpproductions.Cookie5",
+    "~/Library/Preferences/com.sweetpproductions.Cookie5.plist",
+    "~/Library/Application Scripts/com.sweetpproductions.CookieApp",
+    "~/Library/Containers/com.sweetpproductions.CookieApp",
+    "~/Library/Preferences/com.sweetpproductions.CookieApp.plist",
+  ]
 end

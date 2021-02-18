@@ -1,13 +1,21 @@
-cask 'sigil' do
-  version '0.9.8'
-  sha256 'cd54a70314df223bad7a1c6d5322b012ddf3402ead14e11b88372165ca66decf'
+cask "sigil" do
+  version "1.4.3"
+  sha256 "e31b0a19e3c39e1b9aca350e8cba87262ab0132d04c6fdc99853d7e9ce0ed567"
 
-  # github.com/Sigil-Ebook/Sigil was verified as official when first introduced to the cask
-  url "https://github.com/Sigil-Ebook/Sigil/releases/download/#{version}/Sigil-#{version}-Mac-Package.dmg"
-  appcast 'https://github.com/Sigil-Ebook/Sigil/releases.atom',
-          checkpoint: '241988e25e2e75340deb541c27f86783a6d4f240a104bd6388e0965afe57388d'
-  name 'Sigil'
-  homepage 'https://sigil-ebook.com/'
+  url "https://github.com/Sigil-Ebook/Sigil/releases/download/#{version}/Sigil.app-#{version}-Mac.txz",
+      verified: "github.com/Sigil-Ebook/Sigil/"
+  appcast "https://github.com/Sigil-Ebook/Sigil/releases.atom"
+  name "Sigil"
+  desc "EPUB ebook editor"
+  homepage "https://sigil-ebook.com/"
 
-  app 'Sigil.app'
+  depends_on macos: ">= :sierra"
+
+  app "Sigil.app"
+
+  zap trash: [
+    "~/Library/Application Support/sigil-ebook",
+    "~/Library/Preferences/com.sigil-ebook.Sigil.app.plist",
+    "~/Library/Saved Application State/com.sigil-ebook.Sigil.app.savedState",
+  ]
 end

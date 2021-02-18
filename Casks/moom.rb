@@ -1,19 +1,19 @@
-cask 'moom' do
-  version '3.2.10'
-  sha256 '89bd554f09a3c4b882b356429bf9eeb1115833e566b6a978285ed4a533edf668'
+cask "moom" do
+  version "3.2.20"
+  sha256 "924a08f89379a4c5ade4b079af9e41fb91ec0297d291d123f29800d18c187def"
 
   url "https://manytricks.com/download/_do_not_hotlink_/moom#{version.no_dots}.dmg"
-  appcast 'https://manytricks.com/moom/appcast',
-          checkpoint: 'bb2f7418da94fe5f384332f58acf450d6dc2bf9ad86f689a7e4c9724f80641bd'
-  name 'Moom'
-  homepage 'https://manytricks.com/moom/'
+  appcast "https://manytricks.com/moom/appcast"
+  name "Moom"
+  desc "Utility to move and zoom windows—on one display"
+  homepage "https://manytricks.com/moom/"
 
   auto_updates true
 
-  app 'Moom.app'
+  app "Moom.app"
 
   zap trash: [
-               '~/Library/Preferences/com.manytricks.Moom.plist',
-               '~/Library/Application Support/Many Tricks',
-             ]
+    "~/Library/Preferences/com.manytricks.Moom.plist",
+    "~/Library/Application Support/Many Tricks",
+  ]
 end

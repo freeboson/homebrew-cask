@@ -1,13 +1,19 @@
-cask 'shoes' do
-  version '3.3.4'
-  sha256 '04cbea833ec4772dd995c33021a7b09e38145318d809d8f6a41e0d551671592b'
+cask "shoes" do
+  version "3.3.7"
+  sha256 "9d2d57d8e64a8befc08848939ac0995e2367aadee3aeb24608ebcc8d5c7bb93d"
 
-  # shoes.mvmanila.com/public/shoes was verified as official when first introduced to the cask
-  url "https://shoes.mvmanila.com/public/shoes/shoes-#{version}-osx-10.9.tgz"
-  appcast 'http://shoesrb.com/downloads/',
-          checkpoint: '3d263b9a9005f4e338760e699f11b62d23d401b19e3ece58224704fa5bd75c28'
-  name 'Shoes'
-  homepage 'http://shoesrb.com/'
+  url "https://shoes.mvmanila.com/public/shoes/shoes-#{version}-osx-10.10.tgz",
+      verified: "shoes.mvmanila.com/public/shoes/"
+  name "Shoes"
+  homepage "http://shoesrb.com/"
 
-  app 'Shoes.app'
+  livecheck do
+    url "http://shoesrb.com/downloads/"
+    strategy :page_match
+    regex(%r{href=.*?/shoes-(\d+(?:\.\d+)*)-osx-10\.10\.tgz}i)
+  end
+
+  depends_on macos: ">= :yosemite"
+
+  app "Shoes.app"
 end

@@ -1,19 +1,24 @@
-cask 'skyfonts' do
-  version '5.9.1.0'
-  sha256 '95282a85c259fac335bc5acbca4f3c7b9d94bfa0e3683eeee3d94eb665410bf6'
+cask "skyfonts" do
+  version "5.9.5.7"
+  sha256 "bfdd1e920e0c6871909fbc9ce441d7b1eba9be04fb30af32892649b131ff05ad"
 
-  url "http://cdn1.skyfonts.com/client/Monotype_SkyFonts_Mac64_#{version}.dmg"
-  appcast 'https://www.fonts.com/other/skyfonts/getskyfontsclientdownloadinfo',
-          checkpoint: '17bbc003f08ec07517c947aa0d08d2bb48e0142982008beeeaf5344d9935d537'
-  name 'SkyFonts'
-  homepage 'https://skyfonts.com/'
+  url "https://cdn1.skyfonts.com/client/Monotype_SkyFonts_Mac64_#{version}.dmg"
+  name "SkyFonts"
+  desc "Font manager"
+  homepage "https://skyfonts.com/"
 
-  installer manual: 'SkyFonts.app'
+  livecheck do
+    url "https://api.skyfonts.com/api/SkyFontsAppCast?osid=3"
+    strategy :page_match
+    regex(%r{href=.*?/Monotype_SkyFonts_Mac64_(\d+(?:\.\d+)*)\.dmg}i)
+  end
+
+  installer manual: "Install SkyFonts.app"
 
   uninstall quit:      [
-                         'com.mti.Monotype-SkyFonts',
-                         'com.mti.Monotype-SkyFontsHelper',
-                       ],
-            launchctl: 'com.mti.Monotype-SkyFontsHelper',
-            delete:    '/Applications/Skyfonts'
+    "com.mti.Monotype-SkyFonts",
+    "com.mti.Monotype-SkyFontsHelper",
+  ],
+            launchctl: "com.mti.Monotype-SkyFontsHelper",
+            delete:    "/Applications/Skyfonts"
 end

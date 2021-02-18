@@ -1,15 +1,18 @@
-cask 'gureumkim' do
-  version '1.8.9c'
-  sha256 'f0e69d60ac57b83f475313b2e38ca42c06b3d46cfec69ef77a274a89695ff9ae'
+cask "gureumkim" do
+  version "1.11.1"
+  sha256 "f1e7db79b49a7675dbfc8ff57b4b55eaa55b3018803c6c46671c88b402b496c2"
 
-  # github.com/gureum/gureum was verified as official when first introduced to the cask
-  url "https://github.com/gureum/gureum/releases/download/GureumKIM-#{version.delete('a-z')}/GureumKIM-#{version}.pkg"
-  appcast 'https://github.com/gureum/gureum/releases.atom',
-          checkpoint: '6078155196702a345bb4af91e78357288f113d5b639272a936708a3c9e0e7705'
-  name '구름 입력기'
-  homepage 'http://gureum.io/'
+  url "https://github.com/gureum/gureum/releases/download/#{version}/Gureum-#{version}.pkg",
+      verified: "github.com/gureum/gureum/"
+  name "구름 입력기"
+  homepage "https://gureum.io/"
 
-  pkg "GureumKIM-#{version}.pkg"
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
-  uninstall pkgutil: 'org.youknowone.inputmethod.Gureum'
+  pkg "Gureum-#{version}.pkg"
+
+  uninstall pkgutil: "org.youknowone.inputmethod.Gureum"
 end

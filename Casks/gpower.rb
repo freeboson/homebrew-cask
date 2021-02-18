@@ -1,12 +1,17 @@
-cask 'gpower' do
-  version '3.1.9.3'
-  sha256 'a905bd452edd6e0618ea5ab5dd16468010a92b676415a1fe57a9d0c9a7a2ac27'
+cask "gpower" do
+  version "3.1.9.6"
+  sha256 "3faabed05929251901da704205a34385cfe4fc7516ba31f92e1cd9ac8086e572"
 
-  url "http://www.gpower.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Psychologie/AAP/gpower/GPowerMac_#{version}.zip"
-  appcast 'http://www.gpower.hhu.de/',
-          checkpoint: 'a91685256dd3ea33a16b9a7ba66b72dd5a87a02e70fc8a677a1f6eb0f3230db1'
-  name 'G*Power'
-  homepage 'http://www.gpower.hhu.de/'
+  url "https://www.psychologie.hhu.de/fileadmin/redaktion/Fakultaeten/Mathematisch-Naturwissenschaftliche_Fakultaet/Psychologie/AAP/gpower/GPowerMac_#{version}.zip"
+  name "G*Power"
+  desc "Tool to compute statistical power analyses"
+  homepage "https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html"
 
-  app 'G*Power.app'
+  livecheck do
+    url "https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html"
+    strategy :page_match
+    regex(%r{href=.*?/GPowerMac_(\d+(?:\.\d+)*)\.zip}i)
+  end
+
+  app "G*Power.app"
 end

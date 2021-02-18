@@ -1,13 +1,31 @@
-cask 'rambox' do
-  version '0.5.13'
-  sha256 '8ec83ac8a82179aad47d30fdc326fc5571ca871e8cf48d2db8f5d2e52f68e51a'
+cask "rambox" do
+  version "0.7.7"
+  sha256 "b73accdc18e20b285dbf280d9db539cfdd8ccffa0ab4ccddc26bd596ab56a8df"
 
-  # github.com/saenzramiro/rambox was verified as official when first introduced to the cask
-  url "https://github.com/saenzramiro/rambox/releases/download/#{version}/Rambox-#{version}-mac.zip"
-  appcast 'https://github.com/saenzramiro/rambox/releases.atom',
-          checkpoint: '06b7e301ccad5de7627c038237b36a2325e931774399c6789099bad806a7f1e6'
-  name 'Rambox'
-  homepage 'http://rambox.pro/'
+  url "https://github.com/ramboxapp/community-edition/releases/download/#{version}/Rambox-#{version}-mac.zip",
+      verified: "github.com/ramboxapp/community-edition/"
+  appcast "https://github.com/ramboxapp/community-edition/releases.atom"
+  name "Rambox"
+  desc "Free and Open Source messaging and emailing app"
+  homepage "https://rambox.pro/"
 
-  app 'Rambox.app'
+  app "Rambox.app"
+
+  zap trash: [
+    "~/Library/Application Support/CrashReporter/Rambox Helper_*.plist",
+    "~/Library/Application Support/CrashReporter/Rambox_*.plist",
+    "~/Library/Application Support/Rambox",
+    "~/Library/Caches/com.grupovrs.ramboxce",
+    "~/Library/Caches/com.grupovrs.ramboxce.ShipIt",
+    "~/Library/Caches/com.saenzramiro.rambox",
+    "~/Library/Logs/Rambox",
+    "~/Library/Preferences/ByHost/com.grupovrs.ramboxce.ShipIt.*.plist",
+    "~/Library/Preferences/com.grupovrs.ramboxce.helper.plist",
+    "~/Library/Preferences/com.grupovrs.ramboxce.plist",
+    "~/Library/Preferences/com.saenzramiro.rambox.helper.plist",
+    "~/Library/Preferences/com.saenzramiro.rambox.plist",
+    "~/Library/Saved Application State/com.grupovrs.ramboxce.savedState",
+    "~/Library/Saved Application State/com.saenzramiro.rambox.savedState",
+    "~/Library/WebKit/com.saenzramiro.rambox",
+  ]
 end

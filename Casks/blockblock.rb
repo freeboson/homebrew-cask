@@ -1,27 +1,45 @@
-cask 'blockblock' do
-  version '0.9.9'
-  sha256 '133ebdffd9847e17af048cdeb069ba5d1978595f6855d7fabf0cface0e562609'
+cask "blockblock" do
+  if MacOS.version <= :mojave
+    version "0.9.9.4"
+    sha256 "6ab3a8224e8bc77b9abe8d41492c161454c6b0266e60e61b06931fed4b431282"
 
-  # bitbucket.org/objective-see was verified as official when first introduced to the cask
-  url "https://bitbucket.org/objective-see/deploy/downloads/BlockBlock_#{version}.zip"
-  appcast 'https://objective-see.com/products/changelogs/BlockBlock.txt',
-          checkpoint: '143a59e168fcbdb4c391bf55d371ee09ea689246c25c005a2d2ffb0b7a62da11'
-  name 'BlockBlock'
-  homepage 'https://objective-see.com/products/blockblock.html'
+    url "https://bitbucket.org/objective-see/deploy/downloads/BlockBlock_#{version}.zip",
+        verified: "bitbucket.org/objective-see/"
 
-  depends_on macos: '>= :mavericks'
+    installer script: {
+      executable: "#{staged_path}/BlockBlock Installer.app/Contents/MacOS/BlockBlock",
+      args:       ["-install"],
+      sudo:       true,
+    }
 
-  installer script: {
-                      executable: "#{staged_path}/BlockBlock_Installer.app/Contents/MacOS/BlockBlock",
-                      args:       ['-install'],
-                      sudo:       true,
-                    }
+    uninstall script: {
+      executable: "#{staged_path}/BlockBlock Installer.app/Contents/MacOS/BlockBlock",
+      args:       ["-uninstall"],
+      sudo:       true,
+    }
+  else
+    version "1.1.0"
+    sha256 "a5260a993c2f713f3f101b8728ad7b1636336c28f325f70cbc4445f6c0c1f420"
 
-  uninstall script: {
-                      executable: "#{staged_path}/BlockBlock_Installer.app/Contents/MacOS/BlockBlock",
-                      args:       ['-uninstall'],
-                      sudo:       true,
-                    }
+    url "https://bitbucket.org/objective-see/deploy/downloads/BlockBlock_#{version}.zip",
+        verified: "bitbucket.org/objective-see/"
 
-  zap trash: '~/Library/Preferences/com.objectiveSee.BlockBlock.plist'
+    installer script: {
+      executable: "#{staged_path}/BlockBlock Installer.app/Contents/MacOS/BlockBlock Installer",
+      args:       ["-install"],
+      sudo:       true,
+    }
+
+    uninstall script: {
+      executable: "#{staged_path}/BlockBlock Installer.app/Contents/MacOS/BlockBlock Installer",
+      args:       ["-uninstall"],
+      sudo:       true,
+    }
+  end
+
+  appcast "https://objective-see.com/products/changelogs/BlockBlock.txt"
+  name "BlockBlock"
+  homepage "https://objective-see.com/products/blockblock.html"
+
+  zap trash: "~/Library/Preferences/com.objectiveSee.BlockBlock.plist"
 end

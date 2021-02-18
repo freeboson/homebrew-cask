@@ -1,17 +1,27 @@
-cask 'xamarin-ios' do
-  version '11.3.0.47'
-  sha256 '94da4adb80f1bf1ad32fb563cfe7ce2fefef442a9107a0a13e05685f2a4875ab'
+cask "xamarin-ios" do
+  version "14.8.0.3"
+  sha256 "4a2c0fc0924b070bf9c46e08b687d049d6fc3a101bf690a00c2df9590de99d0c"
 
   url "https://dl.xamarin.com/MonoTouch/Mac/xamarin.ios-#{version}.pkg"
-  appcast 'https://xampubdl.blob.core.windows.net/static/installer_assets/v3/Mac/Universal/InstallationManifest.xml',
-          checkpoint: '72454391ed3476126473c324f16b31b54518d0ab05c30aeb6c452b1ea1c61dce'
-  name 'Xamarin.iOS'
-  homepage 'https://www.xamarin.com/platform'
+  name "Xamarin.iOS"
+  homepage "https://www.xamarin.com/platform"
+
+  livecheck do
+    url "https://software.xamarin.com/Service/Updates?v=2&pv4569c276-1397-4adb-9485-82a7696df22e=0"
+    strategy :page_match
+    regex(%r{/xamarin\.ios-(\d+(?:\.\d+)*)\.pkg}i)
+  end
 
   pkg "xamarin.ios-#{version}.pkg"
 
   uninstall pkgutil: [
-                       'com.xamarin.xamarin.ios.pkg',
-                       'com.xamarin.xamarin-ios-build-host.pkg',
-                     ]
+    "com.xamarin.xamarin.ios.pkg",
+    "com.xamarin.xamarin-ios-build-host.pkg",
+    "com.xamarin.monotouch.pkg",
+  ]
+
+  zap trash: [
+    "/Developer/MonoTouch",
+    "/Library/Frameworks/Xamarin.iOS.framework",
+  ]
 end

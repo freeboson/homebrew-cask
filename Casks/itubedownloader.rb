@@ -1,13 +1,19 @@
-cask 'itubedownloader' do
-  version '6.3.2,1509417770'
-  sha256 'dfdf21331a24da4f2e85532112c13b3d88b354d3fdc3b6afa01fb02061a5a651'
+cask "itubedownloader" do
+  version "6.5.27,65027"
+  sha256 :no_check
 
-  # dl.devmate.com/com.AlphaSoft.iTubeDownloader was verified as official when first introduced to the cask
-  url "https://dl.devmate.com/com.AlphaSoft.iTubeDownloader/#{version.before_comma.no_dots}/#{version.after_comma}/iTubeDownloader-#{version.before_comma.no_dots}.zip"
-  appcast 'https://updates.devmate.com/com.AlphaSoft.iTubeDownloader.xml',
-          checkpoint: 'd534df0b9b617b025c1243aef2c743cf59faac2807a0b59967fcd7964ba90459'
-  name 'iTubeDownloader'
-  homepage 'http://alphasoftware.co/'
+  url "https://itubedownloader.s3.us-east-2.amazonaws.com/iTubeDownloader.dmg",
+      verified: "itubedownloader.s3.us-east-2.amazonaws.com/"
+  name "iTubeDownloader"
+  desc "Download YouTube videos, channels, or playlists"
+  homepage "https://alphasoftware.co/"
 
-  app 'iTubeDownloader.app'
+  livecheck do
+    url "https://itubedownloader.s3.us-east-2.amazonaws.com/appcast.xml"
+    strategy :sparkle
+  end
+
+  depends_on macos: ">= :yosemite"
+
+  app "iTubeDownloader.app"
 end

@@ -1,10 +1,14 @@
-cask 'camtasia' do
-  version '3.1.1'
-  sha256 'b4e45f99fef0d7573fb316b29d43cc0fa14b8fe3ada5cccbd7e6c730f7cddc64'
+cask "camtasia" do
+  version "2020.0.12,113623"
+  sha256 :no_check
 
-  url "https://download.techsmith.com/camtasiamac/enu/#{version.no_dots}/camtasia.dmg"
-  name 'Camtasia'
-  homepage 'https://www.techsmith.com/camtasia.html'
+  url "https://download.techsmith.com/camtasiamac/releases/Camtasia.dmg"
+  appcast "https://support.techsmith.com/hc/en-us/articles/115006624748-Camtasia-Mac-Version-History"
+  name "Camtasia"
+  homepage "https://www.techsmith.com/camtasia.html"
+
+  auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "Camtasia #{version.major}.app"
 end

@@ -1,22 +1,32 @@
-cask 'neteasemusic' do
-  version '1.5.7_580'
-  sha256 'a1ede5a8e3ec027ec670fb989dbefa23bd5a5c021af56f16c2c24fa0ff26489a'
+cask "neteasemusic" do
+  version "2.3.4,846"
+  sha256 "1dfee30efbfdc8cd37c841e00c01ea4f1db4b4bbafb379c4aeeec8e70e0812b7"
 
-  # d1.music.126.net was verified as official when first introduced to the cask
-  url "http://d1.music.126.net/dmusic/NeteaseMusic_#{version}_web.dmg"
-  name 'NetEase cloud music'
-  name '网易云音乐'
-  homepage 'http://music.163.com/#/download'
+  url "https://d1.music.126.net/dmusic/NeteaseMusic_#{version.before_comma}_#{version.after_comma}_web.dmg",
+      verified:   "d1.music.126.net/",
+      user_agent: :fake
+  name "NetEase cloud music"
+  name "网易云音乐"
+  desc "Music streaming platform"
+  homepage "https://music.163.com/"
 
-  app 'NeteaseMusic.app'
+  livecheck do
+    url "https://music.163.com/api/mac/appcast.xml"
+    strategy :sparkle
+  end
 
-  uninstall quit: 'com.netease.163music'
+  depends_on macos: ">= :sierra"
+
+  app "NeteaseMusic.app"
+
+  uninstall quit: "com.netease.163music"
 
   zap trash: [
-               '~/Library/Caches/com.netease.163music',
-               '~/Library/Containers/com.netease.163music',
-               '~/Library/Cookies/com.netease.163music.binarycookies',
-               '~/Library/Preferences/com.netease.163music.plist',
-               '~/Library/Saved Application State/com.netease.163music.savedState',
-             ]
+    "~/Library/Application Support/com.netease.163music",
+    "~/Library/Caches/com.netease.163music",
+    "~/Library/Containers/com.netease.163music",
+    "~/Library/Cookies/com.netease.163music.binarycookies",
+    "~/Library/Preferences/com.netease.163music.plist",
+    "~/Library/Saved Application State/com.netease.163music.savedState",
+  ]
 end

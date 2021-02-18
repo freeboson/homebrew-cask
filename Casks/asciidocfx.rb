@@ -1,23 +1,23 @@
-cask 'asciidocfx' do
-  version '1.5.6'
-  sha256 '4b210b2ef4079bdc41109a8481f4f986e6042325dcca794e85393068268eaba9'
+cask "asciidocfx" do
+  version "1.7.3"
+  sha256 "394be4606490939526fe584981c3d00c922258b07bc1a7409322b153b9b5509f"
 
-  # github.com/asciidocfx/AsciidocFX was verified as official when first introduced to the cask
-  url "https://github.com/asciidocfx/AsciidocFX/releases/download/v#{version}/AsciidocFX_Mac.dmg"
-  appcast 'https://github.com/asciidocfx/AsciidocFX/releases.atom',
-          checkpoint: '4d3b225ac337c5434862f9ced9ddbb4b114e48ba4597e69f119ae1b9e93d6bcd'
-  name 'AsciidocFX'
-  homepage 'http://www.asciidocfx.com/'
+  url "https://github.com/asciidocfx/AsciidocFX/releases/download/v#{version}/AsciidocFX_Mac.dmg",
+      verified: "github.com/asciidocfx/AsciidocFX/"
+  appcast "https://github.com/asciidocfx/AsciidocFX/releases.atom"
+  name "AsciidocFX"
+  desc "Asciidoc Editor and Toolchain to build books, documents and slides"
+  homepage "https://www.asciidocfx.com/"
 
   installer script: {
-                      executable: 'AsciidocFX Installer.app/Contents/MacOS/JavaApplicationStub',
-                      args:       ['-q'],
-                      sudo:       true,
-                    }
+    executable: "AsciidocFX Installer.app/Contents/MacOS/JavaApplicationStub",
+    args:       ["-q"],
+    sudo:       true,
+  }
 
   uninstall script: {
-                      executable: '/Applications/AsciidocFX/AsciidocFX Uninstaller.app/Contents/MacOS/JavaApplicationStub',
-                      args:       ['-q'],
-                      sudo:       true,
-                    }
+    executable: "/Applications/AsciidocFX/AsciidocFX Uninstaller.app/Contents/MacOS/JavaApplicationStub",
+    args:       ["-q"],
+    sudo:       true,
+  }
 end

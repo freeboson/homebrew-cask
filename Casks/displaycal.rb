@@ -1,26 +1,23 @@
-cask 'displaycal' do
-  version '3.3.5.0'
-  sha256 'fa6db00826de1ee65f06f13f196b24a160fcabeb6bde8db8861cb581e52b72b0'
+cask "displaycal" do
+  version "3.8.9.3"
+  sha256 "3e3f4a506c3ffc1e2004d57c6cd521d6cacb1bb6a71f9e3fa4cd81ab6ad4f31a"
 
-  # sourceforge.net/dispcalgui was verified as official when first introduced to the cask
-  url "https://downloads.sourceforge.net/dispcalgui/release/#{version}/DisplayCAL-#{version}.dmg"
-  appcast 'https://sourceforge.net/projects/dispcalgui/rss?path=/release',
-          checkpoint: 'ec198b0f2c1741e6c10baf4f815da19bafc68c7f7c0c18b6711408485dadeafd'
-  name 'DisplayCAL'
-  homepage 'https://displaycal.net/'
+  url "https://downloads.sourceforge.net/dispcalgui/release/#{version}/DisplayCAL-#{version}.pkg",
+      verified: "sourceforge.net/dispcalgui/"
+  appcast "https://sourceforge.net/projects/dispcalgui/rss?path=/release"
+  name "DisplayCAL"
+  homepage "https://displaycal.net/"
 
-  depends_on formula: 'argyll-cms'
+  auto_updates true
+  depends_on formula: "argyll-cms"
 
-  suite 'DisplayCAL'
+  pkg "DisplayCAL-#{version}.pkg"
 
-  preflight do
-    # There is no sub-folder in the DMG; the root *is* the folder
-    FileUtils.mv(staged_path.children, staged_path.join('DisplayCAL').tap(&:mkpath))
-  end
+  uninstall pkgutil: "net.displaycal.*.DisplayCAL.*"
 
   zap trash: [
-               '~/Library/Application Support/dispcalGUI',
-               '~/Library/Logs/dispcalGUI',
-               '~/Library/Preferences/dispcalGUI',
-             ]
+    "~/Library/Application Support/dispcalGUI",
+    "~/Library/Logs/dispcalGUI",
+    "~/Library/Preferences/dispcalGUI",
+  ]
 end

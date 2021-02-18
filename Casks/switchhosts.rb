@@ -1,13 +1,18 @@
-cask 'switchhosts' do
-  version '3.3.8.5338'
-  sha256 'a158abcf3a10c1d9c6ebfe3dd0a832157ec445fc050df5b9a5e3f949dc9093b4'
+cask "switchhosts" do
+  version "3.5.6.5551"
+  sha256 "600a19939862160daee29747d6c9d41275bd1d6aa8ad9ec52aec29c2b62e6c9f"
 
-  # github.com/oldj/SwitchHosts was verified as official when first introduced to the cask
-  url "https://github.com/oldj/SwitchHosts/releases/download/v#{version.major_minor_patch}/SwitchHosts-macOS-x64_v#{version}.zip"
-  appcast 'https://github.com/oldj/SwitchHosts/releases.atom',
-          checkpoint: 'b8a3e89d000cc0d08cea1348d7d985efccc618449dd7d9586efe5b19c2bee313'
-  name 'SwitchHosts!'
-  homepage 'https://oldj.github.io/SwitchHosts/'
+  url "https://github.com/oldj/SwitchHosts/releases/download/v#{version.major_minor_patch}/SwitchHosts._macOS_#{version}.dmg",
+      verified: "github.com/oldj/SwitchHosts/"
+  name "SwitchHosts!"
+  desc "App to switch hosts"
+  homepage "https://oldj.github.io/SwitchHosts/"
 
-  app 'SwitchHosts!-darwin-x64/SwitchHosts!.app'
+  livecheck do
+    url :url
+    strategy :github_latest
+    regex(%r{/SwitchHosts\._macOS_(\d+(?:\.\d+)*)\.dmg}i)
+  end
+
+  app "SwitchHosts!.app"
 end

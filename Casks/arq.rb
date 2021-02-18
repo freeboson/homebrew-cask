@@ -1,14 +1,27 @@
-cask 'arq' do
-  version '5.10'
-  sha256 'ddc8619cc957ade7ca51ae5fc3d0f048f170b71c9a57bf53d283ffcec8e15fc4'
+cask "arq" do
+  version "7.1.6"
+  sha256 "fa7880bb33a9467f1a6d4b284f81356641d13dde482740fddac470f71dffef01"
 
-  url "https://www.arqbackup.com/download/Arq_#{version}.zip"
-  appcast "https://www.arqbackup.com/download/arq#{version.major}.xml",
-          checkpoint: '9c249908088d35cc6fdb77e9113e42230eebf1946d82a1b4121626187e62484a'
-  name 'Arq'
-  homepage 'https://www.arqbackup.com/'
+  url "https://www.arqbackup.com/download/arqbackup/Arq#{version}.pkg"
+  appcast "https://www.arqbackup.com/download/arqbackup/arq#{version.major}_release_notes.html"
+  name "Arq"
+  desc "Multi-cloud backup application"
+  homepage "https://www.arqbackup.com/"
 
   auto_updates true
 
-  app 'Arq.app'
+  pkg "Arq#{version}.pkg"
+
+  uninstall pkgutil:   "com.haystacksoftware.Arq",
+            quit:      "com.haystacksoftware.Arq",
+            launchctl: [
+              "com.haystacksoftware.ArqMonitor",
+              "com.haystacksoftware.arqagent",
+            ]
+
+  zap trash: [
+    "/Library/Application Support/ArqAgentAPFS",
+    "/Library/Application Support/ArqAgent",
+    "~/Library/Application Support/Arq *",
+  ]
 end

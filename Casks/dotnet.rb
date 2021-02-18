@@ -1,17 +1,24 @@
-cask 'dotnet' do
-  version '2.0.3'
-  sha256 '834973adfe31fd7011f0b4a18976ceb9271cf572d1a5a9503275582ce79a911d'
+cask "dotnet" do
+  version "3.1.9,175aea5a-1b4a-4faa-b29d-ff72fa8c16bc:fcef8fc0139672f19ec8b9913824b6bb"
+  sha256 "9169251b1a55a0f812efe426b9a456002d9288962712b266ef6195fe9ea6c942"
 
-  url "https://download.microsoft.com/download/5/C/1/5C190037-632B-443D-842D-39085F02E1E8/dotnet-runtime-#{version}-osx-x64.pkg"
-  name '.Net Core Runtime'
-  homepage 'https://www.microsoft.com/net/core#macos'
+  url "https://download.visualstudio.microsoft.com/download/pr/#{version.after_comma.before_colon}/#{version.after_colon}/dotnet-runtime-#{version.before_comma}-osx-x64.pkg"
+  appcast "https://dotnet.microsoft.com/download/dotnet-core"
+  name ".Net Core Runtime"
+  homepage "https://www.microsoft.com/net/core#macos"
 
-  depends_on macos: '>= :sierra'
+  conflicts_with cask: [
+    "dotnet-sdk",
+    "dotnet-preview",
+    "dotnet-sdk-preview",
+  ]
+  depends_on macos: ">= :sierra"
 
-  pkg "dotnet-runtime-#{version}-osx-x64.pkg"
+  pkg "dotnet-runtime-#{version.before_comma}-osx-x64.pkg"
+  binary "/usr/local/share/dotnet/dotnet"
 
-  uninstall pkgutil: 'com.microsoft.dotnet.*',
-            delete:  '/etc/paths.d/dotnet'
+  uninstall pkgutil: "com.microsoft.dotnet.*",
+            delete:  "/etc/paths.d/dotnet"
 
-  zap trash: '~/.nuget'
+  zap trash: "~/.nuget"
 end

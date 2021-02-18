@@ -1,18 +1,26 @@
-cask 'jumpshare' do
-  version :latest
-  sha256 :no_check
+cask "jumpshare" do
+  version "2.6.8,92"
+  sha256 "4816bfcbaac413fa9a4f4b07e5a60ecaf7453af0e49f0d746a001996dadc61de"
 
-  url 'https://apps.jumpshare.com/desktop/mac/Jumpshare.dmg'
-  name 'Jumpshare'
-  homepage 'https://jumpshare.com/'
+  url "https://apps.jumpshare.com/desktop/mac/updates/Jumpshare-#{version.before_comma}.tar.bz2"
+  name "Jumpshare"
+  desc "File sharing, screen recording, and screenshot capture app"
+  homepage "https://jumpshare.com/"
 
-  app 'Jumpshare.app'
+  livecheck do
+    url "https://apps.jumpshare.com/desktop/mac/updates/appcast.xml"
+    strategy :sparkle
+  end
+
+  depends_on macos: ">= :high_sierra"
+
+  app "Jumpshare.app"
 
   zap trash: [
-               '~/Library/Application Scripts/com.jumpshare.JumpshareLoginHelper',
-               '~/Library/Application Support/com.jumpshare.Jumpshare',
-               '~/Library/Containers/com.jumpshare.JumpshareLoginHelper',
-               '~/Library/Cookies/com.jumpshare.Jumpshare.binarycookies',
-               '~/Library/Preferences/com.jumpshare.Jumpshare.plist',
-             ]
+    "~/Library/Application Scripts/com.jumpshare.JumpshareLoginHelper",
+    "~/Library/Application Support/com.jumpshare.Jumpshare",
+    "~/Library/Containers/com.jumpshare.JumpshareLoginHelper",
+    "~/Library/Cookies/com.jumpshare.Jumpshare.binarycookies",
+    "~/Library/Preferences/com.jumpshare.Jumpshare.plist",
+  ]
 end

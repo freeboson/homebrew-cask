@@ -1,12 +1,19 @@
-cask 'clover-configurator' do
-  version '4.56.0.0'
-  sha256 '1c1b2eb238c4bf57dc9301fa1e3d631895cee37a8cca75357f8b03850b5cc1c3'
+cask "clover-configurator" do
+  version "5.17.4.0"
+  sha256 :no_check
 
-  url 'http://mackie100projects.altervista.org/download-mac.php?version=vibrant'
-  appcast 'http://mackie100projects.altervista.org/apps/cloverconf/10.10/update.xml',
-          checkpoint: 'f23ec91340184f536da923bff4146de28841a109e2b3cb74af045845e4ddfc74'
-  name 'Clover Configurator'
-  homepage 'http://mackie100projects.altervista.org/'
+  url "https://mackie100projects.altervista.org/apps/cloverconf/download-new-build.php?version=global"
+  appcast "https://mackie100projects.altervista.org/download-clover-configurator/"
+  name "Clover Configurator"
+  desc "Clover EFI bootloader configuration helper"
+  homepage "https://mackie100projects.altervista.org/clover-configurator/"
 
-  app 'Clover Configurator.app'
+  auto_updates true
+
+  app "Clover Configurator.app"
+
+  zap trash: [
+    "~/Library/Caches/org.altervista.mackie100projects.Clover-Configurator",
+    "~/Library/Preferences/org.altervista.mackie100projects.Clover-Configurator.plist",
+  ]
 end

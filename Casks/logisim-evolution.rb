@@ -1,26 +1,20 @@
-cask 'logisim-evolution' do
-  version '2.14.2'
-  sha256 '9c1c766d9ebc92ec6444a7ae79c68c5676a61a4ddd2e7d329f468694d32ad164'
+cask "logisim-evolution" do
+  version "3.4.1"
+  sha256 "1b72dd3397290b7be95f886b933bd37a2d9182b8d33247fa5f059d0867e8111c"
 
-  url "https://github.com/reds-heig/logisim-evolution/releases/download/v#{version}/logisim-evolution.jar"
-  appcast 'https://github.com/reds-heig/logisim-evolution/releases.atom',
-          checkpoint: '98c5c4c9e67ef35fd77bbf4d7df6d178f0148df1950094d72c9470ee1f9eadf0'
-  name 'Logisim Evolution'
-  homepage 'https://github.com/reds-heig/logisim-evolution'
+  url "https://github.com/reds-heig/logisim-evolution/releases/download/v#{version}/logisim-evolution-#{version}-all.jar"
+  appcast "https://github.com/reds-heig/logisim-evolution/releases.atom"
+  name "Logisim Evolution"
+  desc "Digital logic designer and simulator"
+  homepage "https://github.com/reds-heig/logisim-evolution"
 
   container type: :naked
 
-  # shim script (https://github.com/caskroom/homebrew-cask/issues/18809)
-  shimscript = "#{staged_path}/logisim-evolution.wrapper.sh"
-  binary shimscript, target: 'logisim-evolution'
+  app "logisim-evolution-#{version}-all.jar", target: "logisim-evolution.jar"
 
-  preflight do
-    IO.write shimscript, <<~EOS
-      #!/bin/bash
-      cd "$(dirname "$(readlink -n "${0}")")" && \
-        java "${@}" -jar 'logisim-evolution.jar'
-    EOS
+  zap trash: "~/Library/Preferences/com.cburch.logisim.plist"
+
+  caveats do
+    depends_on_java "9+"
   end
-
-  zap trash: '~/Library/Preferences/com.cburch.logisim.plist'
 end

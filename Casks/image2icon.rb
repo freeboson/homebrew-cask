@@ -1,22 +1,26 @@
-cask 'image2icon' do
-  version '2.8'
-  sha256 'ba8e0f29bab556bc8d8a3630351d4321cdb990d89ec11a2cca90c7fd69a2328a'
+cask "image2icon" do
+  version "2.12,890"
+  sha256 "db9b7c25834a6d30cd9b050d39739ffe7e2c40b914aaf4ac07eece03fb36913b"
 
-  # sf-applications.s3.amazonaws.com was verified as official when first introduced to the cask
-  url "https://sf-applications.s3.amazonaws.com/Image2Icon/app-releases/Image2icon#{version}.zip"
-  name 'Image2Icon'
-  homepage 'http://www.img2icnsapp.com/'
+  url "https://sf-applications.s3.amazonaws.com/Image2Icon/app-releases/Image2icon#{version.before_comma}.zip",
+      verified: "sf-applications.s3.amazonaws.com/Image2Icon/"
+  name "Image2Icon"
+  desc "Icon creator and file and folder customizer"
+  homepage "https://www.img2icnsapp.com/"
 
-  depends_on macos: '>= :mavericks'
+  livecheck do
+    url "http://apps.shinynode.com/apps/image2icon_appcast.xml"
+    strategy :sparkle
+  end
 
-  app 'Image2Icon.app'
+  app "Image2Icon.app"
 
   zap trash: [
-               '~/Library/Caches/net.shinyfrog.image2icon',
-               '~/Library/Preferences/net.shinyfrog.image2icon.plist',
-               '~/Library/Containers/net.shinyfrog.image2icon',
-               '~/Library/Containers/net.shinyfrog.image2icon.templateRenderer',
-               '~/Library/Containers/net.shinyfrog.templateRenderer',
-               '~/Library/Saved Application State/net.shinyfrog.image2icon.savedState',
-             ]
+    "~/Library/Caches/net.shinyfrog.image2icon",
+    "~/Library/Preferences/net.shinyfrog.image2icon.plist",
+    "~/Library/Containers/net.shinyfrog.image2icon",
+    "~/Library/Containers/net.shinyfrog.image2icon.templateRenderer",
+    "~/Library/Containers/net.shinyfrog.templateRenderer",
+    "~/Library/Saved Application State/net.shinyfrog.image2icon.savedState",
+  ]
 end

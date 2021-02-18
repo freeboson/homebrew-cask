@@ -1,10 +1,23 @@
-cask 'monero-wallet' do
-  version '0.11.1.0'
-  sha256 '4f63ac3e9c5f87f8d8318ff89cdbfa954716e8addbdc8fcd0352fe678b84f8e2'
+cask "monero-wallet" do
+  version "0.17.1.9"
+  sha256 "c8a8ea012e8731bfacd17434fdd3a0f03302fc61d7187d218da5ff6a6e869f0b"
 
-  url "https://downloads.getmonero.org/gui/monero-gui-mac-x64-v#{version}.tar.bz2"
-  name 'Monero Wallet'
-  homepage 'https://getmonero.org/'
+  url "https://downloads.getmonero.org/gui/monero-gui-mac-x64-v#{version}.dmg"
+  name "Monero Wallet"
+  desc "Untraceable cryptocurrency wallet"
+  homepage "https://getmonero.org/"
 
-  app 'monero-wallet-gui.app'
+  livecheck do
+    url "https://downloads.getmonero.org/gui/mac64"
+    strategy :header_match
+  end
+
+  app "monero-wallet-gui.app"
+
+  zap trash: [
+    "~/.bitmonero",
+    "~/Monero",
+    "~/Library/Preferences/org.getmonero.monero-core.plist",
+    "~/Library/Saved Application State/com.yourcompany.monero-wallet-gui.savedState",
+  ]
 end

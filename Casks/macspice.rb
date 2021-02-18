@@ -1,12 +1,21 @@
-cask 'macspice' do
-  version '3.1.17'
-  sha256 'd66d5c2082d74ff01fde68d0048237b014d298e13fee5e445739b13302fe27d0'
+cask "macspice" do
+  version "3.1.24,341"
+  sha256 "486baee366773f3589c870d9294e1028c118e29f9bf4dc824322e37f2782475f"
 
-  url "http://www.macspice.com/mirror/binaries/v#{version}/MacSpice3f5.dmg"
-  appcast 'http://www.macspice.com/AppCast-v2.xml',
-          checkpoint: 'b1dbf97e266f9ce8b26f14fbfc8cdb7158cd0ea48c76838d4bea3e7652c904d7'
-  name 'MacSpice'
-  homepage 'https://www.macspice.com/'
+  url "https://www.macspice.com/mirror/binaries/v#{version.before_comma}/MacSpice3f5.dmg"
+  name "MacSpice"
+  homepage "https://www.macspice.com/"
 
-  app 'MacSpice.app'
+  livecheck do
+    url "https://www.macspice.com/AppCast-v2.xml"
+    strategy :sparkle
+  end
+
+  app "MacSpice.app"
+
+  zap trash: [
+    "~/Library/Application Support/MacSpice",
+    "~/Library/Preferences/uk.co.cdhw.MacSpice.plist",
+    "~/Library/Saved Application State/uk.co.cdhw.MacSpice.savedState",
+  ]
 end

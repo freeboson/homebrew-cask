@@ -1,13 +1,20 @@
-cask 'gramps' do
-  version '4.2.6-1'
-  sha256 'b38648187e2eae04d4e4012e64754c721960582118c05c4ae61726bafc1bad93'
+cask "gramps" do
+  version "5.1.3,4"
+  sha256 "30d4a44d2900c3c8519f90e0b2f7236d3859002b8ba30596b0900c5634a80f33"
 
-  # github.com/gramps-project/gramps was verified as official when first introduced to the cask
-  url "https://github.com/gramps-project/gramps/releases/download/v#{version.major_minor_patch}/Gramps-Intel-#{version}.dmg"
-  appcast 'https://github.com/gramps-project/gramps/releases.atom',
-          checkpoint: '381bfc19f192623005e03ce6a1b63e63bc3d7271c70d6b27c031ad3f287ab7b5'
-  name 'Gramps'
-  homepage 'https://gramps-project.org/introduction-WP/'
+  url "https://github.com/gramps-project/gramps/releases/download/v#{version.before_comma}/Gramps-Intel-#{version.before_comma}-#{version.after_comma}.dmg",
+      verified: "github.com/gramps-project/gramps/"
+  name "Gramps"
+  desc "Genealogy software"
+  homepage "https://gramps-project.org/blog/"
 
-  app 'Gramps.app'
+  livecheck do
+    url "https://github.com/gramps-project/gramps/releases/latest"
+    strategy :page_match do |page|
+      match = page.match(%r{href=.*?/Gramps-Intel-(\d+(?:.\d+)*)-(\d+)\.dmg}i)
+      "#{match[1]},#{match[2]}"
+    end
+  end
+
+  app "Gramps.app"
 end

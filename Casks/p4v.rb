@@ -1,22 +1,41 @@
-cask 'p4v' do
-  version '2017.3'
-  sha256 'fb753bc17ae96ccf09e4c258474b2ba2ea12695140b1e5d7c6c58b6c6543a945'
+cask "p4v" do
+  version "21.1,2075061"
+  sha256 "2220402b491b0707165954d31fe1cb11909f846c1d8d1ab238ccd8b84b5d078b"
 
-  url "http://cdist2.perforce.com/perforce/r#{version.sub(%r{\A20(\d\d\.\d+).*}, '\1')}/bin.macosx1011x86_64/P4V.dmg"
-  appcast "http://filehost.perforce.com/perforce/r#{version.sub(%r{\A20(\d\d\.\d+).*}, '\1')}/bin.macosx1011x86_64/SHA256SUMS",
-          checkpoint: '4a0f614a44c0cf4e38a7ce13def9b343abc9edb3f4b58ba7323a4664e85a2c62'
-  name 'Perforce Visual Client'
-  name 'P4V'
-  homepage 'https://www.perforce.com/products/helix-core-apps/helix-visual-client-p4v'
+  url "https://cdist2.perforce.com/perforce/r#{version.before_comma}/bin.macosx1015x86_64/P4V.dmg"
+  appcast "https://www.perforce.com/perforce/doc.current/user/p4vnotes.txt"
+  name "Perforce Visual Client"
+  name "P4Merge"
+  name "P4V"
+  desc "Visual client for Helix Core"
+  homepage "https://www.perforce.com/products/helix-core-apps/helix-visual-client-p4v"
 
-  app 'p4v.app'
-  app 'p4admin.app'
-  app 'p4merge.app'
-  binary 'p4vc'
+  app "p4v.app"
+  app "p4admin.app"
+  app "p4merge.app"
+  binary "p4vc"
+  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
+  p4_wrapper = "#{staged_path}/p4.wrapper.sh"
+  binary p4_wrapper, target: "p4v"
+  binary p4_wrapper, target: "p4admin"
+  binary p4_wrapper, target: "p4merge"
+
+  preflight do
+    IO.write p4_wrapper, <<~EOS
+      #!/bin/bash
+      set -euo pipefail
+      COMMAND=$(basename "$0")
+      if [[ "$COMMAND" == "p4merge" ]]; then
+        exec "#{appdir}/${COMMAND}.app/Contents/Resources/launch${COMMAND}" "$@" 2> /dev/null
+      else
+        exec "#{appdir}/${COMMAND}.app/Contents/MacOS/${COMMAND}" "$@" 2> /dev/null
+      fi
+    EOS
+  end
 
   zap trash: [
-               '~/Library/Preferences/com.perforce.p4v',
-               '~/Library/Preferences/com.perforce.p4v.plist',
-               '~/Library/Saved Application State/com.perforce.p4v.savedState',
-             ]
+    "~/Library/Preferences/com.perforce.p4v",
+    "~/Library/Preferences/com.perforce.p4v.plist",
+    "~/Library/Saved Application State/com.perforce.p4v.savedState",
+  ]
 end

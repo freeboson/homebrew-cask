@@ -1,11 +1,13 @@
-cask 'twine' do
-  version '2.1.3'
-  sha256 'f99eafcf3d70f6851016e350705aca563520b204cec13f86c353569f6ab362a4'
+cask "twine" do
+  version "2.3.12"
+  sha256 "0cd745968ba7db2c4119396022ede038e60a1f237dd9380168ef20f42a637ce4"
 
-  # bitbucket.org/klembot/twinejs was verified as official when first introduced to the cask
-  url "https://bitbucket.org/klembot/twinejs/downloads/twine_#{version}_osx.zip"
-  name 'Twine'
-  homepage 'https://twinery.org/'
+  url "https://github.com/klembot/twinejs/releases/download/#{version}/twine_#{version}_macos.dmg",
+      verified: "github.com/klembot/twinejs/"
+  appcast "https://github.com/klembot/twinejs/releases.atom"
+  name "Twine"
+  desc "Tool for telling interactive, nonlinear stories"
+  homepage "https://twinery.org/"
 
-  app 'Twine.app'
+  app "Twine.app"
 end

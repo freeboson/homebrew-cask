@@ -1,13 +1,23 @@
-cask 'papers' do
-  version '3.4.10,548'
-  sha256 'cef4ecc8f0968b500db1fe1cd0d525a6912d8e3e9b5035d416fe77236ba74132'
+cask "papers" do
+  version :latest
+  sha256 :no_check
 
-  # appcaster.papersapp.com/apps/mac/production/download was verified as official when first introduced to the cask
-  url "http://appcaster.papersapp.com/apps/mac/production/download/#{version.after_comma}/papers_#{version.before_comma.no_dots}_#{version.after_comma}.dmg"
-  appcast 'https://appcaster.papersapp.com/apps/mac/production/appcast.xml',
-          checkpoint: '211d6e5e84a12cb510842970d9e1ba096ad3206a3a3574b4ea266969f93fb9b0'
-  name 'Papers'
-  homepage 'https://www.readcube.com/papers/'
+  url "https://download.readcube.com/app/Install%20Papers.zip"
+  name "ReadCube Papers"
+  homepage "https://www.readcube.com/home"
 
-  app 'Papers.app'
+  installer manual: "Papers Installer.app"
+
+  uninstall quit:   "com.ReadCube.Papers",
+            delete: "/Applications/Papers.app"
+
+  zap trash: [
+    "~/Library/Application Support/Papers",
+    "~/Library/Caches/com.ReadCube.Papers",
+    "~/Library/Caches/com.ReadCube.Papers.ShipIt",
+    "~/Library/Cookies/com.ReadCube.Papers-Installer.binarycookies",
+    "~/Library/Logs/Papers",
+    "~/Library/Preferences/com.ReadCube.Papers.plist",
+    "~/Library/Saved Application State/com.ReadCube.Papers.savedState",
+  ]
 end

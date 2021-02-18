@@ -1,14 +1,23 @@
-cask 'boxcryptor' do
-  version '2.16.880'
-  sha256 '47c0a9486d9b80ca0582d875a22307ff31320e36d036d5ee79bf4f2a55aafa02'
+cask "boxcryptor" do
+  if MacOS.version <= :catalina
+    version "2.38.1090"
+    sha256 "974d097017bdc1377a62fa4e9e51033636198659fc9353372233cde0e5094285"
+  else
+    version "2.39.1119"
+    sha256 "b6415b07a0b9e73bf4314d19e319e3dbfdcfdfea1eda379a0c2a241bfb214a9c"
+  end
 
   url "https://downloads.boxcryptor.com/boxcryptor/mac/Boxcryptor_v#{version}_Installer.dmg"
-  appcast 'https://rink.hockeyapp.net/api/2/apps/7fd6db3e51a977132e3b120c613eaea8',
-          checkpoint: '5294c8d43ba3e498dce1e23fe1cf11279292237eb22823573d88bf5f75b22efb'
-  name 'Boxcryptor'
-  homepage 'https://www.boxcryptor.com/en/'
+  name "Boxcryptor"
+  desc "Tool to encrypt files and folders in various cloud storage services"
+  homepage "https://www.boxcryptor.com/en/"
 
-  depends_on macos: '>= :mavericks'
+  livecheck do
+    url "https://www.boxcryptor.com/l/download-macosx"
+    strategy :header_match
+  end
 
-  app 'Boxcryptor.app'
+  depends_on macos: ">= :sierra"
+
+  app "Boxcryptor.app"
 end

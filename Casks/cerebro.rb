@@ -1,20 +1,20 @@
-cask 'cerebro' do
-  version '0.3.1'
-  sha256 '83fe4fa5baae56052eb44ae0a94a93880e2d99e52ad5d2e0d4201ddd2f960889'
+cask "cerebro" do
+  version "0.3.2"
+  sha256 "a4df90aca836d6110ac65cd5c1427fb9121f93bdd36ed8527816befbda3dc833"
 
-  # github.com/KELiON/cerebro was verified as official when first introduced to the cask
-  url "https://github.com/KELiON/cerebro/releases/download/v#{version}/cerebro-#{version}.dmg"
-  appcast 'https://github.com/KELiON/cerebro/releases.atom',
-          checkpoint: '868bc9ed6937baa629020e6338898aed949e76c5a367006ffe5112a1f4f9ce91'
-  name 'Cerebro'
-  homepage 'https://cerebroapp.com/'
+  url "https://github.com/KELiON/cerebro/releases/download/v#{version}/cerebro-#{version}.dmg",
+      verified: "github.com/KELiON/cerebro/"
+  appcast "https://github.com/KELiON/cerebro/releases.atom"
+  name "Cerebro"
+  desc "Open-source productivity booster with a brain"
+  homepage "https://cerebroapp.com/"
 
-  app 'Cerebro.app'
+  app "Cerebro.app"
 
   zap trash: [
-               '~/Library/Application Support/Cerebro',
-               '~/Library/Preferences/com.cerebroapp.Cerebro.helper.plist',
-               '~/Library/Preferences/com.cerebroapp.Cerebro.plist',
-               '~/Library/Saved Application State/com.cerebroapp.Cerebro.savedState',
-             ]
+    "~/Library/Application Support/Cerebro",
+    "~/Library/Preferences/com.cerebroapp.Cerebro.helper.plist",
+    "~/Library/Preferences/com.cerebroapp.Cerebro.plist",
+    "~/Library/Saved Application State/com.cerebroapp.Cerebro.savedState",
+  ]
 end

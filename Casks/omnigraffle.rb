@@ -1,22 +1,31 @@
-cask 'omnigraffle' do
-  if MacOS.version <= :mavericks
-    version '6.0.5'
-    sha256 'a2eff19909d1ba38a4f01b2beecbde2f31f4af43d30e06d2c6921ae8880f85bc'
-    url "https://downloads.omnigroup.com/software/MacOSX/10.8/OmniGraffle-#{version}.dmg"
-  elsif MacOS.version <= :yosemite
-    version '6.6.1'
-    sha256 '7671d46ccd0b53a5917b0ccba5971fe1f1d7990b2d636f25c941b11b03c6e23c'
-    url "https://downloads.omnigroup.com/software/MacOSX/10.10/OmniGraffle-#{version}.dmg"
+cask "omnigraffle" do
+  if MacOS.version <= :sierra
+    version "7.8.2"
+    sha256 "ab463ea6c12d49c4104d3814ac3280d0359072702d4751f5074f644fc79de0c6"
+    url "https://downloads.omnigroup.com/software/Archive/MacOSX/10.12/OmniGraffle-#{version}.dmg"
+  elsif MacOS.version <= :high_sierra
+    version "7.11.5"
+    sha256 "83ef24af2dbd7977b9922e992f17f23e102562f0589d28bc37d5579b4a4d4938"
+    url "https://downloads.omnigroup.com/software/MacOSX/10.13/OmniGraffle-#{version}.dmg"
   else
-    version '7.5'
-    sha256 'd8d8963a85ee34270d7d0148aaaa7aee75bc7d3fffc1bb89e64626546c943d34'
-    url "https://downloads.omnigroup.com/software/MacOSX/10.11/OmniGraffle-#{version}.dmg"
+    version "7.18.2"
+    sha256 "9186817646d4bf63d014eb2693af1192137f9ed4f5eb92f9c82c074c29c1ee5a"
+    url "https://downloads.omnigroup.com/software/MacOSX/10.14/OmniGraffle-#{version}.dmg"
   end
 
-  name 'OmniGraffle'
-  homepage 'https://www.omnigroup.com/omnigraffle/'
+  name "OmniGraffle"
+  desc "Visual communication software"
+  homepage "https://www.omnigroup.com/omnigraffle/"
 
-  app 'OmniGraffle.app'
+  livecheck do
+    url "https://www.omnigroup.com/download/latest/omnigraffle/"
+    strategy :header_match
+  end
 
-  zap trash: '~/Library/Application Support/The Omni Group/OmniGraffle'
+  auto_updates true
+  depends_on macos: ">= :sierra"
+
+  app "OmniGraffle.app"
+
+  zap trash: "~/Library/Application Support/The Omni Group/OmniGraffle"
 end

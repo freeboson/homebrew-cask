@@ -1,14 +1,23 @@
-cask 'calibre' do
-  version '3.12.0'
-  sha256 '16ac7e877684287a3a4c0272c832fb6b58d7d72d2aa7c3e8b89adc5acc4649d8'
+cask "calibre" do
+  if MacOS.version <= :high_sierra
+    version "3.48.0"
+    sha256 "68829cd902b8e0b2b7d5cf7be132df37bcc274a1e5720b4605d2dd95f3a29168"
+    url "https://download.calibre-ebook.com/#{version}/calibre-#{version}.dmg"
+  else
+    version "5.11.0"
+    sha256 "45abf47f9e95e9410d170665580244ec0938c15757a36b8935500163c58bf583"
+    url "https://github.com/kovidgoyal/calibre/releases/download/v#{version}/calibre-#{version}.dmg",
+        verified: "github.com/kovidgoyal/calibre/"
+    appcast "https://github.com/kovidgoyal/calibre/releases.atom"
+  end
 
-  url "https://download.calibre-ebook.com/#{version}/calibre-#{version}.dmg"
-  appcast 'https://github.com/kovidgoyal/calibre/releases.atom',
-          checkpoint: '26c8346af220a9cb7ec8b1ab3dd72f0d9804e63a1c32b4f75e7680b8ced29f4e'
-  name 'calibre'
-  homepage 'https://calibre-ebook.com/'
+  name "calibre"
+  desc "E-books management software"
+  homepage "https://calibre-ebook.com/"
 
-  app 'calibre.app'
+  conflicts_with cask: "homebrew/cask-versions/calibre4"
+
+  app "calibre.app"
   binary "#{appdir}/calibre.app/Contents/MacOS/calibre"
   binary "#{appdir}/calibre.app/Contents/MacOS/calibre-complete"
   binary "#{appdir}/calibre.app/Contents/MacOS/calibre-customize"
@@ -31,10 +40,10 @@ cask 'calibre' do
   binary "#{appdir}/calibre.app/Contents/MacOS/web2disk"
 
   zap trash: [
-               '~/Library/Caches/calibre',
-               '~/Library/Preferences/calibre',
-               '~/Library/Preferences/net.kovidgoyal.calibre.plist',
-               '~/Library/Saved Application State/com.calibre-ebook.ebook-viewer.savedState',
-               '~/Library/Saved Application State/net.kovidgoyal.calibre.savedState',
-             ]
+    "~/Library/Caches/calibre",
+    "~/Library/Preferences/calibre",
+    "~/Library/Preferences/net.kovidgoyal.calibre.plist",
+    "~/Library/Saved Application State/com.calibre-ebook.ebook-viewer.savedState",
+    "~/Library/Saved Application State/net.kovidgoyal.calibre.savedState",
+  ]
 end

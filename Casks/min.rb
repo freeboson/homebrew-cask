@@ -1,19 +1,19 @@
-cask 'min' do
-  version '1.6.3'
-  sha256 'c79e32dcaeb170a4276bb9981642359135716731d1457d9cc3fc25db51e941c8'
+cask "min" do
+  version "1.18.1"
+  sha256 "8c77f3e1e6ead2ceb019e39d4d5522f90b7c3ab28d4ccaa52600c30a8630031a"
 
-  # github.com/minbrowser/min was verified as official when first introduced to the cask
-  url "https://github.com/minbrowser/min/releases/download/v#{version}/Min-v#{version}-darwin-x64.zip"
-  appcast 'https://github.com/minbrowser/min/releases.atom',
-          checkpoint: 'd2616d784b1a20887718c7d5480b43a11ff8e94912889ee2040344f8cffa6b32'
-  name 'Min'
-  homepage 'https://minbrowser.github.io/min/'
+  url "https://github.com/minbrowser/min/releases/download/v#{version}/Min-v#{version}-darwin-x64.zip",
+      verified: "github.com/minbrowser/min/"
+  appcast "https://github.com/minbrowser/min/releases.atom"
+  name "Min"
+  desc "Minimal browser that protects privacy"
+  homepage "https://minbrowser.github.io/min/"
 
-  app 'Min.app'
+  app "Min.app"
 
   zap trash: [
-               '~/Library/Application Support/Min',
-               '~/Library/Caches/Min',
-               '~/Library/Saved Application State/com.electron.min.savedState',
-             ]
+    "~/Library/Application Support/Min",
+    "~/Library/Caches/Min",
+    "~/Library/Saved Application State/com.electron.min.savedState",
+  ]
 end

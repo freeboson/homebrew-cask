@@ -1,10 +1,20 @@
-cask 'qt-creator' do
-  version '4.4.1'
-  sha256 '6e048a113f34bd3333fbcecdbf916aa292c5fe510662c4ad7cf8d65a515a0d64'
+cask "qt-creator" do
+  version "4.14.0"
+  sha256 "922097dd07ef7ba967b04608bf95e6c7b6755493baf3393d751c6ad889131a3d"
 
-  url "http://download.qt.io/official_releases/qtcreator/#{version.major_minor}/#{version}/qt-creator-opensource-mac-x86_64-#{version}.dmg"
-  name 'Qt Creator'
-  homepage 'https://www1.qt.io/developers/'
+  url "https://download.qt.io/official_releases/qtcreator/#{version.major_minor}/#{version}/qt-creator-opensource-mac-x86_64-#{version}.dmg"
+  appcast "https://download.qt.io/official_releases/qtcreator/",
+          must_contain: version.major_minor
+  name "Qt Creator"
+  homepage "https://www.qt.io/developers/"
 
-  app 'Qt Creator.app'
+  depends_on macos: ">= :sierra"
+
+  app "Qt Creator.app"
+
+  zap trash: [
+    "~/Library/Preferences/com.qtproject.QtCreator.plist",
+    "~/Library/Preferences/org.qt-project.qtcreator.plist",
+    "~/Library/Saved Application State/org.qt-project.qtcreator.savedState",
+  ]
 end

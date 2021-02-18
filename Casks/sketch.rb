@@ -1,25 +1,33 @@
-cask 'sketch' do
-  version '47.1-45422'
-  sha256 '2b9417ce3da0aed9752cce343ad6f5ab57f0d5c1b8e5cc9955954dca63f91950'
+cask "sketch" do
+  version "70.5,109233"
+  sha256 "74dccb3930bafcb3f530e1a2b163574a044c8c3fb8e20d927217e87d91b680f9"
 
-  url "https://download.sketchapp.com/sketch-#{version}.zip"
-  appcast 'https://download.sketchapp.com/sketch-versions.xml',
-          checkpoint: '656609cc2ae3a83af50015410bacbb2cc777d53c2762712649241ce66b1ccd30'
-  name 'Sketch'
-  homepage 'https://www.sketchapp.com/'
+  url "https://download.sketchapp.com/sketch-#{version.before_comma}-#{version.after_comma}.zip"
+  name "Sketch"
+  desc "Digital design and prototyping platform"
+  homepage "https://www.sketchapp.com/"
+
+  livecheck do
+    url "https://download.sketchapp.com/sketch-versions.xml"
+    strategy :sparkle
+  end
 
   auto_updates true
+  depends_on macos: ">= :mojave"
 
-  app 'Sketch.app'
+  app "Sketch.app"
 
   zap trash: [
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.bohemiancoding.sketch3.sfl*',
-               '~/Library/Application Support/com.bohemiancoding.sketch3',
-               '~/Library/Caches/com.bohemiancoding.sketch3',
-               '~/Library/Caches/com.plausiblelabs.crashreporter.data/com.bohemiancoding.sketch3',
-               '~/Library/Logs/com.bohemiancoding.sketch3',
-               '~/Library/Preferences/com.bohemiancoding.sketch3.LSSharedFileList.plist',
-               '~/Library/Preferences/com.bohemiancoding.sketch3.plist',
-               '~/Library/Cookies/com.bohemiancoding.sketch3.binarycookies',
-             ]
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.bohemiancoding.sketch3.sfl*",
+    "~/Library/Application Support/com.bohemiancoding.sketch3",
+    "~/Library/Caches/com.bohemiancoding.sketch3",
+    "~/Library/Caches/com.plausiblelabs.crashreporter.data/com.bohemiancoding.sketch3",
+    "~/Library/Logs/com.bohemiancoding.sketch3",
+    "~/Library/Preferences/com.bohemiancoding.sketch3.LSSharedFileList.plist",
+    "~/Library/Preferences/com.bohemiancoding.sketch3.plist",
+    "~/Library/Cookies/com.bohemiancoding.sketch3.binarycookies",
+    "~/Library/HTTPStorages/com.bohemiancoding.sketch3.binarycookies",
+    "~/Library/Saved Application State/com.bohemiancoding.sketch3.savedState",
+    "~/Library/Autosave Information/com.bohemiancoding.sketch3.plist",
+  ]
 end

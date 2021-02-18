@@ -1,23 +1,32 @@
-cask 'suspicious-package' do
-  version '3.3'
-  sha256 '8b7f5149b042ef46e689689f19c306ef3b10436d46ca6c150852aa2de2636b8a'
+cask "suspicious-package" do
+  version "3.6,736"
+  sha256 :no_check
 
-  url 'http://www.mothersruin.com/software/downloads/SuspiciousPackage.dmg'
-  appcast 'http://www.mothersruin.com/software/SuspiciousPackage/data/SuspiciousPackageVersionInfo.plist',
-          checkpoint: '520bbb902026f6393e55542b1aa188f4c6970ffa8a020e728fd8413ea5eea776'
-  name 'Suspicious Package'
-  homepage 'http://www.mothersruin.com/software/SuspiciousPackage/'
+  url "https://www.mothersruin.com/software/downloads/SuspiciousPackage.dmg"
+  name "Suspicious Package"
+  desc "Application for inspecting installer packages"
+  homepage "https://www.mothersruin.com/software/SuspiciousPackage/"
 
-  auto_updates true
+  livecheck do
+    url "https://www.mothersruin.com/software/SuspiciousPackage/data/SuspiciousPackageVersionInfo.plist"
+    strategy :page_match do |page|
+      svs = page.match(/CFBundleShortVersionString.*?\n.*?(\d+(?:\.\d+)*)/i)
+      bv = page.match(/CFBundleVersion.*?\n.*?(\d+(?:\.\d+)*)/i)
+      "#{svs[1]},#{bv[1]}"
+    end
+  end
 
-  app 'Suspicious Package.app'
+  depends_on macos: ">= :mojave"
+
+  app "Suspicious Package.app"
+  binary "#{appdir}/Suspicious Package.app/Contents/SharedSupport/spkg"
 
   zap trash: [
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.mothersruin.suspiciouspackageapp.sfl*',
-               '~/Library/Caches/com.mothersruin.SuspiciousPackageApp',
-               '~/Library/Caches/com.mothersruin.XPCService.UpdateChecker',
-               '~/Library/Preferences/com.mothersruin.SuspiciousPackage.plist',
-               '~/Library/Preferences/com.mothersruin.SuspiciousPackageApp.plist',
-               '~/Library/WebKit/com.mothersruin.SuspiciousPackageApp',
-             ]
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.mothersruin.suspiciouspackageapp.sfl*",
+    "~/Library/Caches/com.mothersruin.SuspiciousPackageApp",
+    "~/Library/Caches/com.mothersruin.XPCService.UpdateChecker",
+    "~/Library/Preferences/com.mothersruin.SuspiciousPackage.plist",
+    "~/Library/Preferences/com.mothersruin.SuspiciousPackageApp.plist",
+    "~/Library/WebKit/com.mothersruin.SuspiciousPackageApp",
+  ]
 end

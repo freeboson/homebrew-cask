@@ -1,12 +1,11 @@
-cask 'livetail' do
-  version '1.0'
-  sha256 '40cc322b1f31ab9189798d4bb193d1eb43d00c95906bdb863dadefc72f4a839c'
+cask "livetail" do
+  version "2.1"
+  sha256 "fd8b3d8521c4be647c8cbb85d02f659d547f2c8825bd3d270e44d0401c4197fa"
 
-  url "https://github.com/SumoLogic/livetail-cli/releases/download/v#{version}/livetail_mac_os.zip"
-  appcast 'https://github.com/SumoLogic/livetail-cli/releases.atom',
-          checkpoint: 'f800c5aa6f95542b178d7f91aa5c9285fdf8dac1f48ed11b215f14f2136d2cda'
-  name 'Sumologic livetail CLI'
-  homepage 'https://github.com/SumoLogic/livetail-cli'
+  url "https://github.com/SumoLogic/livetail-cli/releases/download/#{version}/livetail_mac_os.zip"
+  appcast "https://github.com/SumoLogic/livetail-cli/releases.atom"
+  name "Sumologic livetail CLI"
+  homepage "https://github.com/SumoLogic/livetail-cli"
 
-  binary 'livetail'
+  binary "livetail"
 end

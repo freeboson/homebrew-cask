@@ -1,12 +1,21 @@
-cask 'whatsize' do
-  version '6.6.2'
-  sha256 '9e1c6c81ef3ca4a251f4a1313d0ec6fa353cc92bbb8160335d45411cc156033d'
+cask "whatsize" do
+  version "7.6.4,7640"
+  sha256 "06c317d247ac0b01cbab146c6d6a7f70506223fbb39a32a7ebc55cfe63e8a92e"
 
-  url "https://www.whatsizemac.com/software/whatsize#{version.major}/whatsize.dmg"
-  appcast 'http://www.id-design.com/software/whatsize/release/notes.xml',
-          checkpoint: 'a3939b96017d292cb2c10d7b3a024db78f734bf47d522b548c41e2ff71b74909'
-  name 'WhatSize'
-  homepage 'https://whatsizemac.com/'
+  url "https://www.whatsizemac.com/software/whatsize#{version.major}/whatsize_#{version.before_comma}.tgz"
+  name "WhatSize"
+  desc "File system utility used to view and reclaim disk space"
+  homepage "https://www.whatsizemac.com/"
 
-  app 'WhatSize.app'
+  livecheck do
+    url "https://www.whatsizemac.com/software/whatsize#{version.major}/release/notes.xml"
+    strategy :sparkle
+  end
+
+  depends_on macos: ">= :sierra"
+
+  pkg "WhatSize.pkg"
+
+  uninstall pkgutil:   "com.id-design.whatsize#{version.major}.pkg",
+            launchctl: "com.id-design.v#{version.major}.whatsizehelper"
 end

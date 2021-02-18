@@ -1,18 +1,28 @@
-cask 'cmake' do
-  version '3.10.0'
-  sha256 'dd8383916ee1559edd64ce890dc1838ad90474aa06c838378aa3309009cf4618'
+cask "cmake" do
+  version "3.19.5"
+  sha256 "5b5d1c42df3a91ee340795abb881de057cfd7c50d1776fc97ff40a9779d9f21d"
 
-  url "https://www.cmake.org/files/v#{version.major_minor}/cmake-#{version}-Darwin-x86_64.dmg"
-  name 'CMake'
-  homepage 'https://cmake.org/'
+  url "https://cmake.org/files/LatestRelease/cmake-#{version}-macos-universal.dmg"
+  name "CMake"
+  desc "Family of tools to build, test and package software"
+  homepage "https://cmake.org/"
 
-  conflicts_with formula: 'cmake'
+  livecheck do
+    url "https://cmake.org/files/LatestRelease/"
+    regex(/href=.*?cmake[._-]v?(\d+(?:\.\d+)+)-macos-universal\.dmg/i)
+  end
 
-  app 'CMake.app'
+  conflicts_with formula: "cmake"
+
+  app "CMake.app"
   binary "#{appdir}/CMake.app/Contents/bin/cmake"
   binary "#{appdir}/CMake.app/Contents/bin/ccmake"
-  binary "#{appdir}/CMake.app/Contents/bin/cmakexbuild"
   binary "#{appdir}/CMake.app/Contents/bin/cpack"
   binary "#{appdir}/CMake.app/Contents/bin/ctest"
   binary "#{appdir}/CMake.app/Contents/bin/cmake-gui"
+
+  zap trash: [
+    "~/Library/Preferences/org.cmake.cmake.plist",
+    "~/Library/Saved Application State/org.cmake.cmake.savedState",
+  ]
 end

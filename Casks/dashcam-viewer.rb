@@ -1,12 +1,18 @@
-cask 'dashcam-viewer' do
-  version '2.6.8'
-  sha256 '72ae74866a81c8dff2730ba67f115ee3c2ee57bf918ccba2ec96547d54c1be0b'
+cask "dashcam-viewer" do
+  version "3.6.4"
+  sha256 "6e7a452882d5ffe89663119d37ec29a22b6ae29391a2b04d884372cb037a6602"
 
-  # dropboxusercontent.com/u/25150850 was verified as official when first introduced to the cask
-  url "https://dl.dropboxusercontent.com/u/25150850/Dashcam_Viewer_v#{version}.dmg"
-  name 'Dashcam Viewer'
-  name 'Dashcam Viewer by Earthshine Software'
-  homepage 'https://dashcamviewer.com/'
+  url "https://filedn.com/l2s8TAtm4VASBX72ds0zYD8/dcv/Dashcam_Viewer_v#{version}.dmg",
+      verified: "filedn.com/l2s8TAtm4VASBX72ds0zYD8/dcv/"
+  name "Dashcam Viewer"
+  name "Dashcam Viewer by Earthshine Software"
+  homepage "https://dashcamviewer.com/"
 
-  app 'Dashcam Viewer.app'
+  livecheck do
+    url "https://dashcamviewer.com/"
+    strategy :page_match
+    regex(%r{href=.*?/Dashcam_Viewer_v?(\d+(?:\.\d+)*)\.dmg}i)
+  end
+
+  app "Dashcam Viewer.app"
 end

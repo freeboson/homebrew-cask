@@ -1,15 +1,34 @@
-cask 'bbedit' do
-  version '12.0.1'
-  sha256 'a9ff2a3b21a11c30e6c872f3df8548fb7dfabe4372b1b578cb6d6be089cab891'
+cask "bbedit" do
+  if MacOS.version <= :el_capitan
+    version "12.1.6"
+    sha256 "23b9fc6ef5c03cbcab041566503c556d5baf56b2ec18f551e6f0e9e6b48dc690"
+  elsif MacOS.version <= :high_sierra
+    version "12.6.7"
+    sha256 "d0647c864268b187343bd95bfcf490d6a2388579b1f8fce64a289c65341b1144"
+  else
+    version "13.5.4"
+    sha256 "b55359e27937390f9b4a028b180c140e24fdf8077d1caa9f9d3440fdfeacf411"
+  end
+  url "https://s3.amazonaws.com/BBSW-download/BBEdit_#{version}.dmg",
+      verified: "s3.amazonaws.com/BBSW-download/"
+  name "BBEdit"
+  desc "Text, code, and markup editor"
+  homepage "https://www.barebones.com/products/bbedit/"
 
-  # s3.amazonaws.com/BBSW-download was verified as official when first introduced to the cask
-  url "http://s3.amazonaws.com/BBSW-download/BBEdit_#{version}.dmg"
-  appcast 'https://versioncheck.barebones.com/BBEdit.xml',
-          checkpoint: '54d0f82c57c8c7c3158f1262295b64df119f9a802c25d45a762231955c5ba629'
-  name 'BBEdit'
-  homepage 'https://www.barebones.com/products/bbedit/'
+  livecheck do
+    url "http://versioncheck.barebones.com/BBEdit.xml"
+    regex(/BBEdit[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+  end
 
-  depends_on macos: '>= :mavericks'
+  auto_updates true
+  depends_on macos: ">= :el_capitan"
 
-  app 'BBEdit.app'
+  app "BBEdit.app"
+
+  zap trash: [
+    "~/Library/Application Support/BBEdit",
+    "~/Library/Preferences/com.barebones.bbedit.plist",
+    "~/Library/BBEdit",
+    "~/Library/Caches/com.barebones.bbedit",
+  ]
 end

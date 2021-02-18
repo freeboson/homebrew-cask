@@ -1,13 +1,18 @@
-cask 'minizincide' do
-  version '2.1.6'
-  sha256 'f352d27136da50f0c33d3372d30dc061e7f5f9cf0a7e654b53a5dde53940417d'
+cask "minizincide" do
+  version "2.5.3"
+  sha256 "b317bea197d00c9125935c88ef8eea6b4c77892028a49cd1a7f71078213de35f"
 
-  # github.com/MiniZinc/MiniZincIDE was verified as official when first introduced to the cask
-  url "https://github.com/MiniZinc/MiniZincIDE/releases/download/#{version}/MiniZincIDE-#{version}-bundled.dmg"
-  appcast 'https://github.com/MiniZinc/MiniZincIDE/releases.atom',
-          checkpoint: '70888ec595a2ceea223addec1ad904f14721180fd5142cd6420df6924404e221'
-  name 'MiniZincIDE'
-  homepage 'http://www.minizinc.org/ide/index.html'
+  url "https://github.com/MiniZinc/MiniZincIDE/releases/download/#{version}/MiniZincIDE-#{version}-bundled.dmg",
+      verified: "github.com/MiniZinc/MiniZincIDE/"
+  appcast "https://github.com/MiniZinc/MiniZincIDE/releases.atom"
+  name "MiniZincIDE"
+  desc "Open-source constraint modeling language and IDE"
+  homepage "https://www.minizinc.org/index.html"
 
-  app 'MiniZincIDE.app'
+  conflicts_with formula: "minizinc"
+  depends_on macos: ">= :sierra"
+
+  app "MiniZincIDE.app"
+  binary "#{appdir}/MiniZincIDE.app/Contents/Resources/minizinc"
+  binary "#{appdir}/MiniZincIDE.app/Contents/Resources/mzn2doc"
 end

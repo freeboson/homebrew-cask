@@ -1,21 +1,21 @@
-cask 'quail' do
-  version '0.9.0'
-  sha256 '702a3fe4b2c2c7024357b2ef144b0ef837d8047c5a4ba32963e6fe293e273f34'
+cask "quail" do
+  version "2.3.0"
+  sha256 "0f39a9b5bf0c3dadf6e1693fd7782aec562d9b519bee2e9770467ab071f08f35"
 
-  url "https://github.com/1000ch/quail/releases/download/v#{version}/Quail-macos-v#{version}.zip"
-  appcast 'https://github.com/1000ch/quail/releases.atom',
-          checkpoint: '3558d2f1ecdd4cd9f9d33e948743f993c7d3e8b3579ced3f648d29e3bf83964a'
-  name 'Quail'
-  homepage 'https://github.com/1000ch/quail'
+  url "https://github.com/1000ch/quail/releases/download/v#{version}/Quail-#{version}.dmg"
+  appcast "https://github.com/1000ch/quail/releases.atom"
+  name "Quail"
+  desc "Unofficial but officially accepted esa app"
+  homepage "https://github.com/1000ch/quail"
 
-  app 'Quail.app'
+  app "Quail.app"
 
   zap trash: [
-               '~/Library/Application Support/Quail',
-               '~/Library/Caches/net.1000ch.quail',
-               '~/Library/Caches/net.1000ch.quail.ShipIt',
-               '~/Library/Preferences/net.1000ch.quail.helper.plist',
-               '~/Library/Preferences/net.1000ch.quail.plist',
-               '~/Library/Saved Application State/net.1000ch.quail.savedState',
-             ]
+    "~/Library/Application Support/Quail",
+    "~/Library/Caches/net.1000ch.quail",
+    "~/Library/Caches/net.1000ch.quail.ShipIt",
+    "~/Library/Preferences/net.1000ch.quail.helper.plist",
+    "~/Library/Preferences/net.1000ch.quail.plist",
+    "~/Library/Saved Application State/net.1000ch.quail.savedState",
+  ]
 end

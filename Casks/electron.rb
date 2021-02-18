@@ -1,20 +1,24 @@
-cask 'electron' do
-  version '1.7.9'
-  sha256 '9e2a3ea75796f4e991512e055b858cdfdcc159b9c8e5b19c53be07102ed513e9'
+cask "electron" do
+  version "11.2.3"
+  sha256 "e0b2784b25fd4a5ee4041d508d59bbb8386039c7ea7e9cea3e547c672f052b60"
 
-  # github.com/electron/electron was verified as official when first introduced to the cask
-  url "https://github.com/electron/electron/releases/download/v#{version}/electron-v#{version}-darwin-x64.zip"
-  appcast 'https://github.com/electron/electron/releases.atom',
-          checkpoint: '49d509921f87492a9a878dc876c44c06c0b10c2693969b0d28fcb3b6891d0fd6'
-  name 'Electron'
-  homepage 'https://electron.atom.io/'
+  url "https://github.com/electron/electron/releases/download/v#{version}/electron-v#{version}-darwin-x64.zip",
+      verified: "github.com/electron/electron/"
+  name "Electron"
+  desc "Build desktop apps with JavaScript, HTML, and CSS"
+  homepage "https://electronjs.org/"
 
-  app 'Electron.app'
+  livecheck do
+    url :url
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+  end
+
+  app "Electron.app"
 
   zap trash: [
-               '~/Library/Application Support/Electron',
-               '~/Library/Caches/Electron',
-               '~/Library/Preferences/com.github.electron.helper.plist',
-               '~/Library/Preferences/com.github.electron.plist',
-             ]
+    "~/Library/Application Support/Electron",
+    "~/Library/Caches/Electron",
+    "~/Library/Preferences/com.github.electron.helper.plist",
+    "~/Library/Preferences/com.github.electron.plist",
+  ]
 end

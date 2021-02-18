@@ -1,25 +1,30 @@
-cask 'insomnia' do
-  version '5.11.7'
-  sha256 'd724fd3b0ae97f771c55db00c56d54482312355e3f3a305e141a9d56cd0ed1d1'
+cask "insomnia" do
+  version "2020.5.2"
+  sha256 "300845e30bc88fc2b9ed00cceb4b0f33a50b75bdd4247c41676aabe89e4588d2"
 
-  # github.com/getinsomnia/insomnia was verified as official when first introduced to the cask
-  url "https://github.com/getinsomnia/insomnia/releases/download/v#{version}/Insomnia-#{version}.dmg"
-  appcast 'https://github.com/getinsomnia/insomnia/releases.atom',
-          checkpoint: '06117303f694f91f06c919299e14297072b3ac051fa77ddc0acc45ea62cd4498'
-  name 'Insomnia'
-  homepage 'https://insomnia.rest/'
+  url "https://github.com/Kong/insomnia/releases/download/core%40#{version}/Insomnia.Core-#{version}.dmg",
+      verified: "github.com/Kong/insomnia/"
+  name "Insomnia"
+  desc "HTTP and GraphQL Client"
+  homepage "https://insomnia.rest/"
+
+  livecheck do
+    url :url
+    regex(/^core@?(\d+(?:\.\d+)+)$/i)
+  end
 
   auto_updates true
 
-  app 'Insomnia.app'
+  app "Insomnia.app"
 
   zap trash: [
-               '~/Library/Application Support/Insomnia',
-               '~/Library/Caches/com.insomnia.app',
-               '~/Library/Caches/com.insomnia.app.ShipIt',
-               '~/Library/Cookies/com.insomnia.app.binarycookies',
-               '~/Library/Preferences/com.insomnia.app.helper.plist',
-               '~/Library/Preferences/com.insomnia.app.plist',
-               '~/Library/Saved Application State/com.insomnia.app.savedState',
-             ]
+    "~/Library/Application Support/Insomnia",
+    "~/Library/Caches/com.insomnia.app",
+    "~/Library/Caches/com.insomnia.app.ShipIt",
+    "~/Library/Cookies/com.insomnia.app.binarycookies",
+    "~/Library/Preferences/ByHost/com.insomnia.app.ShipIt.*.plist",
+    "~/Library/Preferences/com.insomnia.app.helper.plist",
+    "~/Library/Preferences/com.insomnia.app.plist",
+    "~/Library/Saved Application State/com.insomnia.app.savedState",
+  ]
 end

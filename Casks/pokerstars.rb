@@ -1,51 +1,26 @@
-cask 'pokerstars' do
+cask "pokerstars" do
   version :latest
   sha256 :no_check
 
-  language 'US', default: true do
-    ['.com', '']
-  end
+  url "https://download.pokerstars.net/client/download/"
+  name "PokerStars"
+  homepage "https://www.pokerstars.net/"
 
-  language 'AT' do
-    ['.eu', 'EU']
-  end
+  container nested: "PokerStars.net/PokerStars.net.dmg"
 
-  language 'DK' do
-    ['.dk', 'DK']
-  end
+  app "PokerStars.net.app"
 
-  language 'GR' do
-    ['.gr', 'GR']
-  end
-
-  language 'IT' do
-    ['.it', 'IT']
-  end
-
-  language 'RO' do
-    ['.ro', 'RO']
-  end
-
-  language 'UK' do
-    ['.uk', 'UK']
-  end
-
-  language 'PT' do
-    ['.pt', 'PT']
-  end
-
-  url "http://www.pokerstars#{language[0]}/PokerStars#{language[1]}.app.zip"
-  name 'PokerStars'
-  homepage "http://www.pokerstars#{language[0]}"
-
-  auto_updates true
-  container nested: "PokerStars#{language[1]}/PokerStars#{language[1]}.dmg"
-
-  app "PokerStars#{language[1]}.app"
+  uninstall quit:   [
+    "com.pokerstars.PokerStars.net",
+    "com.pokerstars.PokerStarsBrowse",
+  ],
+            delete: "#{appdir}/PokerStars.net.app"
 
   zap trash: [
-               "~/Library/Preferences/com.pokerstars#{language[1]}.user.ini",
-               "~/Library/Preferences/com.pokerstars.PokerStars#{language[1]}.plist",
-               "~/Library/Application Support/PokerStars#{language[1]}",
-             ]
+    "~/Library/Preferences/com.pokerstars.NetworkStatus.plist",
+    "~/Library/Preferences/com.pokerstars.PokerStars.net.plist",
+    "~/Library/Preferences/com.pokerstars.PokerStarsBrowse.plist",
+    "~/Library/Preferences/com.pokerstars.net.user.ini",
+    "~/Library/Application Support/PokerStars.net",
+  ]
 end

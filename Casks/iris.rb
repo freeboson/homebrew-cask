@@ -1,19 +1,21 @@
-cask 'iris' do
-  version '0.9.2.5'
-  sha256 '4c93b0c9391302470ad53940cec32f7ce6f9f67b74aadec498c6368e344f44c3'
+cask "iris" do
+  version "1.2.0"
+  sha256 "dec14c8768aab69c343ec173e4b7cca2c9966d6b5425a1fb3a198b3704a21359"
 
-  # raw.github.com/danielng01/Iris-Builds/master/OSX was verified as official when first introduced to the cask
-  url "https://raw.github.com/danielng01/Iris-Builds/master/OSX/Iris-#{version}-OSX.zip"
-  name 'Iris'
-  homepage 'https://iristech.co/iris/'
+  url "https://raw.githubusercontent.com/danielng01/product-builds/master/iris/macos/Iris-#{version}-OSX.zip",
+      verified: "raw.githubusercontent.com/danielng01/product-builds/"
+  appcast "https://iristech.co/iris/"
+  name "Iris"
+  desc "Blue light filter and eye protection software"
+  homepage "https://iristech.co/iris/"
 
-  app 'Iris.app'
+  app "Iris.app"
 
-  uninstall launchctl: 'co.iristech.Iris',
-            quit:      'co.iristech.Iris'
+  uninstall launchctl: "co.iristech.Iris",
+            quit:      "co.iristech.Iris"
 
   zap trash: [
-               '~/Library/Preferences/com.iristech.Iris.plist',
-               '~/Library/Saved Application State/co.iristech.Iris.savedState',
-             ]
+    "~/Library/Preferences/com.iristech.Iris.plist",
+    "~/Library/Saved Application State/co.iristech.Iris.savedState",
+  ]
 end

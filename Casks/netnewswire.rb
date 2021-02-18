@@ -1,17 +1,26 @@
-cask 'netnewswire' do
-  version '4.1.0-546'
-  sha256 '5198e5f52fa1fc7a951212760e17cefae14fe6b4e8aaf291c5c0818a14df8fb7'
+cask "netnewswire" do
+  version "5.1.3"
+  sha256 "5f08f9ee986621d146c57f3ab3e98297944af368ce7ff1382a8e3a6c31fab5ea"
 
-  url "https://cdn.netnewswireapp.com/releases/NetNewsWire-#{version}.zip"
-  appcast 'https://updates.blackpixel.com/updates?app=nnw',
-          checkpoint: 'cd4a2ff2e246facea0d4fa0abfc4aa400017b9cecf9cf19a3ef45b78116a7ca3'
-  name 'NetNewsWire'
-  homepage 'http://netnewswireapp.com/'
+  url "https://github.com/brentsimmons/NetNewsWire/releases/download/mac-#{version}/NetNewsWire#{version}.zip",
+      verified: "github.com/brentsimmons/NetNewsWire/"
+  appcast "https://github.com/brentsimmons/NetNewsWire/releases.atom"
+  name "NetNewsWire"
+  desc "Free and open-source RSS reader"
+  homepage "https://ranchero.com/netnewswire/"
 
-  app 'NetNewsWire.app'
+  auto_updates true
+  depends_on macos: ">= :catalina"
+
+  app "NetNewsWire.app"
 
   zap trash: [
-               '~/Library/Application Scripts/com.blackpixel.netnewswire',
-               '~/Library/Containers/com.blackpixel.netnewswire',
-             ]
+    "~/Library/Application Scripts/com.ranchero.NetNewsWire-Evergreen.Subscribe-to-Feed",
+    "~/Library/Application Support/NetNewsWire",
+    "~/Library/Caches/com.ranchero.NetNewsWire-Evergreen",
+    "~/Library/Containers/com.ranchero.NetNewsWire-Evergreen.Subscribe-to-Feed",
+    "~/Library/Preferences/com.ranchero.NetNewsWire-Evergreen.plist",
+    "~/Library/Saved Application State/com.ranchero.NetNewsWire-Evergreen.savedState",
+    "~/Library/WebKit/com.ranchero.NetNewsWire-Evergreen",
+  ]
 end

@@ -1,15 +1,19 @@
-cask 'lastpass' do
-  version :latest
+cask "lastpass" do
+  version "4.65.2,1140"
   sha256 :no_check
 
-  url 'https://lastpass.com/download/cdn/lpmacosx.zip'
-  name 'LastPass'
-  homepage 'https://www.lastpass.com/'
+  url "https://download.cloud.lastpass.com/mac/LastPass.dmg"
+  name "LastPass"
+  desc "Password manager"
+  homepage "https://www.lastpass.com/"
 
-  installer manual: 'LastPass Installer.app'
+  livecheck do
+    url "https://download.cloud.lastpass.com/mac/AppCast.xml"
+    strategy :sparkle
+  end
 
-  uninstall script: {
-                      executable: 'Uninstaller.app/Contents/Resources/uninstall.sh',
-                      sudo:       true,
-                    }
+  auto_updates true
+  depends_on macos: ">= :sierra"
+
+  app "LastPass.app"
 end

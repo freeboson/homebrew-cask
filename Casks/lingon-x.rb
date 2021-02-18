@@ -1,19 +1,24 @@
-cask 'lingon-x' do
-  version '5.2.2'
-  sha256 'd301daeed3f66fc5f1a8534778a008d97575fdfe5bf8577f396adc64039a9d5a'
+cask "lingon-x" do
+  if MacOS.version <= :high_sierra
+    version "6.6.5"
+    sha256 "b0231b1a98dcc8f5c4234b419c9f5331407b8cce29b33f0ea2e32b12595adfa8"
+  else
+    version "8.1"
+    sha256 "113609b8e1e6b154617eb7ff929e6a1197844ce61a02f383771550bcf5f636d5"
+  end
 
   url "https://www.peterborgapps.com/downloads/LingonX#{version.major}.zip"
-  appcast "https://www.peterborgapps.com/updates/lingonx#{version.major}-appcast.xml",
-          checkpoint: 'fd7c0d26c1af08efa432a9d653b73453c54dc57571b0c98a78e75195163f646f'
-  name 'Lingon X'
-  homepage 'https://www.peterborgapps.com/lingon/'
+  appcast "https://www.peterborgapps.com/updates/lingonx#{version.major}.plist"
+  name "Lingon X"
+  desc "Automator software to start apps, run scripts or commands and more"
+  homepage "https://www.peterborgapps.com/lingon/"
 
-  depends_on macos: '>= :sierra'
+  depends_on macos: ">= :high_sierra"
 
-  app 'Lingon X.app'
+  app "Lingon X.app"
 
   zap trash: [
-               '~/Library/Application Scripts/com.peterborgapps.LingonX5',
-               '~/Library/Containers/com.peterborgapps.LingonX5',
-             ]
+    "~/Library/Application Scripts/com.peterborgapps.LingonX#{version.major}",
+    "~/Library/Containers/com.peterborgapps.LingonX#{version.major}",
+  ]
 end

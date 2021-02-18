@@ -1,10 +1,12 @@
-cask 'bluej' do
-  version '4.1.2'
-  sha256 '64f33dc1df320fbe742b3972b4563fea8f3f4786133f2dd39202a8d67160786d'
+cask "bluej" do
+  version "5.0.0"
+  sha256 "5f64a2492f1c6606de2c646e37e407615cc2febcfad479d9a7e9bc74ae95788f"
 
   url "https://www.bluej.org/download/files/BlueJ-mac-#{version.no_dots}.zip"
-  name 'BlueJ'
-  homepage 'https://www.bluej.org/'
+  appcast "https://www.bluej.org"
+  name "BlueJ"
+  desc "Java Development Environment designed for begginers"
+  homepage "https://www.bluej.org/"
 
-  app "BlueJ #{version.sub(%r{[a-z]$}, '')}/BlueJ.app"
+  app "BlueJ #{version}/BlueJ.app"
 end

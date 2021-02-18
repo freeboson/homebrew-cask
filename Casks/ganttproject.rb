@@ -1,13 +1,19 @@
-cask 'ganttproject' do
-  version '2.8.5,r2179'
-  sha256 '0f8a752c03e29196d38b1874239c4e8e048b3b8360c82d8da3262ec9e1160ad9'
+cask "ganttproject" do
+  version "2.8.11,2396"
+  sha256 "b8f64286ca9c04f606336994785c5ed3995c1842f8b1d82199f7ad0bb01d2851"
 
-  # github.com/bardsoftware/ganttproject/releases/download was verified as official when first introduced to the cask
-  url "https://github.com/bardsoftware/ganttproject/releases/download/ganttproject-#{version.before_comma}/ganttproject-#{version.before_comma}-#{version.after_comma}.dmg"
-  appcast 'https://github.com/bardsoftware/ganttproject/releases.atom',
-          checkpoint: '3bf25b7d2739eace46496219d2955bfcf420a00c9a315a9ff948267d40b7c9d9'
-  name 'GanttProject'
-  homepage 'https://www.ganttproject.biz/'
+  url "https://github.com/bardsoftware/ganttproject/releases/download/ganttproject-#{version.before_comma}/ganttproject-#{version.before_comma}-r#{version.after_comma}.dmg",
+      verified: "github.com/bardsoftware/ganttproject/"
+  name "GanttProject"
+  homepage "https://www.ganttproject.biz/"
 
-  app 'GanttProject.app'
+  livecheck do
+    url "https://github.com/bardsoftware/ganttproject/releases/latest"
+    strategy :page_match do |page|
+      match = page.match(%r{href=.*?/ganttproject-(\d+(?:.\d+)*)-r(\d+)\.dmg}i)
+      "#{match[1]},#{match[2]}"
+    end
+  end
+
+  app "GanttProject.app"
 end

@@ -1,13 +1,14 @@
-cask 'focuswriter' do
-  version '1.6.7'
-  sha256 'b41d6a8b0b2e679c2035839ceaa85bbe00d281361cc4190ff1d1db8a3cc658e0'
+cask "focuswriter" do
+  version "1.7.6"
+  sha256 "3431642e61cf11c3d0993fd6b70880cba2cca23043e22b2b2f68f8f8a02ff1bc"
 
   url "https://gottcode.org/focuswriter/FocusWriter_#{version}.dmg"
-  name 'FocusWriter'
-  homepage 'https://gottcode.org/focuswriter/'
+  appcast "https://gottcode.org/focuswriter/"
+  name "FocusWriter"
+  homepage "https://gottcode.org/focuswriter/"
 
-  app 'FocusWriter.app'
+  app "FocusWriter.app"
 
-  zap trash: '~/Library/Application Support/GottCode/FocusWriter',
-      rmdir: '~/Library/Application Support/GottCode'
+  zap trash: "~/Library/Application Support/GottCode/FocusWriter",
+      rmdir: "~/Library/Application Support/GottCode"
 end

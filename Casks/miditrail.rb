@@ -1,13 +1,13 @@
-cask 'miditrail' do
-  version '1.2.2,64107'
-  sha256 '6c1f5730c9404e85f769c11142fe8b3b2e8c73f77e817729ff67e01363692ef7'
+cask "miditrail" do
+  version "1.3.1,71899"
+  sha256 "17d561bafa46413a721215b7df5a5442cf131acfd868309a5c8bcb37a14f1286"
 
-  # dl.osdn.jp/miditrail was verified as official when first introduced to the cask
-  url "http://dl.osdn.jp/miditrail/#{version.after_comma}/MIDITrail-Ver.#{version.before_comma}-MacOSX.zip"
-  appcast 'https://ja.osdn.net/projects/miditrail/releases/rss',
-          checkpoint: '8da63abdfbc8cde08c4993b6895ac475ba7986e15aa0f5dd750cdc060dc11a59'
-  name 'MIDITrail'
-  homepage 'https://osdn.net/projects/miditrail/'
+  url "http://dl.osdn.jp/miditrail/#{version.after_comma}/MIDITrail-Ver.#{version.before_comma}-macOS.zip",
+      verified: "dl.osdn.jp/miditrail/"
+  appcast "https://ja.osdn.net/projects/miditrail/releases/rss"
+  name "MIDITrail"
+  desc "MIDI player which provides 3D visualization of MIDI data sets"
+  homepage "https://osdn.net/projects/miditrail/"
 
-  app 'MIDITrail/MIDITrail.app'
+  app "MIDITrail/MIDITrail.app"
 end

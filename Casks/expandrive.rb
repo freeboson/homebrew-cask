@@ -1,19 +1,21 @@
-cask 'expandrive' do
-  version '6.1.6'
-  sha256 '997a9613e94196dff26bd78afcbfa49c7a3a759bb8f2651836634961074cd2ec'
+cask "expandrive" do
+  version "7.7.5"
+  sha256 "6ab37834da6446b456f9c53dbbcfb018c6f159e5bc1310aafd1cc307b408a99d"
 
-  url "https://updates.expandrive.com/apps/expandrive/v/#{version.dots_to_hyphens}/download.dmg"
-  name 'ExpanDrive'
-  homepage 'https://www.expandrive.com/apps/expandrive/'
+  url "https://updates.expandrive.com/apps/expandrive#{version.major}/v/#{version.dots_to_hyphens}/update_download"
+  appcast "https://updates.expandrive.com/appcast/expandrive#{version.major}.json?version=#{version.major}.0.0"
+  name "ExpanDrive"
+  desc "Network drive and browser for cloud storage"
+  homepage "https://www.expandrive.com/apps/expandrive/"
 
-  app 'ExpanDrive.app'
+  app "ExpanDrive.app"
 
   zap trash: [
-               '~/Library/Application Support/ExpanDrive',
-               '~/Library/Preferences/com.expandrive.exfs.plist',
-               '~/Library/Preferences/com.expandrive.ExpanDrive.plist',
-               '~/Library/Preferences/com.expandrive.ExpanDrive2.plist',
-               '~/Library/Preferences/com.expandrive.ExpanDrive3.plist',
-               '~/Library/Preferences/com.expandrive.ExpanDrive.helper.plist',
-             ]
+    "~/Library/Application Support/ExpanDrive",
+    "~/Library/Preferences/com.expandrive.exfs.plist",
+    "~/Library/Preferences/com.expandrive.ExpanDrive.plist",
+    "~/Library/Preferences/com.expandrive.ExpanDrive2.plist",
+    "~/Library/Preferences/com.expandrive.ExpanDrive3.plist",
+    "~/Library/Preferences/com.expandrive.ExpanDrive.helper.plist",
+  ]
 end

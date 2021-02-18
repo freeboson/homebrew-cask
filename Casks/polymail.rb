@@ -1,14 +1,17 @@
-cask 'polymail' do
-  version '1.46'
-  sha256 '38e1e91bf18df9d3430bdacb15542e5f7e843aff473751ffa6a0bd8d3f7da2cc'
+cask "polymail" do
+  version "2.2.6"
+  sha256 "7f0545b2a99ab9fa515b6f78437a53226e6e1f788a8ed411e6bbd3fff5c09249"
 
-  url "https://sparkle-updater.polymail.io/osx/builds/Polymail-v#{version.major_minor.no_dots}.zip"
-  appcast 'https://sparkle-updater.polymail.io/cast.xml',
-          checkpoint: 'e6ff8cf1aff7be4d13f80b9ef1d10b4766105174707eb1b633225fae8bf339a8'
-  name 'Polymail'
-  homepage 'https://polymail.io/'
+  url "https://sparkle-updater.polymail.io/macos/builds/Polymail-v#{version}.zip"
+  name "Polymail"
+  homepage "https://polymail.io/"
+
+  livecheck do
+    url "https://sparkle-updater.polymail.io/osx/Polymail-Latest.zip"
+    strategy :header_match
+  end
 
   auto_updates true
 
-  app 'Polymail.app'
+  app "Polymail.app"
 end

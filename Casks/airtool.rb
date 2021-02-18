@@ -1,25 +1,27 @@
-cask 'airtool' do
-  version '1.6'
-  sha256 'ba7db87984d2f18f2d46cdbb0b75fdfdda920d3f43dfa3cf18aff1866bac0701'
+cask "airtool" do
+  version "1.9.2,31"
+  sha256 "b70a3d4fa4f49ae9a87ad669b21963e825f9252e92d3d0bd5abc6a825b75f3de"
 
-  # amazonaws.com/apps.adriangranados.com was verified as official when first introduced to the cask
-  url "https://s3.amazonaws.com/apps.adriangranados.com/airtool_#{version}.pkg"
-  appcast 'https://www.adriangranados.com/appcasts/airtoolcast.xml',
-          checkpoint: 'e2801e382b08cc44b507979619bfef3c1bb019d803a269148564e8366426d583'
-  name 'Airtool'
-  homepage 'https://www.adriangranados.com/apps/airtool'
+  url "https://www.intuitibits.com/downloads/Airtool_#{version.before_comma}.pkg"
+  name "Airtool"
+  homepage "https://www.intuitibits.com/products/airtool/"
 
-  pkg "airtool_#{version}.pkg"
+  livecheck do
+    url "https://www.intuitibits.com/appcasts/airtoolcast.xml"
+    strategy :sparkle
+  end
+
+  pkg "Airtool_#{version.before_comma}.pkg"
+
+  uninstall_preflight do
+    set_ownership "/Library/Application Support/Airtool"
+  end
 
   uninstall pkgutil:    [
-                          'com.adriangranados.airtool.airtool-bpf.*',
-                          'com.adriangranados.airtool.Airtool.pkg',
-                        ],
-            launchctl:  'com.adriangranados.airtool.airtool-bpf.pkg',
-            login_item: 'Airtool'
-
-  zap trash: [
-               '/Library/Application Support/Airtool',
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.adriangranados.airtool.sfl*',
-             ]
+    "com.intuitibits.airtool-helper.pkg",
+    "com.intuitibits.airtool.pkg",
+  ],
+            launchctl:  "com.intuitibits.airtool.airtool-bpf",
+            login_item: "Airtool",
+            delete:     "/Library/Application Support/Airtool"
 end

@@ -1,16 +1,17 @@
-cask 'jgrasp' do
-  version '2.0.4_01'
-  sha256 'f30ae9d0847f6f108300fe1f6d145d9f4f121f37fb155899bc9a938ead96b57d'
+cask "jgrasp" do
+  version "2.0.6_07"
+  sha256 "0ffec1427ec0587f29f1d7765382be42c1732c4da99b9b46504adc260884f124"
 
-  url "http://www.jgrasp.org/dl4g/jgrasp/jgrasp#{version.no_dots}.pkg"
-  name 'jgrasp'
-  homepage 'http://jgrasp.org/index.html'
+  url "https://jgrasp.org/dl4g/jgrasp/jgrasp#{version.no_dots}.pkg"
+  appcast "https://jgrasp.org/"
+  name "jgrasp"
+  homepage "https://jgrasp.org/"
 
   pkg "jgrasp#{version.no_dots}.pkg"
 
-  uninstall pkgutil: 'jgrasp'
+  uninstall pkgutil: "jgrasp"
 
   caveats do
-    depends_on_java('6+')
+    depends_on_java "6+"
   end
 end

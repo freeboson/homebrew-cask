@@ -1,13 +1,15 @@
-cask 'fldigi' do
-  version '4.0.12'
-  sha256 'ebbab8f04ac20f2d1b4b6236ccf865d73e215fc16f190563e3012259c69c3a04'
+cask "fldigi" do
+  version "4.1.17,4.3.7"
+  sha256 "ef6a5eeb107cfcfb019dfcc915bc9e6c42de3f9d5d5ceb91d67b302fa513445f"
 
-  url "https://downloads.sourceforge.net/fldigi/fldigi/fldigi-#{version}.univ.dmg"
-  appcast 'https://sourceforge.net/projects/fldigi/rss?path=/fldigi',
-          checkpoint: 'b51b27ac8eba6d9592913d9f4d4444fb52f50f46c933b156eb1c80cdf0675a53'
-  name 'fldigi'
-  homepage 'https://sourceforge.net/projects/fldigi/files/fldigi/'
+  url "https://downloads.sourceforge.net/fldigi/fldigi/fldigi-#{version.before_comma}_x86_64.dmg"
+  appcast "https://sourceforge.net/projects/fldigi/rss?path=/fldigi"
+  name "fldigi"
+  desc "Ham radio digital modem application"
+  homepage "https://sourceforge.net/projects/fldigi/files/fldigi/"
 
-  app "fldigi-#{version}.app"
-  app 'flarq-4.3.6.app'
+  app "fldigi-#{version.before_comma}.app"
+  app "flarq-#{version.after_comma}.app"
+
+  zap trash: "~/.fldigi"
 end

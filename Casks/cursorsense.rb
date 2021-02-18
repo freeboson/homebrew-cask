@@ -1,12 +1,18 @@
-cask 'cursorsense' do
-  version '1.3.5'
-  sha256 '67f3d3a7c82eb35cc326c134cfb5b6c4fd7ad78f2672912546108508b01a5381'
+cask "cursorsense" do
+  version "2.2.2"
+  sha256 "2e990f3b865bb134463e7dd6b8a02de6a5e9c12a049b1e577ce48a61e9d5010d"
 
-  url "http://plentycom.jp/ctrl/files_cs/CursorSense#{version}.dmg"
-  appcast 'http://plentycom.jp/en/cursorsense/download.php',
-          checkpoint: 'd2b522b9d74123e2efe4febb39954318c2a3c3dd4e7297d12309afa7d6a7c276'
-  name 'CursorSense'
-  homepage 'http://plentycom.jp/en/cursorsense/'
+  url "https://plentycom.jp/ctrl/files_cs/CursorSense#{version}.dmg"
+  name "CursorSense"
+  homepage "https://plentycom.jp/en/cursorsense/"
 
-  prefpane 'CursorSense.prefPane'
+  livecheck do
+    url "https://plentycom.jp/en/cursorsense/download.php"
+    strategy :page_match
+    regex(%r{href=.*?/CursorSense(\d+(?:\.\d+)*)\.dmg}i)
+  end
+
+  depends_on macos: ">= :sierra"
+
+  prefpane "CursorSense.prefPane"
 end

@@ -1,13 +1,20 @@
-cask 'slicer' do
-  version '4.8.0.26489,700005'
-  sha256 '9a13ef5084b1aee1fd56891c7c61cd5d8f093f17168fe996f067548cf4e825c8'
+cask "slicer" do
+  version "4.11.20200930,1340262"
+  sha256 "f1cd27ec7ade67709ef8c49ddf0f3048f3795b32100c9dd67c3885f355950ad2"
 
-  # slicer.kitware.com/midas3 was verified as official when first introduced to the cask
-  url "https://slicer.kitware.com/midas3/download?bitstream=#{version.after_comma}"
-  appcast 'https://github.com/Slicer/Slicer/releases.atom',
-          checkpoint: '51525b99e07c45a2001ee17dbd400a25060d465255498344d9e132931787b91d'
-  name '3D Slicer'
-  homepage 'https://www.slicer.org/'
+  url "https://slicer.kitware.com/midas3/download?bitstream=#{version.after_comma}",
+      verified: "slicer.kitware.com/midas3/"
+  name "3D Slicer"
+  desc "Medical image processing and visualization system"
+  homepage "https://www.slicer.org/"
 
-  app 'Slicer.app'
+  livecheck do
+    url "http://download.slicer.org"
+    strategy :page_match do |page|
+      match = page.scan(%r{href=.*?/bitstream/(\d+).*?version\s*(\d+(?:\.\d+)*)}im)
+      "#{match[1][1]},#{match[1][0]}"
+    end
+  end
+
+  app "Slicer.app"
 end

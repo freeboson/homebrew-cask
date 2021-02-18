@@ -1,16 +1,20 @@
-cask 'airy' do
-  version '3.2.175'
-  sha256 '1664ab626a06652c2546101bad63a9ae19defa0e77e1218ff3290af3f6f2660d'
+cask "airy" do
+  version "3.21,318"
+  sha256 :no_check
 
-  url "http://www.eltima.com/download/airy-update/airy_#{version}.dmg"
-  appcast 'http://mac.eltima.com/download/airy-update/airy.xml',
-          checkpoint: '6e57d84268b74bcb5fe180cf5fbf724b224585d99f0eea006e683a0fcd128239'
-  name 'Airy'
-  homepage 'https://mac.eltima.com/youtube-downloader-mac.html'
+  url "https://cdn.eltima.com/download/airy.dmg"
+  name "Airy"
+  desc "YouTube video and MP3 downloader"
+  homepage "https://mac.eltima.com/youtube-downloader-mac.html"
 
-  app 'Airy.app'
+  livecheck do
+    url "https://cdn.eltima.com/download/airy-update/airy.xml"
+    strategy :sparkle
+  end
 
-  uninstall quit: 'com.eltima.Airy'
+  app "Airy.app"
 
-  zap trash: '~/Library/Preferences/com.eltima.Airy.plist'
+  uninstall quit: "com.eltima.Airy"
+
+  zap trash: "~/Library/Preferences/com.eltima.Airy.plist"
 end

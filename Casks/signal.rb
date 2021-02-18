@@ -1,19 +1,25 @@
-cask 'signal' do
-  version '1.0.39'
-  sha256 '957b55782351d912f7261a3018e6f2be87a5fa9c130271b45a753cc81882a251'
+cask "signal" do
+  version "1.40.0"
+  sha256 "96eab9f752889753b504e7affe2c04c2e8bbe7b7be25bd0a243afa57d7301b9c"
 
-  url "https://updates.signal.org/desktop/Signal-mac-#{version}.zip"
-  appcast 'https://github.com/WhisperSystems/Signal-Desktop/releases.atom',
-          checkpoint: '7bd0f4cd30a17d56bcd93ff7df8979fa990be88f064f93a79f50046011e60864'
-  name 'Signal'
-  homepage 'https://signal.org/'
+  url "https://updates.signal.org/desktop/signal-desktop-mac-#{version}.dmg"
+  name "Signal"
+  desc "Instant messaging application focusing on security"
+  homepage "https://signal.org/"
 
-  app 'Signal.app'
+  livecheck do
+    url "https://github.com/signalapp/Signal-Desktop"
+    strategy :github_latest
+  end
+
+  auto_updates true
+
+  app "Signal.app"
 
   zap trash: [
-               '~/Library/Application Support/Signal',
-               '~/Library/Preferences/org.whispersystems.signal-desktop.helper.plist',
-               '~/Library/Preferences/org.whispersystems.signal-desktop.plist',
-               '~/Library/Saved Application State/org.whispersystems.signal-desktop.savedState',
-             ]
+    "~/Library/Application Support/Signal",
+    "~/Library/Preferences/org.whispersystems.signal-desktop.helper.plist",
+    "~/Library/Preferences/org.whispersystems.signal-desktop.plist",
+    "~/Library/Saved Application State/org.whispersystems.signal-desktop.savedState",
+  ]
 end

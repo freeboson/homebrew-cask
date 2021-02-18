@@ -1,16 +1,19 @@
-cask 'latexdraw' do
-  version '3.3.7'
-  sha256 '7a4db698767e74ca9548d26caec385faf12c8565535c1c108d9ec450193b25e5'
+cask "latexdraw" do
+  version "4.0.3"
+  sha256 "7a21014c60d1d75fc8efe8c0d3ba8e827d2d09d29daeda492aff5d7cbc4f257c"
 
-  url "https://downloads.sourceforge.net/latexdraw/LaTeXDraw-#{version}.app.zip"
-  appcast 'https://sourceforge.net/projects/latexdraw/rss?path=/latexdraw',
-          checkpoint: '37de4623cbf3183c9fa9a7304d5bb489d8690f81c6c4eb88c24b10f49e25df86'
-  name 'LaTexDraw'
-  homepage 'http://latexdraw.sourceforge.net/'
+  url "https://downloads.sourceforge.net/latexdraw/LaTeXDraw-#{version}.dmg",
+      verified: "downloads.sourceforge.net/latexdraw/"
+  appcast "https://github.com/latexdraw/latexdraw/releases.atom"
+  name "LaTexDraw"
+  desc "Drawing editor for creating LaTeX PSTricks code"
+  homepage "https://latexdraw.sourceforge.io/"
 
-  app "LaTexDraw-#{version}.app"
+  app "LaTeXDraw.app"
 
-  caveats do
-    depends_on_java('8')
-  end
+  zap trash: [
+    "~/.latexdraw",
+    "~/Library/Preferences/latexdraw.plist",
+    "~/Library/Saved Application State/latexdraw.savedState",
+  ]
 end

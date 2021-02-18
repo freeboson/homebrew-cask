@@ -1,18 +1,17 @@
-cask 'gogs' do
-  version '0.11.33'
-  sha256 'f76e68ab510c1ed89a625ef5007e136a0cae96aad12fbbe4409949a127457f74'
+cask "gogs" do
+  version "0.11.91"
+  sha256 "1480a489aa853d01b0f6c9c2fb0aa19b61b5847bcd0cae1f2d8db6833f79b29d"
 
-  # github.com/gogits/gogs was verified as official when first introduced to the cask
-  url "https://github.com/gogits/gogs/releases/download/v#{version}/darwin_amd64.zip"
-  appcast 'https://github.com/gogits/gogs/releases.atom',
-          checkpoint: 'e8beaabf15d3f183b81466fc1462fe74c49ff1f046040321eb234f7d7adf7473'
-  name 'Go Git Service'
-  homepage 'https://gogs.io/'
+  url "https://github.com/gogs/gogs/releases/download/v#{version}/darwin_amd64.zip",
+      verified: "github.com/gogs/gogs/"
+  appcast "https://github.com/gogs/gogs/releases.atom"
+  name "Go Git Service"
+  homepage "https://gogs.io/"
 
-  # shim script (https://github.com/caskroom/homebrew-cask/issues/18809)
+  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
   shimscript = "#{staged_path}/gogs.wrapper.sh"
 
-  binary shimscript, target: 'gogs'
+  binary shimscript, target: "gogs"
 
   preflight do
     IO.write shimscript, <<~EOS

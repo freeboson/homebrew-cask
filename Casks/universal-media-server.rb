@@ -1,15 +1,15 @@
-cask 'universal-media-server' do
-  version '6.7.4'
-  sha256 'd2c5e4579ad705bdbdfb89ac5326a96a43aa18e7f4c82b01656e3d40ca8890a0'
+cask "universal-media-server" do
+  version "10.0.1"
+  sha256 "c2d832b7aafd071a28b3344c9be7563a9b61f936182c05ee8191f132db6c7512"
 
-  # sourceforge.net/unimediaserver was verified as official when first introduced to the cask
-  url "https://downloads.sourceforge.net/unimediaserver/Official%20Releases/OS%20X/UMS-#{version}.dmg"
-  appcast 'https://sourceforge.net/projects/unimediaserver/rss?path=/Official%20Releases',
-          checkpoint: 'a6904fda55b82838bdc60eec7a5519776a1b7c418de20b0b9c747612f5e9ef59'
-  name 'Universal Media Server'
-  homepage 'http://www.universalmediaserver.com/'
+  url "https://github.com/UniversalMediaServer/UniversalMediaServer/releases/download/#{version}/UMS-#{version}.dmg",
+      verified: "github.com/UniversalMediaServer/UniversalMediaServer/"
+  appcast "https://github.com/UniversalMediaServer/UniversalMediaServer/releases.atom"
+  name "Universal Media Server"
+  desc "Media server supporting DLNA, UPnP and HTTP(S)"
+  homepage "https://www.universalmediaserver.com/"
 
-  app 'Universal Media Server.app'
+  app "Universal Media Server.app"
 
-  zap trash: '~/Library/Application Support/UMS/'
+  zap trash: "~/Library/Application Support/UMS/"
 end

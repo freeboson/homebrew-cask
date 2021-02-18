@@ -1,17 +1,15 @@
-cask 'openra' do
-  version '20171014'
-  sha256 'f6896f9f18c215ca801a69649fc9f46037a9492b67b03bd04f40fb4c4f408cf2'
+cask "openra" do
+  version "20200503"
+  sha256 "0240e82003fc46af6b321efd0a5ef7703f4f0293fe75212ef29cad67a705c4fb"
 
-  # github.com/OpenRA/OpenRA was verified as official when first introduced to the cask
-  url "https://github.com/OpenRA/OpenRA/releases/download/release-#{version}/OpenRA-release-#{version}.dmg"
-  appcast 'https://github.com/OpenRA/OpenRA/releases.atom',
-          checkpoint: '375c84af42e7d70986d9e81a0556944fbbc9fbc3cc9f8ba5605f67522b2a24b4'
-  name 'OpenRA'
-  homepage 'http://www.openra.net/'
+  url "https://github.com/OpenRA/OpenRA/releases/download/release-#{version}/OpenRA-release-#{version}.dmg",
+      verified: "github.com/OpenRA/OpenRA/"
+  appcast "https://github.com/OpenRA/OpenRA/releases.atom"
+  name "OpenRA"
+  desc "Real-time strategy game engine for Westwood games"
+  homepage "https://www.openra.net/"
 
-  depends_on cask: 'mono-mdk'
-
-  app 'OpenRA - Dune 2000.app'
-  app 'OpenRA - Red Alert.app'
-  app 'OpenRA - Tiberian Dawn.app'
+  app "OpenRA - Dune 2000.app"
+  app "OpenRA - Red Alert.app"
+  app "OpenRA - Tiberian Dawn.app"
 end

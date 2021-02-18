@@ -1,11 +1,26 @@
-cask 'gotomeeting' do
-  version '8.16.0.7881,ka338000000L6kiAAC'
-  sha256 'df26df961b04c339b14f2f3e1066546b77665ae31d61e0717c89ef35bea85540'
+cask "gotomeeting" do
+  version "19228"
+  sha256 "aced1b755ef29d15909e3eb10fb5ed72f705b77920c831a1ab7112948a05df38"
 
-  # support.citrixonline.com was verified as official when first introduced to the cask
-  url "https://support.citrixonline.com/servlet/fileField?entityId=#{version.after_comma}&field=Content__Body__s"
-  name 'GoToMeeting'
-  homepage 'https://www.gotomeeting.com/'
+  url "https://builds.cdn.getgo.com/builds/g2m/#{version}/GoToMeeting.dmg",
+      verified: "builds.cdn.getgo.com/builds/g2m/"
+  name "GoToMeeting"
+  desc "Online meetings, desktop sharing, and video conferencing"
+  homepage "https://www.goto.com/meeting"
 
-  app 'GoToMeeting.app'
+  livecheck do
+    url "https://link.gotomeeting.com/latest-dmg"
+    strategy :header_match do |headers|
+      headers["location"][%r{/([^/]+)/GoToMeeting\.dmg}i, 1]
+    end
+  end
+
+  app "GoToMeeting.app"
+
+  zap trash: [
+    "~/Library/Application Support/LogMeInInc/GoToMeeting",
+    "~/Library/Application Support/LogMeInInc/GoToMeetingElectron",
+    "~/Library/LaunchAgents/com.logmein.GoToMeeting.G2MAIRUploader.plist",
+    "~/Library/LaunchAgents/com.logmein.GoToMeeting.G2MUpdate.plist",
+  ]
 end

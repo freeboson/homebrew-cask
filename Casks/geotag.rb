@@ -1,20 +1,21 @@
-cask 'geotag' do
-  version '4.0.23'
-  sha256 '9fbf9fcbd27130ad5c333e8434747868c50b4b75cbcbd00245174c6489ec444c'
+cask "geotag" do
+  version "4.9"
+  sha256 "ad90415ca66aeea9029e00eeb829ad9706365bbd44340d3467f40d71e5c1d4b4"
 
   url "https://www.snafu.org/GeoTag/GeoTag-#{version}.dmg"
-  appcast 'https://www.snafu.org/GeoTag/',
-          checkpoint: '792da791f2d5d043e2a3bf74215501fc6ca046319a945a9889d9df950d6ac05a'
-  name 'GeoTag'
-  homepage 'https://www.snafu.org/GeoTag/'
+  appcast "https://github.com/marchyman/GeoTag/releases.atom"
+  name "GeoTag"
+  desc "Geo location editor for images"
+  homepage "https://www.snafu.org/GeoTag/"
 
-  depends_on formula: 'exiftool'
+  depends_on macos: ">= :sierra"
+  depends_on formula: "exiftool"
 
-  app 'GeoTag.app'
+  app "GeoTag.app"
 
   zap trash: [
-               '~/Library/Caches/org.snafu.GeoTag',
-               '~/Library/Preferences/org.snafu.GeoTag.plist',
-               '~/Library/Saved Application State/org.snafu.GeoTag.savedState',
-             ]
+    "~/Library/Caches/org.snafu.GeoTag",
+    "~/Library/Preferences/org.snafu.GeoTag.plist",
+    "~/Library/Saved Application State/org.snafu.GeoTag.savedState",
+  ]
 end

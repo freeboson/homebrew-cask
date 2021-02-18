@@ -1,10 +1,11 @@
-cask 'openlp' do
-  version '2.2.1'
-  sha256 '9a26ef78fa8de4ab884033d635edda690f62f78755a5ac7eef0e09a1408d71b6'
+cask "openlp" do
+  version "2.9.1"
+  sha256 "c01ff0a446716048c9f2e19b13ebf124a2d7fadcd6d73273e8d41cf60326c2c5"
 
   url "https://get.openlp.org/#{version}/OpenLP-#{version}.dmg"
-  name 'OpenLP'
-  homepage 'https://openlp.org/'
+  appcast "https://get.openlp.org"
+  name "OpenLP"
+  homepage "https://openlp.org/"
 
-  app 'OpenLP.app'
+  app "OpenLP.app"
 end

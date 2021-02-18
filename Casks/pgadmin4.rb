@@ -1,19 +1,19 @@
-cask 'pgadmin4' do
-  version '2.0'
-  sha256 '918d0fd4d9c743e44bdb7e5c9d96cb6c759c6c3aa49e5ddb6301c3ce49000c74'
+cask "pgadmin4" do
+  version "4.30"
+  sha256 "2b58eaf87c2687f36fda21328c68a032ec7516c655675dacd6f47b2086638e0e"
 
-  # ftp.postgresql.org was verified as official when first introduced to the cask
-  url "https://ftp.postgresql.org/pub/pgadmin/pgadmin4/v#{version}/macos/pgadmin4-#{version}.dmg"
-  name 'pgAdmin4'
-  homepage 'https://www.pgadmin.org/'
-  gpg "#{url}.sig", key_id: 'e0c4ceeb826b1fda4fb468e024adfaaf698f1519'
+  url "https://ftp.postgresql.org/pub/pgadmin/pgadmin4/v#{version}/macos/pgadmin4-#{version}.dmg",
+      verified: "ftp.postgresql.org/"
+  appcast "https://ftp.postgresql.org/pub/pgadmin/pgadmin4/"
+  name "pgAdmin4"
+  homepage "https://www.pgadmin.org/"
 
-  app 'pgAdmin 4.app'
+  app "pgAdmin 4.app"
 
   zap trash: [
-               '~/.pgadmin',
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.pgadmin.pgadmin4.sfl*',
-               '~/Library/Preferences/org.pgadmin.pgadmin4.plist',
-               '~/Library/Saved Application State/org.pgadmin.pgAdmin4.savedState',
-             ]
+    "~/.pgadmin",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.pgadmin.pgadmin4.sfl*",
+    "~/Library/Preferences/org.pgadmin.pgadmin4.plist",
+    "~/Library/Saved Application State/org.pgadmin.pgAdmin4.savedState",
+  ]
 end

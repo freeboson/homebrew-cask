@@ -1,13 +1,31 @@
-cask 'itch' do
-  version '23.6.0'
-  sha256 '0a5b9369cc8ac554eca583af56ab2b849b619a9db949081d1063dec3aec1c1be'
+cask "itch" do
+  version "25.4.1"
+  sha256 :no_check
 
-  # github.com/itchio/itch was verified as official when first introduced to the cask
-  url "https://github.com/itchio/itch/releases/download/v#{version}/itch-mac.dmg"
-  appcast 'https://github.com/itchio/itch/releases.atom',
-          checkpoint: '287c480e37ff8c26e7ea259eb109c48ba7435b5917b3e0de42be2a2aa970472c'
-  name 'itch'
-  homepage 'https://itch.io/app'
+  url "https://broth.itch.ovh/install-itch/darwin-amd64/LATEST/archive/default",
+      verified: "broth.itch.ovh/"
+  name "itch.io"
+  desc "Game client for itch.io"
+  homepage "https://itch.io/app"
 
-  app 'itch.app'
+  livecheck do
+    url "https://github.com/itchio/itch/releases"
+    strategy :github_latest
+  end
+
+  auto_updates true
+
+  installer script: "Install itch.app/Contents/MacOS/itch-setup"
+
+  uninstall delete: [
+    "~/Applications/itch.app",
+    "~/Library/Application Support/itch-setup/",
+  ],
+            quit:   "io.itch.mac"
+
+  zap trash: [
+    "~/Library/Application Support/itch/",
+    "~/Library/Preferences/io.itch.mac.helper.plist",
+    "~/Library/Preferences/io.itch.mac.plist",
+  ]
 end

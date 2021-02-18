@@ -1,12 +1,14 @@
-cask 'printopia' do
-  version '3.0.4'
-  sha256 'a57d6f0ce253b57708a806c8065d29249dffc9679d10a5e8de89a9781c16619c'
+cask "printopia" do
+  version "3.0.17"
+  sha256 "e278e242f3d3fce6e80c2dbca8a5efd78b017dca23b3ec4071355a12632525a7"
 
-  url "https://download.decisivetactics.com/products/printopia/dl/Printopia_#{version}.zip"
-  name 'Printopia'
-  homepage 'https://www.decisivetactics.com/products/printopia/'
+  url "https://download.decisivetactics.com/downloads/printopia/Printopia_#{version}.zip"
+  appcast "https://www.decisivetactics.com/api/checkupdate?x-app_id=com.decisivetactics.printopia"
+  name "Printopia"
+  desc "Wireless printing to any printer"
+  homepage "https://www.decisivetactics.com/products/printopia/"
 
-  app 'Printopia.app'
+  app "Printopia.app"
 
-  zap trash: '~/Library/Preferences/com.ecamm.printopia.plist'
+  zap trash: "~/Library/Preferences/com.ecamm.printopia.plist"
 end

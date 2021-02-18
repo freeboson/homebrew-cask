@@ -1,36 +1,46 @@
-cask 'bartender' do
+cask "bartender" do
   if MacOS.version <= :el_capitan
-    version '2.1.6'
-    sha256 '013bb1f5dcc29ff1ecbc341da96b6e399dc3c85fc95bd8c7bee153ab0d8756f5'
+    version "2.1.6"
+    sha256 "013bb1f5dcc29ff1ecbc341da96b6e399dc3c85fc95bd8c7bee153ab0d8756f5"
+    url "https://macbartender.com/B2/updates/#{version.dots_to_hyphens}/Bartender%20#{version.major}.zip",
+        referer: "https://www.macbartender.com"
+  elsif MacOS.version <= :catalina
+    version "3.1.25,31125"
+    sha256 "bd31aa2aab3262ed08f5c421d504b82893b5dfc546f37fc98eae23bc47494c8a"
+    url "https://macbartender.com/B2/updates/#{version.before_comma.dots_to_hyphens}/Bartender%20#{version.major}.zip",
+        referer: "https://www.macbartender.com"
   else
-    version '3.0.12'
-    sha256 '121e47f4da7b606bc0297b2dd34cc5de89911175e46234b6197384ea416ea31d'
+    version "4.0.35,40035"
+    sha256 "48af1784622de26fe5b6115652ed0b6ab777933a6188c501d20a44e69d7878ba"
+    url "https://macbartender.com/B2/updates/B4Latest/Bartender%20#{version.major}.dmg",
+        referer: "https://www.macbartender.com"
   end
 
-  url "https://macbartender.com/B2/updates/#{version.dots_to_hyphens}/Bartender%20#{version.major}.zip",
-      referer: 'https://www.macbartender.com'
-  appcast 'https://www.macbartender.com/B2/updates/Appcast.xml',
-          checkpoint: '164ad62f5e279c24043f4f9a87f40fefeb058a57030789cfcbd536c0fe32e7b9'
-  name 'Bartender'
-  homepage 'https://www.macbartender.com/'
+  name "Bartender"
+  desc "Menu bar icon organizer"
+  homepage "https://www.macbartender.com/"
+
+  livecheck do
+    url "https://www.macbartender.com/B2/updates/AppcastB#{version.major}.xml"
+    strategy :sparkle
+  end
 
   auto_updates true
 
   app "Bartender #{version.major}.app"
 
-  uninstall delete:     [
-                          '/Library/Audio/Plug-Ins/HAL/BartenderAudioPlugIn.plugin',
-                          '/Library/PrivilegedHelperTools/com.surteesstudios.Bartender.BartenderInstallHelper',
-                          '/Library/ScriptingAdditions/BartenderHelper.osax',
-                          '/System/Library/ScriptingAdditions/BartenderSystemHelper.osax',
-                        ],
-            launchctl:  'com.surteesstudios.Bartender.BartenderInstallHelper',
-            login_item: "Bartender #{version.major}",
-            quit:       'com.surteesstudios.Bartender'
+  uninstall delete:    [
+    "/Library/Audio/Plug-Ins/HAL/BartenderAudioPlugIn.plugin",
+    "/Library/PrivilegedHelperTools/com.surteesstudios.Bartender.BartenderInstallHelper",
+    "/Library/ScriptingAdditions/BartenderHelper.osax",
+    "/System/Library/ScriptingAdditions/BartenderSystemHelper.osax",
+  ],
+            launchctl: "com.surteesstudios.Bartender.BartenderInstallHelper",
+            quit:      "com.surteesstudios.Bartender"
 
   zap trash: [
-               '~/Library/Caches/com.surteesstudios.Bartender',
-               '~/Library/Cookies/com.surteesstudios.Bartender.binarycookies',
-               '~/Library/Preferences/com.surteesstudios.Bartender.plist',
-             ]
+    "~/Library/Caches/com.surteesstudios.Bartender",
+    "~/Library/Cookies/com.surteesstudios.Bartender.binarycookies",
+    "~/Library/Preferences/com.surteesstudios.Bartender.plist",
+  ]
 end

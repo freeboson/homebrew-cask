@@ -1,13 +1,18 @@
-cask 'amazon-workspaces' do
-  version :latest
+cask "amazon-workspaces" do
+  version "3.1.3.1649"
   sha256 :no_check
 
-  # d2td7dqidlhjx7.cloudfront.net was verified as official when first introduced to the cask
-  url 'https://d2td7dqidlhjx7.cloudfront.net/prod/global/osx/WorkSpaces.pkg'
-  name 'Amazon Workspaces'
-  homepage 'https://clients.amazonworkspaces.com/'
+  url "https://workspaces-client-updates.s3.amazonaws.com/prod/iad/osx/WorkSpaces.pkg",
+      verified: "workspaces-client-updates.s3.amazonaws.com/"
+  name "Amazon Workspaces"
+  homepage "https://clients.amazonworkspaces.com/"
 
-  pkg 'WorkSpaces.pkg'
+  livecheck do
+    url "https://d2td7dqidlhjx7.cloudfront.net/prod/iad/osx/WorkSpacesAppCast_macOS_20171023.xml"
+    strategy :sparkle
+  end
 
-  uninstall pkgutil: 'com.amazon.workspaces'
+  pkg "WorkSpaces.pkg"
+
+  uninstall pkgutil: "com.amazon.workspaces"
 end

@@ -1,17 +1,14 @@
-cask 'muruslogsvisualizer' do
-  version '1.4.2'
-  sha256 'c36fc392a741588b9e270d45f0a791cf869473d5842e2d799d32a25b1a3a64e9'
+cask "muruslogsvisualizer" do
+  version "1.4.4"
+  sha256 "fa0629b87cb79c011fa8553a7ba24912d372cd418e26cbff170b8e1c3cf4b65c"
 
   url "https://www.murusfirewall.com/downloads/muruslogsvisualizer-#{version}.zip"
-  name 'Murus Logs Visualizer'
-  homepage 'https://www.murusfirewall.com/'
+  name "Murus Logs Visualizer"
+  homepage "https://www.murusfirewall.com/"
 
-  depends_on macos: '>= :mavericks'
+  app "MurusLogsVisualizer.app"
 
-  app 'MurusLogsVisualizer.app'
+  uninstall quit: "it.murus.MurusLogsVisualizer"
 
-  uninstall login_item: 'MurusLogsVisualizer',
-            quit:       'it.murus.MurusLogsVisualizer'
-
-  zap trash: '~/Library/Preferences/it.murus.MurusLogsVisualizer.plist'
+  zap trash: "~/Library/Preferences/it.murus.MurusLogsVisualizer.plist"
 end

@@ -1,12 +1,12 @@
-cask 'opensim' do
-  version '0.2.0'
-  sha256 '8bd0c409c3cc2441203891c3ed65913359e929367da0f7a1ae4989c66757a6a6'
+cask "opensim" do
+  version "0.4.3"
+  sha256 "4390edc443be22b5659ff9d6f69a66e0021c9f57e063147be79600235ceadfdb"
 
   url "https://github.com/luosheng/OpenSim/releases/download/#{version}/OpenSim.app.zip"
-  appcast 'https://github.com/luosheng/OpenSim/releases.atom',
-          checkpoint: 'd98351f98af4871a937a82f09b8af555c1adc890a1760ab835a6541983c0cc84'
-  name 'OpenSim'
-  homepage 'https://github.com/luosheng/OpenSim/'
+  appcast "https://github.com/luosheng/OpenSim/releases.atom"
+  name "OpenSim"
+  desc "Open-source alternative to SimPholders, written in Swift"
+  homepage "https://github.com/luosheng/OpenSim/"
 
-  app 'OpenSim.app'
+  app "OpenSim.app"
 end

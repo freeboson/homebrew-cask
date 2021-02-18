@@ -1,12 +1,15 @@
-cask 'freeplane' do
-  version '1.6.10'
-  sha256 '9635d901e23a8c547956e2027337a44605738d66fd9842f4ec0e0f46683664e6'
+cask "freeplane" do
+  version "1.8.11"
+  sha256 "5f558640e8811c0d4b515dfc67c4d9ef5d877dfb3b7c88a3578d97001f6b337a"
 
-  url "https://downloads.sourceforge.net/freeplane/freeplane%20stable/freeplane_app_jre-#{version}.dmg"
-  appcast 'https://sourceforge.net/projects/freeplane/rss?path=/freeplane%20stable',
-          checkpoint: '49b21ea5e5a65bf06f8676b3b994451316ccae1f505c0d97c621e8e37d039952'
-  name 'Freeplane'
-  homepage 'http://freeplane.sourceforge.net/'
+  url "https://downloads.sourceforge.net/freeplane/freeplane%20stable/Freeplane-#{version}.dmg",
+      verified: "downloads.sourceforge.net/freeplane/"
+  appcast "https://sourceforge.net/projects/freeplane/rss?path=/freeplane%20stable"
+  name "Freeplane"
+  desc "Mind mapping and knowledge management software"
+  homepage "https://freeplane.sourceforge.io/"
 
-  app 'Freeplane.app'
+  app "Freeplane.app"
+
+  zap trash: "~/Library/Saved Application State/org.freeplane.launcher.savedState"
 end

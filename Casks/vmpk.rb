@@ -1,13 +1,14 @@
-cask 'vmpk' do
-  version '0.6.2'
-  sha256 'e916144e7ee350baeedbf36c59bf019f514af49ca0a927a29ec9f2338b8bd9d8'
+cask "vmpk" do
+  version "0.8.0.1"
+  sha256 "d3ff90bd78320525f23a67c7d216e2cd3df0b02e5c8dbb905084333be006a6d7"
 
-  #  https://downloads.sourceforge.net/vmpk/vmpk-#{version}-mac-x64.dmg was verified as official when first introduced to the cask
-  url "https://downloads.sourceforge.net/vmpk/vmpk-#{version}-mac-x64.dmg"
-  appcast 'https://sourceforge.net/projects/vmpk/rss',
-          checkpoint: '15fe037132d06ffc71c22393c6f360e0828a1844165d4efbb37a31a26c6089f2'
-  name 'VMPK'
-  homepage 'http://vmpk.sourceforge.net/'
+  url "https://downloads.sourceforge.net/vmpk/#{version.major_minor_patch}/vmpk-#{version}-mac-x64.dmg",
+      verified: "downloads.sourceforge.net/vmpk/"
+  appcast "https://sourceforge.net/projects/vmpk/rss"
+  name "VMPK"
+  homepage "https://vmpk.sourceforge.io/"
 
-  app 'vmpk.app'
+  depends_on macos: ">= :sierra"
+
+  app "vmpk.app"
 end

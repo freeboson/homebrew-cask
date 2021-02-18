@@ -1,13 +1,16 @@
-cask 'paintcode' do
-  version '3.3.3'
-  sha256 'd0ab676ed46949c544f07aa7a076d4995c8731a4114283aefe54878cf2378611'
+cask "paintcode" do
+  version "3.4.8,34800"
+  sha256 "07f10e3f7680ab58ade062e338a8ffe71d6a1e7bc950ba1df3bebcdbb23335dc"
 
-  # pixelcut.com/paintcode was verified as official when first introduced to the cask
-  url "https://www.pixelcut.com/paintcode#{version.major}/paintcode.zip"
-  appcast "https://www.pixelcut.com/paintcode#{version.major}/appcast.xml",
-          checkpoint: 'c263ea15e0614837f297bf3c753c2b15dddd5a7c3ed708b74c122f8e44f50a8f'
-  name 'PaintCode'
-  homepage 'https://www.paintcodeapp.com/'
+  url "https://www.pixelcut.com/paintcode#{version.major}/paintcode_#{version.before_comma}.zip",
+      verified: "pixelcut.com/"
+  name "PaintCode"
+  homepage "https://www.paintcodeapp.com/"
 
-  app 'PaintCode.app'
+  livecheck do
+    url "https://www.pixelcut.com/paintcode#{version.major}/appcast.xml"
+    strategy :sparkle
+  end
+
+  app "PaintCode.app"
 end

@@ -1,13 +1,17 @@
-cask 'unity' do
-  version '2017.2.0f3,46dda1414e51'
-  sha256 '4e3ced279969bf59efe63124e4dc79ffa69afb3313cd80632a4dc157450c8e4c'
+cask "unity" do
+  version "2020.1.17f1,9957aee8edc2"
+  sha256 "c6fa8c89eb9a93ee08830b84dc84a948afb32eb17ead7b220c2b5f44662bb6bf"
 
-  url "http://netstorage.unity3d.com/unity/#{version.after_comma}/MacEditorInstaller/Unity.pkg"
-  name 'Unity Editor'
-  homepage 'https://unity3d.com/unity/'
+  url "https://download.unity3d.com/download_unity/#{version.after_comma}/MacEditorInstaller/Unity-#{version.before_comma}.pkg",
+      verified: "download.unity3d.com/download_unity/"
+  appcast "https://public-cdn.cloud.unity3d.com/hub/prod/releases-darwin.json"
+  name "Unity Editor"
+  desc "Platform for 3D content"
+  homepage "https://unity.com/products"
 
-  pkg 'Unity.pkg'
+  pkg "Unity-#{version.before_comma}.pkg"
 
-  uninstall quit:    'com.unity3d.UnityEditor5.x',
-            pkgutil: 'com.unity3d.UnityEditor5.x'
+  uninstall quit:    "com.unity3d.UnityEditor5.x",
+            pkgutil: "com.unity3d.UnityEditor5.x",
+            delete:  "/Applications/Unity"
 end

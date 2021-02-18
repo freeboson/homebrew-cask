@@ -1,39 +1,35 @@
-cask 'coteditor' do
-  if MacOS.version <= :snow_leopard
-    version '1.3.1'
-    sha256 '5c871bd9de30fc3c76fc66acb4ea258d4d3762ae341181d65a7ef1f8de4751c5'
-    # github.com/coteditor/CotEditor was verified as official when first introduced to the cask
-    url "https://github.com/coteditor/CotEditor/releases/download/#{version}/CotEditor_#{version}_For10.4.dmg"
-  elsif MacOS.version <= :lion
-    version '1.5.4'
-    sha256 '444133083698c7c94c2b029644f39a0e36982ae34c24745789fa890626188347'
-    # github.com/coteditor/CotEditor was verified as official when first introduced to the cask
-    url "https://github.com/coteditor/CotEditor/releases/download/#{version}/CotEditor_#{version}.dmg"
-  elsif MacOS.version <= :mavericks
-    version '2.5.7'
-    sha256 'f2c6eed9bfa31999f559396642e7bec0eb90ce0e3398f266fed8b3db5bdab37c'
-    # github.com/coteditor/CotEditor was verified as official when first introduced to the cask
-    url "https://github.com/coteditor/CotEditor/releases/download/#{version}/CotEditor_#{version}.dmg"
+cask "coteditor" do
+  if MacOS.version <= :yosemite
+    version "3.2.8"
+    sha256 "73dd20d27b75c7b0c46242a465adb3df5b5f0b901f42c5a9a85777a57c4a17d6"
+  elsif MacOS.version <= :el_capitan
+    version "3.5.4"
+    sha256 "0b2cbf38cc531268e3691f307445e05ae5da64b48ceaf86c4d16b993c9be3e9f"
+  elsif MacOS.version <= :mojave
+    version "3.9.7"
+    sha256 "be34d4f800e73cc8363d8b83e1b257a06176dc85d345d680149b108f51686cf2"
   else
-    version '3.2.4'
-    sha256 'f7ff7bb309c11716c4c9231e96cd06ab9ee1051a68c7cd1ce4cf1590e863c92b'
-    # github.com/coteditor/CotEditor was verified as official when first introduced to the cask
-    url "https://github.com/coteditor/CotEditor/releases/download/#{version}/CotEditor_#{version}.dmg"
+    version "4.0.1"
+    sha256 "879fa6ef8199c10c8b42b6adaa4a528b41295b97457c7e06fd1a412f65f0ffb9"
   end
 
-  appcast 'https://github.com/coteditor/CotEditor/releases.atom',
-          checkpoint: 'bb68d4aa03bad3aeb15b0b0a36daa91da28ca99efe3fb26e6299f02e9d8f51c6'
-  name 'CotEditor'
-  homepage 'https://coteditor.com/'
+  url "https://github.com/coteditor/CotEditor/releases/download/#{version}/CotEditor_#{version}.dmg",
+      verified: "github.com/coteditor/CotEditor/"
+  appcast "https://github.com/coteditor/CotEditor/releases.atom"
+  name "CotEditor"
+  desc "Plain-text editor for web pages, program source codes and more"
+  homepage "https://coteditor.com/"
 
-  app 'CotEditor.app'
-  binary "#{appdir}/CotEditor.app/Contents/SharedSupport/bin/cot", target: 'cot'
+  auto_updates true
+
+  app "CotEditor.app"
+  binary "#{appdir}/CotEditor.app/Contents/SharedSupport/bin/cot"
 
   zap trash: [
-               '~/Library/Application Scripts/com.coteditor.CotEditor',
-               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.coteditor.coteditor.sfl*',
-               '~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/com.coteditor.CotEditor.help*',
-               '~/Library/Caches/com.apple.helpd/SDMHelpData/Other/Japanese/HelpSDMIndexFile/com.coteditor.CotEditor.help*',
-               '~/Library/Containers/com.coteditor.CotEditor',
-             ]
+    "~/Library/Application Scripts/com.coteditor.CotEditor",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.coteditor.coteditor.sfl*",
+    "~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/com.coteditor.CotEditor.help*",
+    "~/Library/Caches/com.apple.helpd/SDMHelpData/Other/Japanese/HelpSDMIndexFile/com.coteditor.CotEditor.help*",
+    "~/Library/Containers/com.coteditor.CotEditor",
+  ]
 end

@@ -1,10 +1,17 @@
-cask 'qqmacmgr' do
-  version '2.4.1'
-  sha256 '50517f1fa76441886c1874c6dbfb2e910e3e2a20ad71316b7714485bb641c6cb'
+cask "qqmacmgr" do
+  version "2.4.16"
+  sha256 "6ff8fe1fe173ac7c78c0140dec616a1b426237b1b5e3053851a03b3df515c38e"
 
-  url "http://dlied6.qq.com/invc/xfspeed/mac/verupdate/QQMacMgr_#{version}.dmg"
-  name '腾讯电脑管家'
-  homepage 'http://mac.gj.qq.com/'
+  url "https://pm.myapp.com/invc/xfspeed/qqpcmgr/module_update/QQMacMgr_#{version}.dmg",
+      verified: "pm.myapp.com/invc/xfspeed/"
+  name "腾讯电脑管家"
+  homepage "https://lemon.qq.com/index_o.html"
 
-  app 'QQMacMgr.app'
+  livecheck do
+    url :homepage
+    strategy :page_match
+    regex(%r{href=.*?/QQMacMgr_(\d+(?:\.\d+)*)\.dmg}i)
+  end
+
+  app "QQMacMgr.app"
 end

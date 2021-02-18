@@ -1,15 +1,21 @@
-cask 'cloudapp' do
-  version '4.3.1'
-  sha256 '55222f91ac19e1809baa8488da6b843f0c3dd69b1ddd80ef1fdc1aed231d6381'
+cask "cloudapp" do
+  version "6.4.5,2213"
+  sha256 "1383799cb4123f6809e3ae2cf4b20926a3fd449356a6b89ec152c7152846022e"
 
-  # amazonaws.com/downloads.getcloudapp.com was verified as official when first introduced to the cask
-  url "https://s3.amazonaws.com/downloads.getcloudapp.com/mac/CloudApp-#{version}.zip"
-  appcast 'https://updates.getcloudapp.com/appcast.xml',
-          checkpoint: '4c7363e7d6e5cec86236da951fee7e57337c860590d6612b19c4afb487ab8df6'
-  name 'CloudApp'
-  homepage 'https://www.getcloudapp.com/'
+  url "https://downloads.getcloudapp.com/mac/CloudApp-#{version.before_comma}.#{version.after_comma}.zip"
+  name "CloudApp"
+  desc "Visual communication platform"
+  homepage "https://www.getcloudapp.com/"
 
-  app 'CloudApp.app'
+  livecheck do
+    url "https://d2plwz9jdz9z5d.cloudfront.net/mac/latest/appcast.xml"
+    strategy :sparkle
+  end
 
-  zap trash: '~/Library/Preferences/com.linebreak.CloudAppMacOSX.plist'
+  auto_updates true
+  depends_on macos: ">= :mojave"
+
+  app "CloudApp.app"
+
+  zap trash: "~/Library/Preferences/com.linebreak.CloudAppMacOSX.plist"
 end

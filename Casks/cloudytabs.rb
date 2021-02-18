@@ -1,12 +1,12 @@
-cask 'cloudytabs' do
-  version '1.8'
-  sha256 'fbaece85ea803f74fa6c1abf089445bd2722dae39649a1738d58cfeea03d5877'
+cask "cloudytabs" do
+  version "2.0"
+  sha256 "ce3f7c71b134798bbcf607cfacea215c20f1d527d3e3464edbd6510df26e5dac"
 
   url "https://github.com/josh-/CloudyTabs/releases/download/v#{version}/CloudyTabs.zip"
-  appcast 'https://github.com/josh-/CloudyTabs/releases.atom',
-          checkpoint: 'b1a3921bc8e07b1c932632b5bea35f3e10899640ee37088c5897564396c78e03'
-  name 'CloudyTabs'
-  homepage 'https://github.com/josh-/CloudyTabs/'
+  appcast "https://github.com/josh-/CloudyTabs/releases.atom"
+  name "CloudyTabs"
+  desc "Menu bar application that lists iCloud Tabs"
+  homepage "https://github.com/josh-/CloudyTabs/"
 
-  app 'CloudyTabs.app'
+  app "CloudyTabs.app"
 end

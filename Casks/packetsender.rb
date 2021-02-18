@@ -1,13 +1,37 @@
-cask 'packetsender' do
-  version '5.4.2,2017-09-01'
-  sha256 'b65428cda04eadcf956976fe30e9eb78e422c13602ff66f3134e7b6aa48fba7c'
+cask "packetsender" do
+  if MacOS.version <= :catalina
+    version "7.0.5"
+    sha256 "30281225ee4e2baf3ca365123832c2931342aaf1011038268eab13ec73375fad"
 
-  # github.com/dannagle/PacketSender was verified as official when first introduced to the cask
-  url "https://github.com/dannagle/PacketSender/releases/download/v#{version.before_comma}/PacketSender_v#{version.before_comma.dots_to_underscores}_#{version.after_comma}.dmg"
-  appcast 'https://github.com/dannagle/PacketSender/releases.atom',
-          checkpoint: '272e1505776fff4d212eb4f3dd468fb595d3712973cd077e834f99f89baa4055'
-  name 'Packet Sender'
-  homepage 'https://packetsender.com/'
+    url "https://github.com/dannagle/PacketSender/releases/download/v#{version}/PacketSender_v#{version}.dmg",
+        verified: "github.com/dannagle/PacketSender/"
 
-  app 'PacketSender.app'
+    livecheck do
+      url "https://github.com/dannagle/PacketSender/releases/latest"
+      strategy :page_match
+      regex(%r{href=.*?/PacketSender_v?(\d+(?:\.\d+)*)\.dmg}i)
+    end
+  else
+    version "7.0.5,7.1.0"
+    sha256 "a2ab110a5d498389de5b0fd73ca7a63349f1b79235f4acda1da7c2e5322f0d7f"
+
+    url "https://github.com/dannagle/PacketSender/releases/download/v#{version.before_comma}/PacketSender_BigSur_v#{version.after_comma}.dmg",
+        verified: "github.com/dannagle/PacketSender/"
+
+    livecheck do
+      url "https://github.com/dannagle/PacketSender/releases/latest"
+      strategy :page_match do |page|
+        match = page.match(%r{href=.*?/v?(\d+(?:\.\d+)*)/PacketSender_BigSur_v?(\d+(?:\.\d+)*)\.dmg}i)
+        "#{match[1]},#{match[2]}"
+      end
+    end
+  end
+
+  name "Packet Sender"
+  desc "Network utility for sending / receiving TCP, UDP, SSL"
+  homepage "https://packetsender.com/"
+
+  depends_on macos: ">= :sierra"
+
+  app "PacketSender.app"
 end

@@ -1,13 +1,14 @@
-cask 'go-server' do
-  version '17.11.0-5520'
-  sha256 'dd394c2e6342c58dcf8d87b259f8edde4b64efdcfd9188f7d5e20aec3ad570fe'
+cask "go-server" do
+  version "19.1.0-8469"
+  sha256 "6f7d6ce6875d51ab7194834ec836bc502a405b82c90b9359df520850850a27ee"
 
-  # download.gocd.io/binaries was verified as official when first introduced to the cask
-  url "https://download.gocd.io/binaries/#{version}/osx/go-server-#{version}-osx.zip"
-  appcast 'https://github.com/gocd/gocd/releases.atom',
-          checkpoint: '9e3a88815202ffed76a1665fe59343076982308a8fcaa193606cbf3f92a03235'
-  name 'Go Server'
-  homepage 'https://www.gocd.org/'
+  url "https://download.gocd.io/binaries/#{version}/osx/go-server-#{version}-osx.zip",
+      verified: "download.gocd.io/binaries/"
+  appcast "https://github.com/gocd/gocd/releases.atom"
+  name "Go Server"
+  name "GoCD Server"
+  desc "Server for the Go Continuous Delivery platform"
+  homepage "https://www.gocd.org/"
 
-  app 'Go Server.app'
+  app "Go Server.app"
 end

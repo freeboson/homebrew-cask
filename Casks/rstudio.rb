@@ -1,22 +1,32 @@
-cask 'rstudio' do
-  version '1.1.383'
-  sha256 'a30d71591789c3ee276c6376cc496bb75748dfe012d5e0b1e8a9f844d2472a43'
+cask "rstudio" do
+  version "1.4.1103"
+  sha256 "20148bd6ee7ed80d85ae8b309ebaa5d68df282d610056faeedf4acb8716aaaa2"
 
-  # rstudio.org was verified as official when first introduced to the cask
-  url "https://download1.rstudio.org/RStudio-#{version}.dmg"
-  name 'RStudio'
-  homepage 'https://www.rstudio.com/'
+  url "https://rstudio-desktop.s3.amazonaws.com/desktop/macos/RStudio-#{version}.dmg",
+      verified: "rstudio-desktop.s3.amazonaws.com/"
+  name "RStudio"
+  desc "Data science software focusing on R and Python"
+  homepage "https://www.rstudio.com/"
 
-  app 'RStudio.app'
+  livecheck do
+    url "https://rstudio.org/download/latest/stable/desktop/mac/RStudio-latest.dmg"
+    strategy :header_match
+  end
 
-  zap trash: '~/.rstudio-desktop'
+  conflicts_with cask: "homebrew/cask-versions/rstudio-preview"
+  depends_on macos: ">= :high_sierra"
+
+  app "RStudio.app"
+
+  zap trash: "~/.rstudio-desktop"
 
   caveats <<~EOS
-    #{token} depends on R.
-    There are different ways to satisfy that dependency and we don’t want to impose one, so it is up to you to satisfy it.
-    We suggest you do so by running one of:
+    #{token} depends on R. The R Project provides official binaries:
+
+      brew install --cask r
+
+    Alternatively, the Homebrew-compiled version of R omits the GUI app:
 
       brew install r
-      brew cask install r-app
   EOS
 end

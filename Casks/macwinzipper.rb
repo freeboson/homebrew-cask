@@ -1,10 +1,17 @@
-cask 'macwinzipper' do
-  version '2.5.2'
-  sha256 'a0aa57ae29772df78a698eab8c2ac723877c0a34bee2e477e6ceb6c2b4f4b86f'
+cask "macwinzipper" do
+  version "2.7"
+  sha256 "37ff612125d80acf39a873e087a301c524708bb0c4af64be55a335555af23d62"
 
-  url "http://tidajapan.com/files/MacWinZipper-#{version}.dmg?download"
-  name 'MacWinZipper'
-  homepage 'http://tidajapan.com/macwinzipper'
+  url "https://tida.co.jp/files/MacWinZipper-#{version}.dmg"
+  name "MacWinZipper"
+  desc "Zip archiver"
+  homepage "https://tida.co.jp/macwinzipper"
 
-  app 'MacWinZipper.app'
+  livecheck do
+    url "https://tida.co.jp/macwinzipper"
+    strategy :page_match
+    regex(%r{href=.*?/MacWinZipper-(\d+(?:\.\d+)*)\.dmg}i)
+  end
+
+  app "MacWinZipper.app"
 end

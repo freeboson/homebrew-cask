@@ -1,14 +1,13 @@
-cask 'gdisk' do
-  version '1.0.3'
-  sha256 '11a738629d4e40d5830c122ab063f9f07ffab80f0df9294e78f6e85f5f30930c'
+cask "gdisk" do
+  version "1.0.6"
+  sha256 "32b756969414e1e8e78050f7123869e6b4eeb445361bb3f34e9cb0fde97b0454"
 
   url "https://downloads.sourceforge.net/gptfdisk/gdisk-#{version}.pkg"
-  appcast 'https://sourceforge.net/projects/gptfdisk/rss',
-          checkpoint: '81f3940defdef59fb07dc30395b7ec8173fa1073c6d1f242a28178aaa039d34a'
-  name 'GPT fdisk'
-  homepage 'https://sourceforge.net/projects/gptfdisk/'
+  appcast "https://sourceforge.net/projects/gptfdisk/rss"
+  name "GPT fdisk"
+  homepage "https://sourceforge.net/projects/gptfdisk/"
 
   pkg "gdisk-#{version}.pkg"
 
-  uninstall pkgutil: 'com.rodsbooks.pkg.gdisk'
+  uninstall pkgutil: "com.rodsbooks.pkg.gdisk"
 end

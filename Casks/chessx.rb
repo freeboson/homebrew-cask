@@ -1,14 +1,14 @@
-cask 'chessx' do
-  version '1.4.6'
-  sha256 '86bdd57667bf73d460fa39b45e1cdcf70fb122aeaed255d18ace79389271864b'
+cask "chessx" do
+  version "1.5.4"
+  sha256 "68f806e9ade5da2c1e2b4b54aafc0d62dabc182f984e35a184329cbac89ad631"
 
-  url "https://downloads.sourceforge.net/chessx/chessx/#{version}/chessx-#{version}.dmg"
-  appcast 'https://sourceforge.net/projects/chessx/rss?path=/chessx',
-          checkpoint: '425101908c832dc839a05a925807b3abf7bb9430f829ee5a547b20be6469c141'
-  name 'ChessX'
-  homepage 'http://chessx.sourceforge.net/'
+  url "https://downloads.sourceforge.net/chessx/chessx/#{version}/chessx-#{version}.dmg",
+      verified: "downloads.sourceforge.net/chessx/"
+  appcast "https://sourceforge.net/projects/chessx/rss?path=/chessx"
+  name "ChessX"
+  homepage "https://chessx.sourceforge.io/"
 
-  pkg 'chessx-installer.mpkg'
+  pkg "chessx-installer.mpkg"
 
-  uninstall pkgutil: 'net.sourceforge.chessx'
+  uninstall pkgutil: "net.sourceforge.chessx"
 end

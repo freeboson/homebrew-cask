@@ -1,14 +1,15 @@
-cask 'physicseditor' do
-  version '1.6.2'
-  sha256 '33539869b0d6eeae7ac361d06e01cc5d809af2b069745ea62a19c72f4a38a523'
+cask "physicseditor" do
+  version "1.8.6"
+  sha256 "a29747ef56a37578f17b08b6eaa2e36a1311464b0a5bd3d6bc5087ac96fead7a"
 
   url "https://www.codeandweb.com/download/physicseditor/#{version}/PhysicsEditor-#{version}-uni.dmg"
-  appcast 'https://www.codeandweb.com/releases/PhysicsEditor/appcast-mac-release.xml',
-          checkpoint: 'b8f60214da08549fc365bbc64b0e1084d99365e7b3f658265a3242a5bb422857'
-  name 'PhysicsEditor'
-  homepage 'https://www.codeandweb.com/physicseditor'
+  name "PhysicsEditor"
+  homepage "https://www.codeandweb.com/physicseditor"
 
-  depends_on macos: '>= :lion'
+  livecheck do
+    url "https://www.codeandweb.com/releases/PhysicsEditor/appcast-mac-release.xml"
+    strategy :sparkle
+  end
 
-  app 'PhysicsEditor.app'
+  app "PhysicsEditor.app"
 end

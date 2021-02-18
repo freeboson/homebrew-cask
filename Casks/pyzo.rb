@@ -1,15 +1,14 @@
-cask 'pyzo' do
-  version '4.4'
-  sha256 'b031fc62e5cd5b721227ecea55841f269f52e12c6c165a4cac05d797d4f029fb'
+cask "pyzo" do
+  version "4.11.2"
+  sha256 "3a0d2b25988bd27e13857265926ff28851240c17d5d07063b5e23b389cfa1a14"
 
-  # github.com/pyzo/pyzo was verified as official when first introduced to the cask
-  url "https://github.com/pyzo/pyzo/releases/download/v#{version}/pyzo-#{version}-osx64.dmg"
-  appcast 'https://github.com/pyzo/pyzo/releases.atom',
-          checkpoint: '18207956327a9617a6847f0718b5f61acc0fccb1d103380df48b20aec8b9508f'
-  name 'Pyzo'
-  homepage 'http://www.pyzo.org/'
+  url "https://github.com/pyzo/pyzo/releases/download/v#{version}/pyzo-#{version}-macos.dmg",
+      verified: "github.com/pyzo/pyzo/"
+  appcast "https://github.com/pyzo/pyzo/releases.atom"
+  name "Pyzo"
+  homepage "https://pyzo.org/"
 
-  app 'pyzo.app'
+  app "pyzo.app"
 
-  zap trash: '~/Library/Application Support/pyzo'
+  zap trash: "~/Library/Application Support/pyzo"
 end

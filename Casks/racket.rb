@@ -1,12 +1,20 @@
-cask 'racket' do
-  version '6.11'
-  sha256 'b6196c80a7dc5c2e73c0bcb99d441e337f5e7337aa308352049e078a03d9d6ee'
+cask "racket" do
+  version "8.0"
 
-  url "https://mirror.racket-lang.org/installers/#{version}/racket-#{version}-x86_64-macosx.dmg"
-  appcast 'https://download.racket-lang.org/all-versions.html',
-          checkpoint: '3c12b566b1367a36229138d66eb87295f8b6c36198989b667f43b2b0ece89d22'
-  name 'Racket'
-  homepage 'https://racket-lang.org/'
+  if Hardware::CPU.intel?
+    sha256 "42195d6fcc3ea6b3df91b860d2593511e6ce5f9173cfc391fb37fc67767592a9"
+
+    url "https://mirror.racket-lang.org/installers/#{version}/racket-#{version}-x86_64-macosx-cs.dmg"
+  else
+    sha256 "3f1eb3c2965e2d19f0a7301049f397e3117197280f087a7bd2497bb077aadd5d"
+
+    url "https://mirror.racket-lang.org/installers/#{version}/racket-#{version}-aarch64-macosx-cs.dmg"
+  end
+
+  appcast "https://download.racket-lang.org/all-versions.html"
+  name "Racket"
+  desc "Modern programming language in the Lisp/Scheme family"
+  homepage "https://racket-lang.org/"
 
   suite "Racket v#{version}"
   binary "#{appdir}/Racket v#{version}/bin/drracket"

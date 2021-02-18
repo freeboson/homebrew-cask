@@ -1,12 +1,22 @@
-cask 'mountain-duck' do
-  version '2.1.0.8541'
-  sha256 '0e13dbe08cda6d7c13766e2adf3ef51ea29af92ca5d07c77c402375ed0e40d17'
+cask "mountain-duck" do
+  version "4.3.3.17396"
+  sha256 "1a48d0f8ac6c5c3c34b86076df4b84ddaec670b7bab54a68cd7c3eb482087771"
 
   url "https://dist.mountainduck.io/Mountain%20Duck-#{version}.zip"
-  appcast 'https://version.mountainduck.io/changelog.rss',
-          checkpoint: 'aa04e5a3626fb72c7c247be06f4798ddf23f2d5c98d3c36f1f9ec28351fcf135'
-  name 'Mountain Duck'
-  homepage 'https://mountainduck.io/'
+  appcast "https://version.mountainduck.io/#{version.major}/macos/changelog.rss"
+  name "Mountain Duck"
+  desc "Mounts servers and cloud storages as a disk on the desktop"
+  homepage "https://mountainduck.io/"
 
-  app 'Mountain Duck.app'
+  auto_updates true
+
+  app "Mountain Duck.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/io.mountainduck.findersync",
+    "~/Library/Containers/io.mountainduck.findersync",
+    "~/Library/Group Containers/G69SCX94XU.duck",
+    "~/Library/Preferences/io.mountainduck.plist",
+    "~/Library/Preferences/G69SCX94XU.duck.plist",
+  ]
 end

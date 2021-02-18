@@ -1,13 +1,17 @@
-cask 'synalyze-it-pro' do
-  version '1.21.1'
-  sha256 '4febdb58232d0fec26ed8ac5a505723dd3d1c9d6e712ebb366f0077a37d1a0fd'
+cask "synalyze-it-pro" do
+  version "1.23.4"
+  sha256 "b063546e4a053d5423fe464a56fa27b1f41c6ef2cc36f3f2370ef165533b43dc"
 
-  # synalyze-it.com/Downloads was verified as official when first introduced to the cask
-  url "https://www.synalyze-it.com/Downloads/SynalyzeItProTA_#{version}.zip"
-  appcast 'https://www.synalyze-it.com/SynalyzeItPro/appcast.xml',
-          checkpoint: '3daa1cc2ea889094ffb4b4c3974a681e7750c723331610da245b9e500c2dd992'
-  name 'Synalyze It! Pro'
-  homepage 'https://www.synalysis.net/'
+  url "https://www.synalyze-it.com/Downloads/SynalyzeItProTA_#{version}.zip",
+      verified: "synalyze-it.com/Downloads/"
+  name "Synalyze It! Pro"
+  desc "Hex editing and binary file analysis app"
+  homepage "https://www.synalysis.net/"
 
-  app 'Synalyze It! Pro.app'
+  livecheck do
+    url "https://www.synalyze-it.com/SynalyzeItPro/appcast.xml"
+    strategy :sparkle
+  end
+
+  app "Synalyze It! Pro.app"
 end

@@ -1,15 +1,14 @@
-cask 'iota-wallet' do
-  version '2.5.4'
-  sha256 '07e21c8975b540f5e90cd9b370608947023cf23cd92e3f5b5a522912320bd24e'
+cask "iota-wallet" do
+  version "2.5.7"
+  sha256 "dfb4219c68e97a0056df6a59c5ba98684086c4f5347357c14143842eb33ecea9"
 
-  # github.com/iotaledger/wallet was verified as official when first introduced to the cask
-  url "https://github.com/iotaledger/wallet/releases/download/v#{version}/IOTA.Wallet-#{version}.dmg"
-  appcast 'https://github.com/iotaledger/wallet/releases.atom',
-          checkpoint: 'cd9f74ddba5669150bb7349c492f0ec9107b08ccb6938c04e10b9f5b51ec4f56'
-  name 'IOTA Wallet'
-  homepage 'https://iota.org/'
+  url "https://github.com/iotaledger/wallet/releases/download/v#{version}/IOTA.Wallet-#{version}.dmg",
+      verified: "github.com/iotaledger/wallet/"
+  appcast "https://github.com/iotaledger/wallet/releases.atom"
+  name "IOTA Wallet"
+  homepage "https://iota.org/"
 
-  app 'IOTA Wallet.app'
+  app "IOTA Wallet.app"
 
-  zap trash: '~/Library/Application Support/IOTA Wallet'
+  zap trash: "~/Library/Application Support/IOTA Wallet"
 end

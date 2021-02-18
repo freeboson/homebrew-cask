@@ -1,21 +1,22 @@
-cask 'grids' do
-  version '4.6.1'
-  sha256 '92d9ee8c765776582c36340eec7812609e9fc603663895ad6e13d32c7d6c640d'
+cask "grids" do
+  version "6.1.6"
+  sha256 "c3bd41b364b2151a06e542d60e341a19458b4641d67f6fefe6813cc78529762e"
 
-  url "http://thegridsapp.com/bin/Grids_#{version}.zip"
-  appcast 'http://thegridsapp.com/appcast.json',
-          checkpoint: '8a3b6e9e1992e0bcb3d5131b3471e094fa70095cb81427a6b3cb1ed5fadff494'
-  name 'Grids'
-  homepage 'http://thegridsapp.com/'
+  url "https://gridsapp.net/bin/Grids_#{version}.zip"
+  appcast "https://gridsapp.net/appcast.json"
+  name "Grids"
+  desc "Instagram desktop application"
+  homepage "https://gridsapp.net/"
 
   auto_updates true
+  depends_on macos: ">= :sierra"
 
-  app 'Grids.app'
+  app "Grids.app"
 
-  uninstall quit: 'com.thinktimecreations.Grids'
+  uninstall quit: "com.thinktimecreations.Grids"
 
   zap trash: [
-               '~/Library/Application Support/ThinkTimeCreations/Grids',
-               '~/Library/Preferences/com.thinktimecreations.Grids.plist',
-             ]
+    "~/Library/Application Support/ThinkTimeCreations/Grids",
+    "~/Library/Preferences/com.thinktimecreations.Grids.plist",
+  ]
 end

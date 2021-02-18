@@ -1,16 +1,19 @@
-cask 'dbeaver-enterprise' do
-  version '4.2.0'
-  sha256 'be79572cdabee2ba108a8a50ff42dea7d9bb6b9061ddaeaf22e2c9ac4b4c886c'
+cask "dbeaver-enterprise" do
+  version "7.3.0"
+  sha256 "75e778c353d07fa02ed845fbb4f04afaa8d0462c46ac6b8e3a062349935fd873"
 
   url "https://dbeaver.com/files/#{version}/dbeaver-ee-#{version}-macos.dmg"
-  appcast 'https://dbeaver.com/product/version.xml',
-          checkpoint: 'c499fedde33d8066aac425bda71bb8abaa94696411fbc9dd6282dbc734581869'
-  name 'DBeaver Enterprise Edition'
-  homepage 'https://dbeaver.com/'
+  name "DBeaver Enterprise Edition"
+  homepage "https://dbeaver.com/"
 
-  app 'DBeaver.app'
+  livecheck do
+    url "https://dbeaver.com/product/version.xml"
+    regex(%r{<number[^>]*?>v?(\d+(?:\.\d+)+)</number>}i)
+  end
+
+  app "DBeaverEE.app"
 
   caveats do
-    depends_on_java('8+')
+    depends_on_java "8+"
   end
 end

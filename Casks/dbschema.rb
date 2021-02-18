@@ -1,10 +1,11 @@
-cask 'dbschema' do
-  version '7.6.0'
-  sha256 'e33278c787a7560532d3623bf3c89b349ce9d13df561795f2ac87566d1bf81df'
+cask "dbschema" do
+  version "8.3.4"
+  sha256 :no_check # required as upstream package is updated in-place
 
-  url "http://www.dbschema.com/download/DbSchema_macos_#{version.dots_to_underscores}.tgz"
-  name 'DbSchema'
-  homepage 'http://www.dbschema.com/'
+  url "https://www.dbschema.com/download/DbSchema_macos_#{version.dots_to_underscores}.tgz"
+  appcast "https://www.dbschema.com/download.html"
+  name "DbSchema"
+  homepage "https://www.dbschema.com/"
 
-  app 'DbSchema.app'
+  app "DbSchema.app"
 end

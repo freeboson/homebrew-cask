@@ -1,22 +1,26 @@
-cask 'codekit' do
-  version '3.4.2,26148'
-  sha256 'c97497966ae00b2ef376a02de6757a028f12382791ae2a8ef202543f5b39bc69'
+cask "codekit" do
+  version "3.14.2,34018"
+  sha256 "9984f0d8c476839ac90e4e60c49cf89ecd46145972ba68463a1de4549b413aa5"
 
   url "https://codekitapp.com/binaries/codekit-#{version.after_comma}.zip"
-  appcast "https://codekitapp.com/api/#{version.major}/appcast.xml",
-          checkpoint: 'afce2fdbda6da6845517d70e7b221c95254cf4953fcf6eb19a9278c06707e47e'
-  name 'CodeKit'
-  homepage 'https://codekitapp.com/'
+  name "CodeKit"
+  desc "App for building websites"
+  homepage "https://codekitapp.com/"
+
+  livecheck do
+    url "https://codekitapp.com/api/#{version.major}/appcast.xml"
+    strategy :sparkle
+  end
 
   auto_updates true
 
-  app 'CodeKit.app'
+  app "CodeKit.app"
 
   zap trash: [
-               "~/Library/Application Support/com.incident57.CodeKit#{version.major}",
-               "~/Library/Caches/com.incident57.CodeKit#{version.major}",
-               "~/Library/Cookies/com.incident57.CodeKit#{version.major}.binarycookies",
-               "~/Library/Preferences/com.incident57.CodeKit#{version.major}.plist",
-               "~/Library/Saved Application State/com.incident57.CodeKit#{version.major}.savedState",
-             ]
+    "~/Library/Application Support/com.incident57.CodeKit#{version.major}",
+    "~/Library/Caches/com.incident57.CodeKit#{version.major}",
+    "~/Library/Cookies/com.incident57.CodeKit#{version.major}.binarycookies",
+    "~/Library/Preferences/com.incident57.CodeKit#{version.major}.plist",
+    "~/Library/Saved Application State/com.incident57.CodeKit#{version.major}.savedState",
+  ]
 end

@@ -1,15 +1,20 @@
-cask 'exfalso' do
-  version '3.9.1'
-  sha256 'b438f771a6063788bad4c359bb89b09dfce0dbd698caa485caddf6ed50a94a07'
+cask "exfalso" do
+  version "4.3.0"
+  sha256 "988afe6d13691e2ea05c6672aa937d66f4a13f3372d44b6344b50a32da12cf0f"
 
-  # github.com/quodlibet/quodlibet was verified as official when first introduced to the cask
-  url "https://github.com/quodlibet/quodlibet/releases/download/release-#{version}/ExFalso-#{version}.dmg"
-  appcast 'https://github.com/quodlibet/quodlibet/releases.atom',
-          checkpoint: '9efb0435388c948603147c16f6b1f4f3e8ee9ca92f73e3dd4549e5fe5b9edf26'
-  name 'Ex Falso'
-  homepage 'https://quodlibet.readthedocs.io/'
+  url "https://github.com/quodlibet/quodlibet/releases/download/release-#{version}/ExFalso-#{version}.dmg",
+      verified: "github.com/quodlibet/quodlibet/"
+  name "Ex Falso"
+  desc "Music tag editor"
+  homepage "https://quodlibet.readthedocs.io/"
 
-  app 'ExFalso.app'
+  livecheck do
+    url :url
+    strategy :git
+    regex(/^release-(\d+(?:\.\d+)*)$/i)
+  end
 
-  zap trash: '~/.quodlibet'
+  app "ExFalso.app"
+
+  zap trash: "~/.quodlibet"
 end

@@ -1,13 +1,25 @@
-cask 'opencpn' do
-  version '4.4.0'
-  sha256 'aedb42ed43a4f5776422410079b946dd87e05a117ba4289733e32c1e6657d6e7'
+cask "opencpn" do
+  version "5.2.4,1.6b314e6"
+  sha256 "05152e347480519bc010bb334b27601520671ae32953d8e915131ed54da738ca"
 
-  # opencpn.navnux.org was verified as official when first introduced to the cask
-  url "http://opencpn.navnux.org/#{version}/OpenCPN_#{version}.dmg"
-  appcast 'https://github.com/OpenCPN/OpenCPN/releases.atom',
-          checkpoint: '169b89252300cc760dab9f554ad9384183e3d3c7dbad746dfcdf44e69c2e6e93'
-  name 'OpenCPN'
-  homepage 'https://www.opencpn.org/'
+  url "https://github.com/OpenCPN/OpenCPN/releases/download/Release_#{version.before_comma}/OpenCPN_#{version.before_comma}+#{version.after_comma}.pkg",
+      verified: "github.com/OpenCPN/OpenCPN/"
+  name "OpenCPN"
+  desc "Full-featured and concise ChartPlotter/Navigator"
+  homepage "https://www.opencpn.org/"
 
-  app 'OpenCPN.app'
+  livecheck do
+    url "https://github.com/OpenCPN/OpenCPN/releases/latest"
+    strategy :page_match do |page|
+      match = page.match(%r{href=.*?/OpenCPN_(\d+(?:\.\d+)*)\+(.*?)\.pkg}i)
+      "#{match[1]},#{match[2]}"
+    end
+  end
+
+  pkg "OpenCPN_#{version.before_comma}+#{version.after_comma}.pkg"
+
+  uninstall pkgutil: [
+    "org.opencpn.pkg.OpenCPN",
+    "org.opencpn",
+  ]
 end

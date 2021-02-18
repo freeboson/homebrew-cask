@@ -1,13 +1,16 @@
-cask 'hopper-debugger-server' do
-  version '2.4'
-  sha256 '32879ffedbe88d172aa59c1cdb32cdba024d842c20d705458ea4279f5bc18dab'
+cask "hopper-debugger-server" do
+  version "2.6"
+  sha256 "dde3d5949a9550e4a62d135acfcd6cefa930c69d4ea07c6e4056d6e1cca136d3"
 
   url "https://www.hopperapp.com/HopperGDBServer/HopperDebuggerServer-#{version}.zip",
       user_agent: :fake
-  appcast 'https://www.hopperapp.com/HopperGDBServer/appcast.xml',
-          checkpoint: '208cead0553000971b5b0b7dece33d71e7eb2467dd9887f8e24c65523f408347'
-  name 'Hopper Debugger Server'
-  homepage 'https://www.hopperapp.com/HopperGDBServer/'
+  name "Hopper Debugger Server"
+  homepage "https://www.hopperapp.com/HopperGDBServer/"
 
-  app 'Hopper Debugger Server.app'
+  livecheck do
+    url "https://www.hopperapp.com/HopperGDBServer/appcast.xml"
+    strategy :sparkle
+  end
+
+  app "Hopper Debugger Server.app"
 end

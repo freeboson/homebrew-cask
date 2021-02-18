@@ -1,11 +1,16 @@
-cask 'ebmac' do
-  version '1.40,68_67_938'
-  sha256 '4927bcb32604eb7ca6b30aab8c557e974e950b432061d96ef79e204e90929dab'
+cask "ebmac" do
+  version "1.46.1"
+  sha256 "dc537911d917a694360bc739f9a188d5610a1ecc4b935beb3f89dad55a54ee4d"
 
-  # ftp.vector.co.jp was verified as official when first introduced to the cask
-  url "http://ftp.vector.co.jp/#{version.after_comma.underscores_to_slashes}/EBMac#{version.major_minor}.dmg"
-  name 'EBMac'
-  homepage 'http://ebstudio.info/manual/EBMac/'
+  url "http://ebstudio.info/download/ebpocket/EBMac#{version}.dmg"
+  name "EBMac"
+  homepage "http://ebstudio.info/manual/EBMac/"
 
-  app 'EBMac.app'
+  livecheck do
+    url "http://ebstudio.info/manual/EBMac/"
+    strategy :page_match
+    regex(%r{href=.*?/EBMac(\d+(?:\.\d+)*)\.dmg}i)
+  end
+
+  app "EBMac.app"
 end

@@ -1,23 +1,30 @@
-cask 'gifox' do
-  version '010301.00'
-  sha256 '09dc7b2c357e30f2d0ec3600bd522d6cfb95d2c9821f54164c53066e5c5ca7f1'
+cask "gifox" do
+  version "2.2.5,020205.01"
+  sha256 "30448da3b7473c6628c635075a5fc079d859a925c1def651aa628964cfc97335"
 
-  # s3.eu-central-1.amazonaws.com/dstlalgzor/gifox was verified as official when first introduced to the cask
-  url "https://s3.eu-central-1.amazonaws.com/dstlalgzor/gifox/#{version}.dmg"
-  appcast 'https://s3.eu-central-1.amazonaws.com/dstlalgzor/gifox/appcast.xml',
-          checkpoint: '57e6492b681ed9c6489b0cc1491cbe7975aadab4c5b24845122460782a8ab23c'
-  name 'gifox'
-  homepage 'https://gifox.io/'
+  url "https://d3si16icyi9iar.cloudfront.net/gifox/#{version.after_comma}.dmg",
+      verified: "d3si16icyi9iar.cloudfront.net/gifox/"
+  name "gifox"
+  desc "App to record the screen"
+  homepage "https://gifox.io/"
 
-  app 'Gifox.app'
+  livecheck do
+    url "https://gifox.io/download/latest"
+    strategy :header_match do |headers|
+      match = headers["location"].match(%r{/(\d(\d)\d(\d)\d(\d).\d\d)\.dmg}i)
+      "#{match[2]}.#{match[3]}.#{match[4]},#{match[1]}"
+    end
+  end
 
-  uninstall launchctl: 'com.gifox.gifox.agent',
-            quit:      'com.gifox.gifox'
+  app "Gifox.app"
+
+  uninstall launchctl: "com.gifox.gifox#{version.major}.agent",
+            quit:      "com.gifox.gifox#{version.major}"
 
   zap trash: [
-               '~/Library/Application Support/Gifox',
-               '~/Library/Caches/com.gifox.gifox',
-               '~/Library/Cookies/com.gifox.gifox.binarycookies',
-               '~/Library/Preferences/com.gifox.gifox.plist',
-             ]
+    "~/Library/Application Support/Gifox #{version.major}",
+    "~/Library/Caches/com.gifox.gifox#{version.major}",
+    "~/Library/Cookies/com.gifox.gifox#{version.major}.binarycookies",
+    "~/Library/Preferences/com.gifox.gifox#{version.major}.plist",
+  ]
 end

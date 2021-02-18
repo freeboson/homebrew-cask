@@ -1,21 +1,26 @@
-cask 'uninstallpkg' do
-  version '1.0.29'
-  sha256 '8c9d6ecb29e786535490173d186c870bf6c95ea482e3687a76ff46b949449778'
+cask "uninstallpkg" do
+  version "1.1.9,1405"
+  sha256 "4815c2c4ce97f1e5768690651efaf2d7a4feec34a446a027cc866ad78b96ac02"
 
-  url 'https://www.corecode.io/downloads/uninstallpkg_latest.zip'
-  appcast 'https://www.corecode.io/uninstallpkg/history.html',
-          checkpoint: 'a2e0a1e27f2e3bfc4f2bd3872acdb117c73b4471baf137bb6b1587ec7932192b'
-  name 'UninstallPKG'
-  homepage 'https://www.corecode.io/uninstallpkg/'
+  url "https://www.corecode.io/downloads/uninstallpkg_#{version.before_comma}.zip"
+  name "UninstallPKG"
+  homepage "https://www.corecode.io/uninstallpkg/"
 
-  app 'UninstallPKG.app'
+  livecheck do
+    url "https://www.corecode.io/uninstallpkg/uninstallpkg.xml"
+    strategy :sparkle
+  end
 
-  uninstall delete:    '/Library/PrivilegedHelperTools/com.corecode.UninstallPKGDeleteHelper',
-            launchctl: 'com.corecode.UninstallPKGDeleteHelper'
+  depends_on macos: ">= :mojave"
+
+  app "UninstallPKG.app"
+
+  uninstall delete:    "/Library/PrivilegedHelperTools/com.corecode.UninstallPKGDeleteHelper",
+            launchctl: "com.corecode.UninstallPKGDeleteHelper"
 
   zap trash: [
-               '~/Library/Application Support/UninstallPKG',
-               '~/Library/Preferences/com.corecode.UninstallPKG.plist',
-               '~/Library/Saved Application State/com.corecode.UninstallPKG.savedState',
-             ]
+    "~/Library/Application Support/UninstallPKG",
+    "~/Library/Preferences/com.corecode.UninstallPKG.plist",
+    "~/Library/Saved Application State/com.corecode.UninstallPKG.savedState",
+  ]
 end

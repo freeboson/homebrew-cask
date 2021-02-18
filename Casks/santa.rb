@@ -1,17 +1,23 @@
-cask 'santa' do
-  version '0.9.20'
-  sha256 'dcfc535c97732380ce5a116f352110ca15ee7ebaef0eeb63b648148b21f5f3a4'
+cask "santa" do
+  version "2021.2"
+  sha256 "bbd4bb501660ca85ad9fd268e36ab5e266a27cbd1e2f133bb2ef2d748705bd00"
 
   url "https://github.com/google/santa/releases/download/#{version}/santa-#{version}.dmg"
-  appcast 'https://github.com/google/santa/releases.atom',
-          checkpoint: 'fe503820c7dde7055f65eefcb2b09499031ecdb50e774d607ba451cb1003bf1e'
-  name 'Santa'
-  homepage 'https://github.com/google/santa'
+  appcast "https://github.com/google/santa/releases.atom"
+  name "Santa"
+  homepage "https://github.com/google/santa"
 
   pkg "santa-#{version}.pkg"
 
-  uninstall delete:    '/usr/local/bin/santactl',
-            kext:      'com.google.santa-driver',
-            launchctl: ['com.google.santad', 'com.google.santagui'],
-            pkgutil:   'com.google.santa'
+  uninstall delete:    "/usr/local/bin/santactl",
+            kext:      "com.google.santa-driver",
+            launchctl: [
+              "com.google.santa",
+              "com.google.santa.bundleservice",
+              "com.google.santad",
+            ],
+            pkgutil:   "com.google.santa"
+
+  caveats "For #{token} to use EndpointSecurity, it must be granted Full Disk Access under " \
+          "System Preferences → Security & Privacy → Privacy"
 end

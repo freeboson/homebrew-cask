@@ -1,15 +1,30 @@
-cask 'keeweb' do
-  version '1.5.6'
-  sha256 '06d245a0c1245331943404282cc7cdfc6fbbdf74ce5922da65f7d0d0b2eb7e7b'
+cask "keeweb" do
+  version "1.16.7"
 
-  # github.com/keeweb/keeweb was verified as official when first introduced to the cask
-  url "https://github.com/keeweb/keeweb/releases/download/v#{version}/KeeWeb-#{version}.mac.dmg"
-  appcast 'https://github.com/keeweb/keeweb/releases.atom',
-          checkpoint: '3f58da4a70b6d2ccd5719552670a83fcced02e328e0a5c97425ec855f3e04fee'
-  name 'KeeWeb'
-  homepage 'https://keeweb.info/'
+  if Hardware::CPU.intel?
+    sha256 "793aae610275f762e7d96822f88f908ef290403fa4d3c26f30e56fdcda55a147"
+    url "https://github.com/keeweb/keeweb/releases/download/v#{version}/KeeWeb-#{version}.mac.x64.dmg",
+        verified: "github.com/keeweb/keeweb/"
+  else
+    sha256 "e74f7a088ec689b0ec6420aecc78c60aad12e48292867748e263b1990ec5135c"
+    url "https://github.com/keeweb/keeweb/releases/download/v#{version}/KeeWeb-#{version}.mac.arm64.dmg",
+        verified: "github.com/keeweb/keeweb/"
+  end
+
+  name "KeeWeb"
+  desc "Password manager compatible with KeePass"
+  homepage "https://keeweb.info/"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   auto_updates true
 
-  app 'KeeWeb.app'
+  app "KeeWeb.app"
+
+  uninstall_preflight do
+    set_ownership "#{appdir}/KeeWeb.app"
+  end
 end

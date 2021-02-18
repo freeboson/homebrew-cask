@@ -1,13 +1,21 @@
-cask 'cryptomator' do
-  version '1.3.1'
-  sha256 'd9649a87b084efd98ea65d6b93a95e0470b6778a3263fec786fddba818c7f140'
+cask "cryptomator" do
+  version "1.5.12"
+  sha256 "b462b6c1bccbae76a886cf28e0d5c01482b3137a9300998a7a9f098ec607f563"
 
-  # bintray.com/artifact/download/cryptomator was verified as official when first introduced to the cask
-  url "https://bintray.com/artifact/download/cryptomator/cryptomator/Cryptomator-#{version}.dmg"
-  appcast 'https://github.com/cryptomator/cryptomator/releases.atom',
-          checkpoint: '9ed9a21a6aad4badc900649acf3bd26ef1e92e2d18b1e644d1023d2e83e6616e'
-  name 'Cryptomator'
-  homepage 'https://cryptomator.org/'
+  url "https://dl.bintray.com/cryptomator/cryptomator/#{version}/Cryptomator-#{version}.dmg",
+      verified: "dl.bintray.com/cryptomator/cryptomator/"
+  appcast "https://github.com/cryptomator/cryptomator/releases.atom"
+  name "Cryptomator"
+  desc "Multi-platform client-side cloud file encryption tool"
+  homepage "https://cryptomator.org/"
 
-  app 'Cryptomator.app'
+  depends_on macos: ">= :yosemite"
+
+  app "Cryptomator.app"
+
+  zap trash: [
+    "~/Library/Application Support/Cryptomator",
+    "~/Library/Logs/Cryptomator",
+    "~/Library/Preferences/org.cryptomator.plist",
+  ]
 end

@@ -1,10 +1,23 @@
-cask 'subsurface' do
-  version '4.7.4'
-  sha256 '44c2b7ef5c687b6da06f3a75a88752aed0b082f07f68a13a3d851b576e664474'
+cask "subsurface" do
+  version "4.9.10"
 
-  url "https://subsurface-divelog.org/downloads/Subsurface-#{version}.dmg"
-  name 'Subsurface'
-  homepage 'https://subsurface-divelog.org/'
+  if MacOS.version <= :mojave
+    sha256 "34274051fe008486eccd01b31fcfdc793724276b505438184b35393ffd1199fe"
+    url "https://subsurface-divelog.org/downloads/Subsurface-#{version}-10.13+14.dmg"
+  else
+    sha256 "32d8ded0a937689183a8d915acab44330cbb26618ff12abc62be5ef42eefd9c4"
+    url "https://subsurface-divelog.org/downloads/Subsurface-#{version}-10.15+11.0.dmg"
+  end
 
-  app 'Subsurface.app'
+  name "Subsurface"
+  desc "Open source divelog program"
+  homepage "https://subsurface-divelog.org/"
+
+  livecheck do
+    url "https://subsurface.github.io/download/"
+    strategy :page_match
+    regex(%r{href=.*?/Subsurface-(\d+(?:\.\d+)*)-10\.15\+11\.0\.dmg}i)
+  end
+
+  app "Subsurface.app"
 end

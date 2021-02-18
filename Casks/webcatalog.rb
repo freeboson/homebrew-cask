@@ -1,22 +1,23 @@
-cask 'webcatalog' do
-  version '7.6.1'
-  sha256 '65c11319aba490df7dca12cb096b0b5df05bebbd81f0b3c19ce6269428b9c0dd'
+cask "webcatalog" do
+  version "28.7.0"
+  sha256 "ed79de1335e14f9fd6dbd4416268c7cbbd9116856915b8e427404294efcce353"
 
-  # github.com/webcatalog/desktop/releases/download/ was verified as official when first introduced to the cask
-  url "https://github.com/webcatalog/desktop/releases/download/v#{version}/WebCatalog-#{version}.dmg"
-  appcast 'https://github.com/webcatalog/desktop/releases.atom',
-          checkpoint: 'a88aa7cf434a5e3e4ccc13cd35a9600d9d2b9f9a287842b4516c4da8aabeb173'
-  name 'WebCatalog'
-  homepage 'https://webcatalog.io/download/mac'
+  url "https://github.com/webcatalog/webcatalog-app/releases/download/v#{version}/WebCatalog-#{version}.dmg",
+      verified: "github.com/webcatalog/webcatalog-app/"
+  appcast "https://github.com/webcatalog/webcatalog-app/releases.atom"
+  name "WebCatalog"
+  desc "Tool to run web apps like desktop apps"
+  homepage "https://webcatalog.app/"
 
-  app 'WebCatalog.app'
+  auto_updates true
+
+  app "WebCatalog.app"
 
   zap trash: [
-               '~/Library/Application Support/WebCatalog',
-               '~/Library/Cookies/com.webcatalog.app.binarycookies',
-               '~/Library/Preferences/WebCatalog_Alt.plist',
-               '~/Library/Preferences/com.webcatalog.app.helper.plist',
-               '~/Library/Preferences/com.webcatalog.app.plist',
-               '~/Library/Saved Application State/com.webcatalog.app.savedState',
-             ]
+    "~/Library/Application Support/WebCatalog",
+    "~/Library/Caches/com.webcatalog.jordan",
+    "~/Library/Caches/com.webcatalog.jordan.ShipIt",
+    "~/Library/Preferences/com.webcatalog.jordan.plist",
+    "~/Library/Saved Application State/com.webcatalog.jordan.savedState",
+  ]
 end

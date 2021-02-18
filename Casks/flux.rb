@@ -1,25 +1,28 @@
-cask 'flux' do
-  version '39.984'
-  sha256 'c91c43641f6e6d41a10a8831aecae638cd402ef0c4bb0a0eafc90300d3e6e9ce'
+cask "flux" do
+  version "41.1"
+  sha256 "2b2bea6fa4864362c0893df5202ba33d9f3f5239613599eadfbfee2d1bf32aa0"
 
   url "https://justgetflux.com/mac/Flux#{version}.zip"
-  appcast 'https://justgetflux.com/mac/macflux.xml',
-          checkpoint: 'e25f6de1ea73a8a63230af8221a6f532feaa4b2bdedf3ee186f3af9a4f746350'
-  name 'f.lux'
-  homepage 'https://justgetflux.com/'
+  name "f.lux"
+  desc "Screen color temperature controller"
+  homepage "https://justgetflux.com/"
+
+  livecheck do
+    url "https://justgetflux.com/mac/macflux.xml"
+    strategy :sparkle
+  end
 
   auto_updates true
 
-  app 'Flux.app'
+  app "Flux.app"
 
-  uninstall login_item: 'Flux',
-            quit:       'org.herf.Flux'
+  uninstall quit: "org.herf.Flux"
 
   zap trash: [
-               '~/Library/Application Support/Flux',
-               '~/Library/Caches/org.herf.Flux',
-               '~/Library/Containers/com.justgetflux.flux',
-               '~/Library/Cookies/org.herf.Flux.binarycookies',
-               '~/Library/Preferences/org.herf.Flux.plist',
-             ]
+    "~/Library/Application Support/Flux",
+    "~/Library/Caches/org.herf.Flux",
+    "~/Library/Containers/com.justgetflux.flux",
+    "~/Library/Cookies/org.herf.Flux.binarycookies",
+    "~/Library/Preferences/org.herf.Flux.plist",
+  ]
 end

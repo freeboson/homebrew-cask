@@ -1,36 +1,27 @@
-cask 'powershell' do
-  version '6.0.0-rc'
-  sha256 '187dc2772e06319a8e71c71197a8a8287cb12515c4a9e6a9546dec717720609c'
+cask "powershell" do
+  version "7.1.2"
+  sha256 "A3B664487FB2906ABF52442B5E620DF3CF1FCE8AFF82C81679923C66097272C2"
 
-  url "https://github.com/PowerShell/PowerShell/releases/download/v#{version}/powershell-#{version}-osx.10.12-x64.pkg"
-  appcast 'https://github.com/PowerShell/PowerShell/releases.atom',
-          checkpoint: 'd9937dd818ba87d17bd4410898582a5e4ab8d2937aa3c4715acc6dfa887e6960'
-  name 'PowerShell'
-  homepage 'https://github.com/PowerShell/PowerShell'
+  url "https://github.com/PowerShell/PowerShell/releases/download/v#{version}/powershell-#{version}-osx-x64.pkg"
+  name "PowerShell"
+  desc "Command-line shell and scripting language"
+  homepage "https://github.com/PowerShell/PowerShell"
 
-  depends_on formula: 'openssl'
-  depends_on macos: '>= :sierra'
+  livecheck do
+    url :homepage
+    strategy :git
+    regex(/^v?(\d+(?:\.\d+)*)$/)
+  end
 
-  pkg "powershell-#{version}-osx.10.12-x64.pkg"
+  depends_on macos: ">= :high_sierra"
 
-  uninstall pkgutil: 'com.microsoft.powershell'
+  pkg "powershell-#{version}-osx-x64.pkg"
+
+  uninstall pkgutil: "com.microsoft.powershell"
 
   zap trash: [
-               '~/.cache/powershell',
-               '~/.config/PowerShell',
-               '~/.local/share/powershell',
-             ],
-      rmdir: [
-               '~/.cache',
-               '~/.config',
-               '~/.local/share',
-               '~/.local',
-             ]
-
-  caveats <<~EOS
-    A OpenSSL-backed libcurl is required for custom handling of certificates.
-    This is rarely needed, but you can install it with
-      brew install curl --with-openssl
-    See https://github.com/PowerShell/PowerShell/issues/2211
-  EOS
+    "~/.cache/powershell",
+    "~/.config/PowerShell",
+    "~/.local/share/powershell",
+  ]
 end

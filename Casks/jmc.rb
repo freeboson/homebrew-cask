@@ -1,12 +1,12 @@
-cask 'jmc' do
-  version '0.2-beta.5'
-  sha256 'bd524ce2cbb4c05d93d4e7fd362a9f68ac15d307fffe0241a96df2a716c035fc'
+cask "jmc" do
+  version "0.3-beta"
+  sha256 "b6e9303815d80948b80e1f94d797e1ee4ce1017940b236284930abc583ce6e41"
 
   url "https://github.com/jcm93/jmc/releases/download/v#{version}/jmc.app.zip"
-  appcast 'https://github.com/jcm93/jmc/releases.atom',
-          checkpoint: 'f0d94b9ef85e4dce94a4a50ac22d1fad08c1030abf406d20cc4416560aa2d2e5'
-  name 'jmc'
-  homepage 'https://github.com/jcm93/jmc'
+  appcast "https://github.com/jcm93/jmc/releases.atom"
+  name "jmc"
+  desc "Media organizer"
+  homepage "https://github.com/jcm93/jmc"
 
-  app 'jmc.app'
+  app "jmc.app"
 end

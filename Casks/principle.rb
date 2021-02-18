@@ -1,12 +1,17 @@
-cask 'principle' do
-  version '3.6'
-  sha256 '0cc3fa7635b3a7bdbadf6a2349bf45ab78bde5b8554c5aa1ddd49cbecbb5eb8c'
+cask "principle" do
+  version "5.14,5026"
+  sha256 "7772a9dbaa6312211d897b222160e9c7aa3eed81ef10af47c268cf7fa3bee288"
 
-  url "http://principleformac.com/download/Principle_#{version.dots_to_underscores}.zip"
-  appcast 'http://principleformac.com/update2.xml',
-          checkpoint: 'e9153520f388d312b4eb6af72c6be70b53d90d57582cb6e8f7de234a35207238'
-  name 'Principle'
-  homepage 'http://principleformac.com/'
+  url "https://principleformac.com/download/Principle_#{version.before_comma.dots_to_underscores}.zip"
+  name "Principle"
+  homepage "https://principleformac.com/"
 
-  app 'Principle.app'
+  livecheck do
+    url "https://principleformac.com/update2.xml"
+    strategy :sparkle
+  end
+
+  depends_on macos: ">= :high_sierra"
+
+  app "Principle.app"
 end

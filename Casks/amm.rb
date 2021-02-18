@@ -1,12 +1,12 @@
-cask 'amm' do
-  version '0.4.3'
-  sha256 '181410cc890f9f13fb7500fcda3b51be205f150ab6ee8706340429f07d750510'
+cask "amm" do
+  version "0.4.5"
+  sha256 "1e9363fecf5fd21b2bb82a38f0a72e50468f0336f3f8985df8a36e3029ca6121"
 
   url "https://github.com/15cm/AMM/releases/download/v#{version}/AMM_v#{version}.dmg"
-  appcast 'https://github.com/15cm/AMM/releases.atom',
-          checkpoint: 'bf9903a6b584c3024b65045d8633ca4bfa112177af58af044f52f6fc263f04bd'
-  name 'AMM'
-  homepage 'https://github.com/15cm/AMM'
+  appcast "https://github.com/15cm/AMM/releases.atom"
+  name "AMM"
+  desc "Aria2 Menubar Monitor"
+  homepage "https://github.com/15cm/AMM"
 
-  app 'AMM.app'
+  app "AMM.app"
 end

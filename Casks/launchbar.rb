@@ -1,23 +1,22 @@
-cask 'launchbar' do
-  if MacOS.version <= :mountain_lion
-    version '5.6.4'
-    sha256 '22a1ec0c10de940e5efbcccd18b8b048d95fb7c63213a01c7976a76d6be69a4d'
-    url "https://www.obdev.at/downloads/launchbar/legacy/LaunchBar-#{version}.dmg"
-  else
-    version '6.9.1'
-    sha256 '3d6fb55ddf12a80612bd83b340c2a0c995edb7decbc46bf9a98df40a0dfb424b'
-    url "https://www.obdev.at/downloads/launchbar/LaunchBar-#{version}.dmg"
-  end
+cask "launchbar" do
+  version "6.13.1"
+  sha256 "91c0423cdc0cb7a618357e2c9df7c05844ea077f9908640288af0e7eeacf384e"
 
-  appcast 'https://www.obdev.at/products/launchbar/releasenotes.html',
-          checkpoint: '4f4c5a0a0a4209e719444ccb91d3079edc4f91a51df77f41ca3051173be6147f'
-  name 'LaunchBar'
-  homepage 'https://www.obdev.at/products/launchbar/index.html'
+  url "https://www.obdev.at/downloads/launchbar/LaunchBar-#{version}.dmg"
+  appcast "https://sw-update.obdev.at/update-feeds/launchbar-#{version.major}.plist"
+  name "LaunchBar"
+  desc "Productivity tool"
+  homepage "https://www.obdev.at/products/launchbar/index.html"
 
-  app 'LaunchBar.app'
+  auto_updates true
+  depends_on macos: ">= :mojave"
+
+  app "LaunchBar.app"
 
   zap trash: [
-               '~/Library/Preferences/at.obdev.LaunchBar.plist',
-               '~/Library/Application Support/LaunchBar',
-             ]
+    "~/Library/Application Support/LaunchBar",
+    "~/Library/Caches/at.obdev.LaunchBar",
+    "~/Library/Preferences/at.obdev.LaunchBar.plist",
+    "~/Library/Saved Application State/at.obdev.LaunchBar.savedState",
+  ]
 end

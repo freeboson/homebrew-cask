@@ -1,20 +1,23 @@
-cask 'krita' do
-  version '3.3.2'
-  sha256 'ea84d5b9f13f4fef6393bc7e9b5e6a066890c78631f5f813c9b4268f76ac2cdc'
+cask "krita" do
+  version "4.4.2"
+  sha256 "c9f703be76bdd96d6d86b62850d8323b76743736a2d64af8d1506b4f9d1856c4"
 
-  # kde.org/stable/krita was verified as official when first introduced to the cask
-  url "http://download.kde.org/stable/krita/#{version}/krita-#{version}.dmg"
-  name 'Krita'
-  homepage 'https://krita.org/'
+  url "https://cdn.download.kde.org/stable/krita/#{version.major_minor_patch}/krita-#{version}.dmg",
+      verified: "cdn.download.kde.org/stable/krita/"
+  appcast "https://download.kde.org/stable/krita/",
+          must_contain: version.major_minor_patch
+  name "Krita"
+  desc "Free and open-source painting and sketching program"
+  homepage "https://krita.org/"
 
-  depends_on macos: '>= :mavericks'
+  depends_on macos: ">= :sierra"
 
-  app 'Krita.app'
+  app "krita.app"
 
   zap trash: [
-               '~/Library/Application Support/krita',
-               '~/Library/Preferences/kritadisplayrc',
-               '~/Library/Preferences/kritarc',
-               '~/Library/Saved Application State/org.krita.savedState',
-             ]
+    "~/Library/Application Support/krita",
+    "~/Library/Preferences/kritadisplayrc",
+    "~/Library/Preferences/kritarc",
+    "~/Library/Saved Application State/org.krita.savedState",
+  ]
 end

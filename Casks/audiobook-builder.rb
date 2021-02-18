@@ -1,10 +1,11 @@
-cask 'audiobook-builder' do
-  version '1.5.7'
-  sha256 '46e4151d97c0a09c8e5c8567c6d2680d4cbe3f4e2c91c6a3415c1552842ba156'
+cask "audiobook-builder" do
+  version "2.1.2"
+  sha256 "acf96a39171df286a039e88e4e9b9fa20b7fc10c6ab96ed90c308e8cfdc99cd9"
 
-  url "http://www.splasm.com/downloads/audiobookbuilder/Audiobook%20Builder%20#{version}.dmg"
-  name 'Audiobook Builder'
-  homepage 'https://www.splasm.com/audiobookbuilder/'
+  url "https://www.splasm.com/downloads/audiobookbuilder/Audiobook%20Builder%20#{version}.dmg"
+  appcast "https://www.splasm.com/audiobookbuilder/"
+  name "Audiobook Builder"
+  homepage "https://www.splasm.com/audiobookbuilder/"
 
-  app 'Audiobook Builder.app'
+  app "Audiobook Builder.app"
 end

@@ -1,13 +1,13 @@
-cask 'sparkleshare' do
-  version '1.5'
-  sha256 '5000d3484e864c2ca94fb9e3ed40cdcb5d23664fe5708f351b73b8abe6d34f2a'
+cask "sparkleshare" do
+  version "3.28"
+  sha256 "d0e561706b65d379ae947f77a2fc443395b69462d1dd968ac334155c73a38381"
 
-  # bitbucket.org/hbons/sparkleshare was verified as official when first introduced to the cask
-  url "https://bitbucket.org/hbons/sparkleshare/downloads/sparkleshare-mac-#{version}.zip"
-  appcast 'https://github.com/hbons/SparkleShare/releases.atom',
-          checkpoint: '65e48f97e46f2c031347253bb72e60e23a4fe5ba7e9f874b536f4ddf49b994e6'
-  name 'SparkleShare'
-  homepage 'https://sparkleshare.org/'
+  url "https://github.com/hbons/SparkleShare/releases/download/#{version}/sparkleshare-mac-#{version}.zip",
+      verified: "github.com/hbons/SparkleShare/"
+  appcast "https://github.com/hbons/SparkleShare/releases.atom"
+  name "SparkleShare"
+  desc "Tool to sync with any Git repository instantly"
+  homepage "https://sparkleshare.org/"
 
-  app 'SparkleShare.app'
+  app "SparkleShare.app"
 end

@@ -1,23 +1,22 @@
-cask 'trailer' do
-  version '1.6.3'
-  sha256 'b1708c9f34b6d6c944fef44dcfa0fca9373eb8fec287ef1ad888173752519f4f'
+cask "trailer" do
+  version "1.7.4"
+  sha256 "8a7d297cce61df2cd46995a685d71f8f1a384352a58a77dc72843b4545d22c65"
 
-  # github.com/ptsochantaris/trailer was verified as official when first introduced to the cask
-  url "https://github.com/ptsochantaris/trailer/releases/download/#{version}/trailer#{version.no_dots}.zip"
-  appcast 'https://github.com/ptsochantaris/trailer/releases.atom',
-          checkpoint: 'a02b4abab67026baa7fe707dbb1713f0bbf65e0f53529efe81c15a1a8117e32c'
-  name 'Trailer'
-  homepage 'https://ptsochantaris.github.io/trailer/'
+  url "https://github.com/ptsochantaris/trailer/releases/download/#{version}/Trailer-#{version.no_dots}.zip",
+      verified: "github.com/ptsochantaris/trailer/"
+  appcast "https://github.com/ptsochantaris/trailer/releases.atom"
+  name "Trailer"
+  desc "Managing Pull Requests and Issues For GitHub & GitHub Enterprise"
+  homepage "https://ptsochantaris.github.io/trailer/"
 
-  app 'Trailer.app'
+  app "Trailer.app"
 
-  uninstall login_item: 'Trailer',
-            quit:       'com.housetrip.Trailer'
+  uninstall quit: "com.housetrip.Trailer"
 
   zap trash: [
-               '~/Library/Application Support/com.housetrip.Trailer',
-               '~/Library/Caches/com.housetrip.Trailer',
-               '~/Library/Group Containers/group.Trailer',
-               '~/Library/Preferences/com.housetrip.Trailer.plist',
-             ]
+    "~/Library/Application Support/com.housetrip.Trailer",
+    "~/Library/Caches/com.housetrip.Trailer",
+    "~/Library/Group Containers/group.Trailer",
+    "~/Library/Preferences/com.housetrip.Trailer.plist",
+  ]
 end

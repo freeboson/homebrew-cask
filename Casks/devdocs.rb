@@ -1,19 +1,20 @@
-cask 'devdocs' do
-  version '0.6.7'
-  sha256 '3384158e6428b622eb4bc6c9ccc0af65bc935884e35cefbb6d9e384c4a358bd3'
+cask "devdocs" do
+  version "0.7.1"
+  sha256 "cec5ab99d9d3cff879fedf5379904d0993b09a43cf3fb5838e02450e3798753a"
 
   url "https://github.com/egoist/devdocs-desktop/releases/download/v#{version}/DevDocs-#{version}.dmg"
-  appcast 'https://github.com/egoist/devdocs-desktop/releases.atom',
-          checkpoint: '8b8026a1e45c4ec19ef3bc4a3726c63d91703a424ce12ed2e05b23d805418736'
-  name 'DevDocs App'
-  homepage 'https://github.com/egoist/devdocs-desktop'
+  appcast "https://github.com/egoist/devdocs-desktop/releases.atom"
+  name "DevDocs App"
+  desc "Full-featured desktop app for DevDocs.io"
+  homepage "https://github.com/egoist/devdocs-desktop/"
 
-  app 'DevDocs.app'
+  app "DevDocs.app"
 
   zap trash: [
-               '~/Library/Application Support/DevDocs',
-               '~/Library/Preferences/com.egoistian.devdocs-app.helper.plist',
-               '~/Library/Preferences/com.egoistian.devdocs-app.plist',
-               '~/Library/Saved Application State/com.egoistian.devdocs-app.savedState',
-             ]
+    "~/.devdocs",
+    "~/Library/Application Support/DevDocs",
+    "~/Library/Logs/DevDocs",
+    "~/Library/Preferences/sh.egoist.devdocs.plist",
+    "~/Library/Saved Application State/sh.egoist.devdocs.savedState",
+  ]
 end

@@ -1,21 +1,13 @@
-cask 'qgis' do
-  version '2.18.13-1'
-  sha256 '529835ee80f24fa05648402481aed4c0fd691ff5db60dda10bbc51e8db494624'
+cask "qgis" do
+  version "3.16.3"
+  sha256 :no_check
 
-  url "http://www.kyngchaos.com/files/software/qgis/QGIS-#{version}.dmg"
-  name 'QGIS'
-  homepage 'http://www.kyngchaos.com/software/qgis'
+  url "https://qgis.org/downloads/macos/qgis-macos-pr.dmg"
+  appcast "https://qgis.org/downloads/macos/qgis-macos-pr.sha256sum",
+          must_contain: version.dots_to_underscores
+  name "QGIS"
+  desc "Geographic Information System"
+  homepage "https://www.qgis.org/"
 
-  depends_on cask: 'gdal-framework'
-  depends_on formula: 'homebrew/science/matplotlib'
-
-  pkg '4 Install QGIS.pkg'
-
-  uninstall pkgutil: 'org.qgis.qgis-*'
-
-  caveats <<~EOS
-    #{token} requires matplotlib in a specific location. Please run the following to finish install:
-
-      sudo ln -s /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python /Library/Python/2.7/site-packages/matplotlib-override
-  EOS
+  app "QGIS.app"
 end
